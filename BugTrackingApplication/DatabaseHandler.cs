@@ -28,7 +28,7 @@ namespace BugTrackingApplication
             this.DatabaseName = DatabaseName;
             this.DatabaseUsername = DatabaseUsername;
             this.DatabasePassword = DatabasePassword;
-            mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\c3453855\Documents\TestDatabase.mdf;Integrated Security=True;Connect Timeout=30");
+            mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Reec\Source\Repos\BugTrackingApp\BugTrackingApplication\Test.mdf;Integrated Security=True;Connect Timeout=30");
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace BugTrackingApplication
         /// <param name="Parameters"><para>Parameters to be added to query.</para> <para>Pass an empty array if there are no parameters to be added</para></param>
         /// <returns><para>Returns a string array with your results</para></returns>
         /// </summary>
-        public string[] SubmitQuery(string Query, string[] Parameters)
+        public List<List<string>> SubmitQuery(string Query, string[] Parameters)
         {
             if (Query.Equals(null))
             {
@@ -65,10 +65,10 @@ namespace BugTrackingApplication
                         //we can continue
                         //we can split on ?
                         string[] QuerySplit = Query.Split('?');
-                        for (int x = 0; x < QuerySplit.Length; x++)
+                        for (int x = 0; x < QuerySplit.Length -1; x++)
                         {
-                            Query = QuerySplit[x] + Parameters[x];
-                            if (Parameters[x+1].Length <= 1)
+                            Query = QuerySplit[x] +"'" +Parameters[x]+"'";
+                            if (Parameters[x].Length <= 1)
                             {
                                 break;
                             }
@@ -81,12 +81,29 @@ namespace BugTrackingApplication
                     }
                 }
                 Console.WriteLine("hello");
+                //we can then execute the query
+                SqlCommand command = new SqlCommand(Query, mySqlConnection);
+                mySqlConnection.Open();
+                //we can then execute the query
 
+                List<List<string>> list = new List<List<string>>();
 
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        object[] temp = new object[reader.VisibleFieldCount];
+                        reader.GetValues(temp);
+                        string[] test = Array.ConvertAll<object, string>(temp, ConvertObjectToString);
+                        list.Add(test.ToList<string>());
+                       
+                       // list.Add(reader.GetValues(String[] meow));
+                    }
+                }
+                mySqlConnection.Close();
+                return list;
             }
-            string[] meow = new string[100];
             
-            return meow ;
         }
 
         public void RefreshProjectLogs()
@@ -123,7 +140,16 @@ namespace BugTrackingApplication
             {
                 Console.WriteLine("***" + myData[j] + "***");
             }
-
+            mySqlConnection.Close();
+        }
+        /// <summary>
+        /// Used to convert the object array to a string array
+        /// </summary>
+        /// <param name="obj"> the object to be converted</param>
+        /// <returns>returns a string compy of the object</returns>
+        private string ConvertObjectToString(object obj)
+        {
+            return obj?.ToString() ?? string.Empty;
         }
 
     }

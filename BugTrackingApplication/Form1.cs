@@ -20,11 +20,19 @@ namespace BugTrackingApplication
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Console.WriteLine("meow");
-            db.Test();
+            //Console.WriteLine("meow");
+            //db.Test();
             string[] param = { "cat" };
 
-            db.SubmitQuery("SELECT * FROM music WHERE artist_name = ?", param);
+            List<List<string>> tempo = db.SubmitQuery("SELECT * FROM music WHERE artist_name = ?", param);
+            Console.WriteLine("hello");
+            foreach (List<string> m in tempo)
+            {
+                foreach (string s in m)
+                {
+                    Console.WriteLine(s);
+                }
+            }
         }
     }
 }
