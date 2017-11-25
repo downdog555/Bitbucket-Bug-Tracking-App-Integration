@@ -20,6 +20,8 @@ namespace BugTrackingApplication
         private Timer UpdateTimer;
         private SqlConnection mySqlConnection;
 
+       
+
         /// <summary>
         /// The class constructor. 
         /// </summary>
@@ -142,6 +144,11 @@ namespace BugTrackingApplication
             }
             mySqlConnection.Close();
         }
+        /// <summary>
+        /// Getters and setters for the updateTimer
+        /// </summary>
+        public Timer UpdateTimer1 { get => UpdateTimer; set => UpdateTimer = value; }
+
         /// <summary>
         /// Used to convert the object array to a string array
         /// </summary>
