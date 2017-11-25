@@ -60,7 +60,7 @@ namespace BugTrackingApplication
                         y++;
                     } 
 
-                    Console.WriteLine("MEOWWWWWW");
+                    //Console.WriteLine("MEOWWWWWW");
 
                     if (count == Parameters.Length)
                     {
@@ -82,7 +82,7 @@ namespace BugTrackingApplication
                         throw new Exception("Number of parameters do not match markers");
                     }
                 }
-                Console.WriteLine("hello");
+                //Console.WriteLine("hello");
                 //we can then execute the query
                 SqlCommand command = new SqlCommand(Query, mySqlConnection);
                 mySqlConnection.Open();
@@ -144,6 +144,7 @@ namespace BugTrackingApplication
             }
             mySqlConnection.Close();
         }
+
         /// <summary>
         /// Getters and setters for the updateTimer
         /// </summary>

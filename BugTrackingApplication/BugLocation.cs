@@ -11,21 +11,24 @@ namespace BugTrackingApplication
     /// </summary>
     class BugLocation
     {
-        private int Line_Num;
-        private string Method_Block;
-        private string Class_Name;
+        private int lineNum;
+        private string methodBlock;
+        private string className;
+
         /// <summary>
         /// getters and setters
         /// </summary>
-        public int Line_Num1 { get => Line_Num; set => Line_Num = value; }
+        public int LineNum { get => lineNum; set => lineNum = value; }
+
         /// <summary>
         /// getters and setters
         /// </summary>
-        public string Method_Block1 { get => Method_Block; set => Method_Block = value; }
+        public string MethodBlock { get => methodBlock; set => methodBlock = value; }
+
         /// <summary>
         /// getters and setters
         /// </summary>
-        public string Class_name1 { get => Class_Name; set => Class_Name = value; }
+        public string ClassName { get => className; set => className = value; }
 
         /// <summary>
         /// gets an array with the bugs location
@@ -33,9 +36,10 @@ namespace BugTrackingApplication
         /// <returns>String array in format of Line Number, Method Block, Class Name</returns>
         public string[] GetBugLocation()
         {
-            string[] location = {Line_Num.ToString(), Method_Block, Class_Name };
+            string[] location = { lineNum.ToString(), methodBlock, className };
             return location;
         }
+
         /// <summary>
         /// method provided to update the bug location on mass
         /// </summary>
@@ -44,9 +48,20 @@ namespace BugTrackingApplication
         /// <param name="className">the name of the calss where the bug is located</param>
         public void UpdateBugLocation(int lineNum, string methodBlock, string className)
         {
-            this.Line_Num = lineNum;
-            this.Method_Block = methodBlock;
-            this.Class_Name = className;
+            this.lineNum = lineNum;
+            this.methodBlock = methodBlock;
+            this.className = className;
+        }
+
+        /// <summary>
+        /// Method to update the bug lcoation with a bug location object provided
+        /// </summary>
+        /// <param name="bg">bug location object</param>
+        public void UpdateBugLocation(BugLocation bg)
+        {
+            this.lineNum = bg.LineNum;
+            this.methodBlock = bg.MethodBlock;
+            this.className = bg.ClassName;
         }
     }
 }
