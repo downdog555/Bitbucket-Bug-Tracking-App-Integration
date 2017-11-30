@@ -47,8 +47,9 @@ namespace BugTrackingApplication
             }
             else
             {
-                if (!Parameters.Equals(null) && Parameters.Length != 0)
+                if (Parameters != null && Parameters.Length != 0)
                 {
+
                     int count = 0;
                     int y = 0;
                     while (y < Query.Length  )
@@ -81,6 +82,8 @@ namespace BugTrackingApplication
                     {
                         throw new Exception("Number of parameters do not match markers");
                     }
+
+                    Console.WriteLine(Query);
                 }
                 //Console.WriteLine("hello");
                 //we can then execute the query

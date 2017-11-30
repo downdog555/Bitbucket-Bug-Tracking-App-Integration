@@ -17,6 +17,7 @@ namespace BugTrackingApplication
     {
         private User u;
         private DatabaseHandler db;
+        private List<List<string>> projects;
 
         public MainWindow(User u, DatabaseHandler db)
         {
@@ -28,17 +29,32 @@ namespace BugTrackingApplication
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            
+            string query = "SELECT * FROM projects";
+            string[] param = null;
+            projects = db.SubmitQuery(query, param);
+            Console.WriteLine(projects.Count);
+            projects_table.RowCount = projects.Count + 1;
+            projects_table.
+
+
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to exit?", "Are You Sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (dr == DialogResult.Yes)
+            {
+                
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void projects_table_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
