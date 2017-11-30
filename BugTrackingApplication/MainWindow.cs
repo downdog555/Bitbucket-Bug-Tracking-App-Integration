@@ -28,7 +28,7 @@ namespace BugTrackingApplication
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-
+       
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
