@@ -151,10 +151,10 @@ namespace BugTrackingApplication
         public Timer UpdateTimer1 { get => UpdateTimer; set => UpdateTimer = value; }
 
         /// <summary>
-        /// Used to convert the object array to a string array
+        /// Used to convert the object to a string 
         /// </summary>
         /// <param name="obj"> the object to be converted</param>
-        /// <returns>returns a string compy of the object</returns>
+        /// <returns>returns a string copy of the object</returns>
         private string ConvertObjectToString(object obj)
         {
             return obj?.ToString() ?? string.Empty;

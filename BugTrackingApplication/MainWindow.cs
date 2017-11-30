@@ -28,12 +28,17 @@ namespace BugTrackingApplication
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-       
+            
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void projects_table_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
