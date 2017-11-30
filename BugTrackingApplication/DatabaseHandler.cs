@@ -12,7 +12,7 @@ namespace BugTrackingApplication
     ///  This class handles all interaction with the database
     ///  including refreshing data at a set interval
     /// </summary>
-    class DatabaseHandler
+    public class DatabaseHandler
     {
         private string DatabaseName;
         private string DatabaseUsername;
