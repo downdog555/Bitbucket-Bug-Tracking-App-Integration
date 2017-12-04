@@ -1,8 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpBucket.V1;
+using SharpBucket.V1.Pocos;
+using SharpBucket.V2;
+using SharpBucket.V2.Pocos;
+
 
 namespace BugTrackingApplication
 {
@@ -11,10 +17,17 @@ namespace BugTrackingApplication
     /// </summary>
    public class User
     {
+        private bool logged;
         private string username;
         private string password;
         private string id;
         private string name;
+        private string consumerKey;
+        private string consumerSecretKey;
+        private string accountName;
+        private SharpBucketV1 v1Api;
+        private SharpBucketV2 v2Api;
+
 
         /// <summary>
         /// Constructor for a user
@@ -27,7 +40,29 @@ namespace BugTrackingApplication
             this.password = password;
             this.id = id;
             this.name = name;
+            this.logged = true;
+            //we need to get the consumer key and secretkey
+            ReadDataOauth();
+            v1Api = new SharpBucketV1();
+            v1Api.OAuth2LeggedAuthentication(consumerKey, consumerSecretKey);
+            v2Api = new SharpBucketV2();
+            v2Api.OAuth2LeggedAuthentication(consumerKey, consumerSecretKey);
         }
+
+        /// <summary>
+        /// Gets the account name for the repositories
+        /// </summary>
+        public string AccountName { get => accountName; }
+
+        /// <summary>
+        /// gets the api object for the Version 1 api
+        /// </summary>
+        public SharpBucketV1 V1Api { get => v1Api; }
+
+        /// <summary>
+        /// Gets the v2 api for bitbucket
+        /// </summary>
+        public SharpBucketV2 V2Api { get => v2Api; }
 
         /// <summary>
         /// Login function
@@ -46,6 +81,23 @@ namespace BugTrackingApplication
         public bool Logout()
         {
             return false;
+        }
+
+        private void ReadDataOauth()
+        {
+            // Reads test data information from a file, you should structure it like this:
+            // By default it reads from c:\
+            // ApiKey:yourApiKey
+            // SecretApiKey:yourSecretApiKey
+            // AccountName:yourAccountName
+            // Repository:testRepository
+            //Console.WriteLine(Directory.GetFiles(@"H:\test\").ToString());
+
+            var lines = File.ReadAllLines(@"H:\test\TestInformationOauth.txt");
+            consumerKey = lines[0].Split(':')[1];
+            Console.WriteLine(consumerKey);
+            consumerSecretKey = lines[1].Split(':')[1];
+            accountName = lines[2].Split(':')[1];
         }
     }
 }

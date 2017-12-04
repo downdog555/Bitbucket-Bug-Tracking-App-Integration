@@ -77,10 +77,10 @@ namespace BugTrackingApplication
                 {
                     //we can then setup the user
                     user = new User(m.ElementAt(1), m.ElementAt(2), m.ElementAt(0), m.ElementAt(3));
-                    this.Hide();
+                    
                     mw = new MainWindow(user, db);
                     mw.Show();
-                
+                    this.Hide();
                     break;
                 }
             }

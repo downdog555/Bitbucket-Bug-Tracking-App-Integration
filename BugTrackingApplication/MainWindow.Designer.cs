@@ -30,12 +30,14 @@
         {
             this.menuBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.projects_table = new System.Windows.Forms.TableLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectsList = new System.Windows.Forms.ComboBox();
+            this.branchesList = new System.Windows.Forms.ComboBox();
+            this.revisionsList = new System.Windows.Forms.ComboBox();
             this.menuBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -56,7 +58,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.projects_table);
+            this.tabPage1.Controls.Add(this.revisionsList);
+            this.tabPage1.Controls.Add(this.branchesList);
+            this.tabPage1.Controls.Add(this.projectsList);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -64,23 +68,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "View All Projects";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // projects_table
-            // 
-            this.projects_table.ColumnCount = 6;
-            this.projects_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.6281F));
-            this.projects_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.3719F));
-            this.projects_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 197F));
-            this.projects_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.projects_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.projects_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.projects_table.Location = new System.Drawing.Point(6, 6);
-            this.projects_table.Name = "projects_table";
-            this.projects_table.RowCount = 2;
-            this.projects_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.829978F));
-            this.projects_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.17002F));
-            this.projects_table.Size = new System.Drawing.Size(765, 447);
-            this.projects_table.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -122,6 +109,33 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // projectsList
+            // 
+            this.projectsList.FormattingEnabled = true;
+            this.projectsList.Location = new System.Drawing.Point(73, 17);
+            this.projectsList.Name = "projectsList";
+            this.projectsList.Size = new System.Drawing.Size(121, 21);
+            this.projectsList.TabIndex = 0;
+            this.projectsList.SelectedValueChanged += new System.EventHandler(this.projectsList_SelectedValueChanged);
+            // 
+            // branchesList
+            // 
+            this.branchesList.FormattingEnabled = true;
+            this.branchesList.Location = new System.Drawing.Point(260, 17);
+            this.branchesList.Name = "branchesList";
+            this.branchesList.Size = new System.Drawing.Size(121, 21);
+            this.branchesList.TabIndex = 1;
+            this.branchesList.SelectedValueChanged += new System.EventHandler(this.branchesList_SelectedValueChanged);
+            // 
+            // revisionsList
+            // 
+            this.revisionsList.FormattingEnabled = true;
+            this.revisionsList.Location = new System.Drawing.Point(433, 17);
+            this.revisionsList.Name = "revisionsList";
+            this.revisionsList.Size = new System.Drawing.Size(121, 21);
+            this.revisionsList.TabIndex = 2;
+            this.revisionsList.SelectedValueChanged += new System.EventHandler(this.revisionsList_SelectedValueChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,6 +167,8 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel projects_table;
+        private System.Windows.Forms.ComboBox revisionsList;
+        private System.Windows.Forms.ComboBox branchesList;
+        private System.Windows.Forms.ComboBox projectsList;
     }
 }
