@@ -29,6 +29,11 @@ namespace BugTrackingApplication
         private List<Project> currentProjects = new List<Project>();
         private RepositoryEndPoint reposEndPoint;
 
+        /// <summary>
+        /// Constructor for the main window class
+        /// </summary>
+        /// <param name="u">A User Object</param>
+        /// <param name="db">A Database Handler Object</param>
         public MainWindow(User u, DatabaseHandler db)
         {
             InitializeComponent();
@@ -37,12 +42,18 @@ namespace BugTrackingApplication
             this.db = db;
         }
 
+        /// <summary>
+        /// Load function for main window. Used to get the intial list of projects and their repositories
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_Load(object sender, EventArgs e)
         {
             reposEndPoint = u.V2Api.RepositoriesEndPoint();
             //first we need to get a list of projects
             //we need each branch
             
+            //gets a list of projects from the version control service
            List<Repository> projects = reposEndPoint.ListRepositories(u.AccountName);
             foreach (Repository r in projects)
             {
@@ -63,6 +74,12 @@ namespace BugTrackingApplication
 
         }
 
+        /// <summary>
+        /// Called when main form window is closing.
+        /// Event is cancelled if they do not want to close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dr = MessageBox.Show("Are you sure you want to exit?", "Are You Sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
@@ -76,11 +93,23 @@ namespace BugTrackingApplication
             }
         }
 
+        /// <summary>
+        /// Called when main window has closed and resources free(no point of return)
+        /// Have to still call application.exit as the application is still running with the entry point of the login form just hidden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Called when the project combo-box is changed
+        /// Used to then get all the relevent branches from that project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void projectsList_SelectedValueChanged(object sender, EventArgs e)
         {
             Project p =(Project) projectsList.SelectedItem;
@@ -91,6 +120,12 @@ namespace BugTrackingApplication
             }
         }
 
+        /// <summary>
+        /// Used when the branch list is changed
+        /// Used to get the revision numbers relating to the branch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void branchesList_SelectedValueChanged(object sender, EventArgs e)
         {
             Project p = (Project)projectsList.SelectedItem;
@@ -107,9 +142,14 @@ namespace BugTrackingApplication
             }
         }
 
+        /// <summary>
+        /// used when revision list is selected can be used to narrow down bugs to this version
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void revisionsList_SelectedValueChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

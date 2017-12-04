@@ -14,8 +14,9 @@ namespace BugTrackingApplication
     {
         private DatabaseHandler db = new DatabaseHandler("u", "sa","asd");
         private User user;
-
         private MainWindow mw;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -23,27 +24,9 @@ namespace BugTrackingApplication
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            /**
-            //Console.WriteLine("meow");
-            //db.Test();
-            string[] param = { "cat" };
-
-            List<List<string>> tempo = db.SubmitQuery("SELECT * FROM music WHERE artist_name = ?", param);
-            Console.WriteLine("hello");
-            foreach (List<string> m in tempo)
-            {
-                foreach (string s in m)
-                {
-                    Console.WriteLine(s);
-                }
-            }
-    **/
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
         }
+
 
         /// <summary>
         /// called when exit button is pressed

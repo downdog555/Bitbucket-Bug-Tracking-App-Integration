@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.usernameBox = new System.Windows.Forms.TextBox();
-            this.passwordBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.passwordBox = new System.Windows.Forms.TextBox();
+            this.usernameBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,45 +55,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Please enter details";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // label1
+            // button2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Username:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Password";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(20, 112);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // usernameBox
-            // 
-            this.usernameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.usernameBox.Location = new System.Drawing.Point(66, 49);
-            this.usernameBox.Name = "usernameBox";
-            this.usernameBox.Size = new System.Drawing.Size(100, 20);
-            this.usernameBox.TabIndex = 3;
+            this.button2.Location = new System.Drawing.Point(101, 112);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Exit";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // passwordBox
             // 
@@ -106,15 +77,43 @@
             this.passwordBox.Size = new System.Drawing.Size(100, 20);
             this.passwordBox.TabIndex = 4;
             // 
-            // button2
+            // usernameBox
             // 
-            this.button2.Location = new System.Drawing.Point(101, 112);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Exit";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.usernameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.usernameBox.Location = new System.Drawing.Point(66, 49);
+            this.usernameBox.Name = "usernameBox";
+            this.usernameBox.Size = new System.Drawing.Size(100, 20);
+            this.usernameBox.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(20, 112);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Login";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(2, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Password";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(2, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Username:";
             // 
             // Form1
             // 

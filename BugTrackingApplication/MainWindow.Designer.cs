@@ -30,14 +30,15 @@
         {
             this.menuBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.revisionsList = new System.Windows.Forms.ComboBox();
+            this.branchesList = new System.Windows.Forms.ComboBox();
+            this.projectsList = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectsList = new System.Windows.Forms.ComboBox();
-            this.branchesList = new System.Windows.Forms.ComboBox();
-            this.revisionsList = new System.Windows.Forms.ComboBox();
+            this.issuesLog = new System.Windows.Forms.RichTextBox();
             this.menuBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -58,6 +59,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.issuesLog);
             this.tabPage1.Controls.Add(this.revisionsList);
             this.tabPage1.Controls.Add(this.branchesList);
             this.tabPage1.Controls.Add(this.projectsList);
@@ -68,6 +70,33 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "View All Projects";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // revisionsList
+            // 
+            this.revisionsList.FormattingEnabled = true;
+            this.revisionsList.Location = new System.Drawing.Point(433, 17);
+            this.revisionsList.Name = "revisionsList";
+            this.revisionsList.Size = new System.Drawing.Size(121, 21);
+            this.revisionsList.TabIndex = 2;
+            this.revisionsList.SelectedValueChanged += new System.EventHandler(this.revisionsList_SelectedValueChanged);
+            // 
+            // branchesList
+            // 
+            this.branchesList.FormattingEnabled = true;
+            this.branchesList.Location = new System.Drawing.Point(260, 17);
+            this.branchesList.Name = "branchesList";
+            this.branchesList.Size = new System.Drawing.Size(121, 21);
+            this.branchesList.TabIndex = 1;
+            this.branchesList.SelectedValueChanged += new System.EventHandler(this.branchesList_SelectedValueChanged);
+            // 
+            // projectsList
+            // 
+            this.projectsList.FormattingEnabled = true;
+            this.projectsList.Location = new System.Drawing.Point(73, 17);
+            this.projectsList.Name = "projectsList";
+            this.projectsList.Size = new System.Drawing.Size(121, 21);
+            this.projectsList.TabIndex = 0;
+            this.projectsList.SelectedValueChanged += new System.EventHandler(this.projectsList_SelectedValueChanged);
             // 
             // tabPage2
             // 
@@ -109,32 +138,13 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // projectsList
+            // issuesLog
             // 
-            this.projectsList.FormattingEnabled = true;
-            this.projectsList.Location = new System.Drawing.Point(73, 17);
-            this.projectsList.Name = "projectsList";
-            this.projectsList.Size = new System.Drawing.Size(121, 21);
-            this.projectsList.TabIndex = 0;
-            this.projectsList.SelectedValueChanged += new System.EventHandler(this.projectsList_SelectedValueChanged);
-            // 
-            // branchesList
-            // 
-            this.branchesList.FormattingEnabled = true;
-            this.branchesList.Location = new System.Drawing.Point(260, 17);
-            this.branchesList.Name = "branchesList";
-            this.branchesList.Size = new System.Drawing.Size(121, 21);
-            this.branchesList.TabIndex = 1;
-            this.branchesList.SelectedValueChanged += new System.EventHandler(this.branchesList_SelectedValueChanged);
-            // 
-            // revisionsList
-            // 
-            this.revisionsList.FormattingEnabled = true;
-            this.revisionsList.Location = new System.Drawing.Point(433, 17);
-            this.revisionsList.Name = "revisionsList";
-            this.revisionsList.Size = new System.Drawing.Size(121, 21);
-            this.revisionsList.TabIndex = 2;
-            this.revisionsList.SelectedValueChanged += new System.EventHandler(this.revisionsList_SelectedValueChanged);
+            this.issuesLog.Location = new System.Drawing.Point(260, 67);
+            this.issuesLog.Name = "issuesLog";
+            this.issuesLog.Size = new System.Drawing.Size(262, 214);
+            this.issuesLog.TabIndex = 3;
+            this.issuesLog.Text = "";
             // 
             // MainWindow
             // 
@@ -170,5 +180,6 @@
         private System.Windows.Forms.ComboBox revisionsList;
         private System.Windows.Forms.ComboBox branchesList;
         private System.Windows.Forms.ComboBox projectsList;
+        private System.Windows.Forms.RichTextBox issuesLog;
     }
 }
