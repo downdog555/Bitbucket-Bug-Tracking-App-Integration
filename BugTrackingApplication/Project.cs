@@ -13,7 +13,7 @@ namespace BugTrackingApplication
     /// </summary>
     class Project
     {
-        private List<Bug> bugs;
+        private List<Bug> bugs = new List<Bug>();
         private string RepositoryURL;
         private string ProjectName;
         private string ProjectOwner;
@@ -21,6 +21,7 @@ namespace BugTrackingApplication
 
         public Dictionary<string, BranchInfo> Branches { get => branches;}
         public string ProjectName1 { get => ProjectName; set => ProjectName = value; }
+        public List<Bug> Bugs { get => bugs; set => bugs = value; }
 
         /// <summary>
         /// Constructor for the project class
@@ -31,7 +32,7 @@ namespace BugTrackingApplication
         /// <param name="ProjectOwner">Owner of the project</param>
         public Project(List<Bug> bugs, string RepositoryURL, string ProjectName, string ProjectOwner, Dictionary<string, BranchInfo> branches)
         {
-            this.bugs = bugs;
+            this.Bugs = bugs;
             this.RepositoryURL = RepositoryURL;
             this.ProjectName1 = ProjectName;
             this.ProjectOwner = ProjectOwner;
@@ -62,6 +63,20 @@ namespace BugTrackingApplication
         public override string ToString()
         {
             return this.ProjectName1;
+        }
+
+        /// <summary>
+        /// Add bug to this project
+        /// </summary>
+        /// <param name="b"></param>
+        public void AddBug(Bug b)
+        {
+            Bugs.Add(b);
+        }
+
+        public void ResetBugList()
+        {
+            Bugs = new List<Bug>();
         }
 
 

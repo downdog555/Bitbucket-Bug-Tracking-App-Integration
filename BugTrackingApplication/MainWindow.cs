@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 //sharpbucke libs
 using SharpBucket.V1;
 using SharpBucket.V1.Pocos;
@@ -138,8 +141,11 @@ namespace BugTrackingApplication
             foreach (Commit c in commits)
             {
                 
-                revisionsList.Items.Add(c.hash +": " +c.message);
+                revisionsList.Items.Add(c.hash +":" +c.message);
             }
+
+            //we then need to get the issues/bugs
+            LoadBugs(p, bi);
         }
 
         /// <summary>
@@ -149,7 +155,65 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void revisionsList_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+            Project p = (Project)projectsList.SelectedItem;
+            BranchInfo bi;
+            p.Branches.TryGetValue((string)branchesList.SelectedItem, out bi);
+            string revision = revisionsList.SelectedText.Split(':')[0];
+
+            LoadBugs(p, bi, revision);
         }
+
+        /// <summary>
+        /// Used to load bugs into the project object
+        /// Gets issues from repository. Checks if there is a revision set, checks if issue has related then adds to project bugs
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="b"></param>
+        /// <param name="revision"></param>
+        private void LoadBugs(Project p, BranchInfo b, string revision = null)
+        {
+            p.ResetBugList();
+
+            List<Issue> correctBugs = new List<Issue>();
+            List<Issue> issues = u.V1Api.RepositoriesEndPoint(u.AccountName, p.ProjectName1).IssuesResource().ListIssues().issues;
+            JsonSerializer serializer = new JsonSerializer();
+
+            // serializer.Converters.Add(new StringEnumConverter());
+       
+      
+            foreach (Issue i in issues)
+            {
+                //we need to check if issues have a certain format
+                Console.WriteLine(i.content);
+                Bug temp = JsonConvert.DeserializeObject<Bug>(i.content);
+                temp.BugID =(int) i.local_id;
+                temp.CreatedOn = i.created_on;
+                if (revision != null)
+                {
+                    //if not null be only show certain bugs
+                    if (temp.REVISION.Equals(revision))
+                    {
+                        p.AddBug(temp);
+                    }
+                    
+
+                }
+                else
+                {
+                    p.AddBug(temp);
+                }
+
+                //we also need to get all of the comments
+            }
+            string logText = "";
+            foreach (Bug b1 in p.Bugs)
+            {
+                logText = logText + b1.REVISION + ": " + b1.ISSUE;
+            }
+            issuesLog.Clear();
+            issuesLog.Text = logText;
+        }
+
+
     }
 }

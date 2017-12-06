@@ -9,63 +9,51 @@ namespace BugTrackingApplication
     /// <summary>
     /// class used to represent a bug
     /// </summary>
+    /// 
+    [Serializable]
     class Bug
     {
         private List<AuditLog> logs;
-        private string reportedBy;
-        private string bugId;
-        private string projectID;
 
-        /// <summary>
-        /// Constructor for bug class
-        /// </summary>
-        /// <param name="logs">list of audit logs</param>
-        /// <param name="reportedBy">who the bug was reported by</param>
-        /// <param name="bugId">the id of the bug</param>
-        /// <param name="projectId">the id of the project</param>
-        public Bug(List<AuditLog> logs, string reportedBy, string bugId, string projectId)
+        private int bugID;
+        private string createdOn;
+        private string revision;
+        private string className;
+        private string method;
+        private string lineNum;
+        private string issue;
+        private string createdby;
+
+        public Bug( string revision, string className, string method, string lineNum, string issue, string createdby)
         {
-            this.logs = logs;
-            this.reportedBy = reportedBy;
-            this.bugId = bugId;
+          
+            this.revision = revision;
+            this.className = className;
+            this.method = method;
+            this.lineNum = lineNum;
+            this.issue = issue;
+            this.createdby = createdby;
         }
 
-        /// <summary>
-        /// Constructor for bug class
-        /// </summary>
-        /// <param name="reportedBy">Who the bug was reported by </param>
-        /// <param name="bugId">The id of the bug</param>
-        public Bug(string reportedBy, string bugId)
+        public Bug()
         {
-           
-            this.reportedBy = reportedBy;
-            this.bugId = bugId;
-        }
-
-        /// <summary>
-        /// Adds and audit log to the list for this bug and then adds to the database.
-        /// </summary>
-        /// <param name="log"></param>
-        public void AddAuditLog(AuditLog log)
-        {
-            this.logs.Add(log);
-            //we need to add to database 
-
-            //TODO: add to db
-        }
-
-        /// <summary>
-        /// Removes from the list as well as the db
-        /// </summary>
-        /// <param name="auditLogId">the id of the log to remove</param>
-        public void RemoveAuditLog(string auditLogId)
-        {
-
+            
+            this.revision = "";
+            this.className = "";
+            this.method = "";
+            this.lineNum = "";
+            this.issue = "";
+            this.createdby = "";
         }
 
 
-
-
-
+        public string REVISION { get => revision; set => revision = value; }
+        public string CLASSNAME { get => className; set => className = value; }
+        public string METHOD { get => method; set => method = value; }
+        public string LINENUM { get => lineNum; set => lineNum = value; }
+        public string ISSUE { get => issue; set => issue = value; }
+        public string CREATEDBY { get => createdby; set => createdby = value; }
+        public int BugID { get => bugID; set => bugID = value; }
+        public string CreatedOn { get => createdOn; set => createdOn = value; }
     }
 }
