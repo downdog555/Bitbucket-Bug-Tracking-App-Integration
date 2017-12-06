@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 //sharpbucke libs
 using SharpBucket.V1;
 using SharpBucket.V1.Pocos;
@@ -31,7 +23,9 @@ namespace BugTrackingApplication
         private DatabaseHandler db;
         private List<Project> currentProjects = new List<Project>();
         private RepositoryEndPoint reposEndPoint;
-
+        private int positionX = 7;
+        private int positionY = 20;
+        
         /// <summary>
         /// Constructor for the main window class
         /// </summary>
@@ -43,6 +37,7 @@ namespace BugTrackingApplication
 
             this.u = u;
             this.db = db;
+            
         }
 
         /// <summary>
@@ -52,6 +47,7 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            tabPage2.Hide();
             reposEndPoint = u.V2Api.RepositoriesEndPoint();
             //first we need to get a list of projects
             //we need each branch
@@ -60,22 +56,43 @@ namespace BugTrackingApplication
            List<Repository> projects = reposEndPoint.ListRepositories(u.AccountName);
             foreach (Repository r in projects)
             {
+
+                //we need to load the project controls
+
                 //we need to get the branches for the project
                 Dictionary<string, BranchInfo> branch = u.V1Api.RepositoriesEndPoint(u.AccountName, r.name).ListBranches();
                 //we need to add the project to the list
                 Project p = new Project(r.links.self.href, r.name, r.owner, branch);
+                
                 currentProjects.Add(p);
-                projectsList.Items.Add(p);
+               
+                ProjectControl pc = new ProjectControl(r.owner, r.links.self.href, r.name, branch, this, p);
+                //pc.Location.X = positionX;
+                //pc.Location.Y = positionY;
 
-
+                Projects.Controls.Add(pc);
+                pc.Location = new System.Drawing.Point(positionX, positionY);
+                positionY = positionY + 100;
             }
 
-
-            //we then need to populate a list of projects 
+            Console.WriteLine(currentProjects.Count);
+           
             
 
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bugId"></param>
+        /// <param name="projectName"></param>
+        internal void ViewAuditLogs(int bugId, string projectName)
+        {
+            throw new NotImplementedException();
+        }
+
+        
 
         /// <summary>
         /// Called when main form window is closing.
@@ -115,38 +132,15 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void projectsList_SelectedValueChanged(object sender, EventArgs e)
         {
-            Project p =(Project) projectsList.SelectedItem;
-            branchesList.Items.Clear();
-            foreach (KeyValuePair<string, BranchInfo> branch in p.Branches)
-            {
-                branchesList.Items.Add(branch.Key);
-            }
+            //Project p =(Project) projectsList.SelectedItem;
+            //branchesList.Items.Clear();
+          //  foreach (KeyValuePair<string, BranchInfo> branch in p.Branches)
+           // {
+                //branchesList.Items.Add(branch.Key);
+           // }
         }
 
-        /// <summary>
-        /// Used when the branch list is changed
-        /// Used to get the revision numbers relating to the branch
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void branchesList_SelectedValueChanged(object sender, EventArgs e)
-        {
-            Project p = (Project)projectsList.SelectedItem;
-            BranchInfo bi;
-            p.Branches.TryGetValue((string)branchesList.SelectedItem, out bi);
 
-            revisionsList.Items.Clear();
-            var commits = u.V2Api.RepositoriesEndPoint().RepositoryResource(u.AccountName, p.ProjectName1).ListCommits(bi.branch);
-
-            foreach (Commit c in commits)
-            {
-                
-                revisionsList.Items.Add(c.hash +":" +c.message);
-            }
-
-            //we then need to get the issues/bugs
-            LoadBugs(p, bi);
-        }
 
         /// <summary>
         /// used when revision list is selected can be used to narrow down bugs to this version
@@ -155,12 +149,12 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void revisionsList_SelectedValueChanged(object sender, EventArgs e)
         {
-            Project p = (Project)projectsList.SelectedItem;
+           // Project p = (Project)projectsList.SelectedItem;
             BranchInfo bi;
-            p.Branches.TryGetValue((string)branchesList.SelectedItem, out bi);
-            string revision = revisionsList.SelectedText.Split(':')[0];
+           // p.Branches.TryGetValue((string)branchesList.SelectedItem, out bi);
+           // string revision = revisionsList.SelectedText.Split(':')[0];
 
-            LoadBugs(p, bi, revision);
+           // LoadBugs(p, bi, revision);
         }
 
         /// <summary>
@@ -170,24 +164,40 @@ namespace BugTrackingApplication
         /// <param name="p"></param>
         /// <param name="b"></param>
         /// <param name="revision"></param>
-        private void LoadBugs(Project p, BranchInfo b, string revision = null)
+        internal void LoadBugs(Project p, BranchInfo b, string revision = null)
         {
             p.ResetBugList();
-
+            
             List<Issue> correctBugs = new List<Issue>();
-            List<Issue> issues = u.V1Api.RepositoriesEndPoint(u.AccountName, p.ProjectName1).IssuesResource().ListIssues().issues;
+            //limit searches to bugs
+            IssueSearchParameters searchParam = new IssueSearchParameters();
+            searchParam.kind = "bug";
+            //get list of issues
+            List<Issue> issues = u.V1Api.RepositoriesEndPoint(u.AccountName, p.ProjectName1).IssuesResource().ListIssues(searchParam).issues;
             JsonSerializer serializer = new JsonSerializer();
-
+            
+         
             // serializer.Converters.Add(new StringEnumConverter());
        
       
             foreach (Issue i in issues)
             {
                 //we need to check if issues have a certain format
-                Console.WriteLine(i.content);
+               // Console.WriteLine(i.metadata.kind);
                 Bug temp = JsonConvert.DeserializeObject<Bug>(i.content);
                 temp.BugID =(int) i.local_id;
                 temp.CreatedOn = i.created_on;
+                int issueID = (int)i.local_id;
+                List<Comment> comments = u.V1Api.RepositoriesEndPoint(u.AccountName, p.ProjectName1).IssuesResource().IssueResource(issueID).ListComments();
+                
+                Console.WriteLine(comments.Count);
+                foreach (Comment comment in comments)
+                {
+                    AuditLog log = new AuditLog((int)comment.comment_id, comment.content, comment.utc_created_on, comment.author_info.display_name);
+                    temp.AddAuditLog(log);
+                    Console.WriteLine(log.Message);
+                    temp.FlipList();
+                }
                 if (revision != null)
                 {
                     //if not null be only show certain bugs
@@ -202,18 +212,32 @@ namespace BugTrackingApplication
                 {
                     p.AddBug(temp);
                 }
+                int bugX = 2;
+                int bugY = 10;
+                foreach (Bug bug in p.Bugs)
+                {
+                    BugList bl = new BugList(bug.ISSUE, bug.CREATEDBY, bug.Logs.Count.ToString(), p.ProjectName1, bug.BugID, this);
+                    bl.Location = new System.Drawing.Point(bugX, bugY);
+                    bugPanel.Controls.Add(bl);
+                    bugY = bugY + 100;
+                }
 
                 //we also need to get all of the comments
             }
-            string logText = "";
-            foreach (Bug b1 in p.Bugs)
-            {
-                logText = logText + b1.REVISION + ": " + b1.ISSUE;
-            }
-            issuesLog.Clear();
-            issuesLog.Text = logText;
+
+            //issuesLog.Clear();
+            //issuesLog.Text = logText;
+            
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+                Application.Exit();
+            
 
+        }
+
+        
     }
 }

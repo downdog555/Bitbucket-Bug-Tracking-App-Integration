@@ -30,17 +30,31 @@
         {
             this.menuBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.revisionsList = new System.Windows.Forms.ComboBox();
-            this.branchesList = new System.Windows.Forms.ComboBox();
-            this.projectsList = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.bugsBox = new System.Windows.Forms.GroupBox();
+            this.bugPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.controlsBox = new System.Windows.Forms.GroupBox();
+            this.projectInfoBox = new System.Windows.Forms.GroupBox();
+            this.viewBugInformation = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newBugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newAuditLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeKeyLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.issuesLog = new System.Windows.Forms.RichTextBox();
+            this.Projects = new System.Windows.Forms.GroupBox();
             this.menuBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.bugsBox.SuspendLayout();
+            this.viewBugInformation.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.menuBar.Controls.Add(this.tabPage1);
             this.menuBar.Controls.Add(this.tabPage2);
+            this.menuBar.Controls.Add(this.viewBugInformation);
             this.menuBar.Location = new System.Drawing.Point(12, 27);
             this.menuBar.Name = "menuBar";
             this.menuBar.SelectedIndex = 0;
@@ -59,10 +74,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.issuesLog);
-            this.tabPage1.Controls.Add(this.revisionsList);
-            this.tabPage1.Controls.Add(this.branchesList);
-            this.tabPage1.Controls.Add(this.projectsList);
+            this.tabPage1.Controls.Add(this.Projects);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -71,35 +83,11 @@
             this.tabPage1.Text = "View All Projects";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // revisionsList
-            // 
-            this.revisionsList.FormattingEnabled = true;
-            this.revisionsList.Location = new System.Drawing.Point(433, 17);
-            this.revisionsList.Name = "revisionsList";
-            this.revisionsList.Size = new System.Drawing.Size(121, 21);
-            this.revisionsList.TabIndex = 2;
-            this.revisionsList.SelectedValueChanged += new System.EventHandler(this.revisionsList_SelectedValueChanged);
-            // 
-            // branchesList
-            // 
-            this.branchesList.FormattingEnabled = true;
-            this.branchesList.Location = new System.Drawing.Point(260, 17);
-            this.branchesList.Name = "branchesList";
-            this.branchesList.Size = new System.Drawing.Size(121, 21);
-            this.branchesList.TabIndex = 1;
-            this.branchesList.SelectedValueChanged += new System.EventHandler(this.branchesList_SelectedValueChanged);
-            // 
-            // projectsList
-            // 
-            this.projectsList.FormattingEnabled = true;
-            this.projectsList.Location = new System.Drawing.Point(73, 17);
-            this.projectsList.Name = "projectsList";
-            this.projectsList.Size = new System.Drawing.Size(121, 21);
-            this.projectsList.TabIndex = 0;
-            this.projectsList.SelectedValueChanged += new System.EventHandler(this.projectsList_SelectedValueChanged);
-            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.bugsBox);
+            this.tabPage2.Controls.Add(this.controlsBox);
+            this.tabPage2.Controls.Add(this.projectInfoBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -107,6 +95,71 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View All Bugs";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // bugsBox
+            // 
+            this.bugsBox.Controls.Add(this.bugPanel);
+            this.bugsBox.Location = new System.Drawing.Point(7, 130);
+            this.bugsBox.Name = "bugsBox";
+            this.bugsBox.Size = new System.Drawing.Size(764, 310);
+            this.bugsBox.TabIndex = 2;
+            this.bugsBox.TabStop = false;
+            this.bugsBox.Text = "Bugs:";
+            // 
+            // bugPanel
+            // 
+            this.bugPanel.Location = new System.Drawing.Point(0, 20);
+            this.bugPanel.Name = "bugPanel";
+            this.bugPanel.Size = new System.Drawing.Size(764, 284);
+            this.bugPanel.TabIndex = 0;
+            // 
+            // controlsBox
+            // 
+            this.controlsBox.Location = new System.Drawing.Point(272, 7);
+            this.controlsBox.Name = "controlsBox";
+            this.controlsBox.Size = new System.Drawing.Size(499, 116);
+            this.controlsBox.TabIndex = 1;
+            this.controlsBox.TabStop = false;
+            this.controlsBox.Text = "Controls";
+            // 
+            // projectInfoBox
+            // 
+            this.projectInfoBox.Location = new System.Drawing.Point(7, 7);
+            this.projectInfoBox.Name = "projectInfoBox";
+            this.projectInfoBox.Size = new System.Drawing.Size(258, 116);
+            this.projectInfoBox.TabIndex = 0;
+            this.projectInfoBox.TabStop = false;
+            this.projectInfoBox.Text = "Project Info";
+            // 
+            // viewBugInformation
+            // 
+            this.viewBugInformation.Controls.Add(this.groupBox2);
+            this.viewBugInformation.Controls.Add(this.groupBox1);
+            this.viewBugInformation.Location = new System.Drawing.Point(4, 22);
+            this.viewBugInformation.Name = "viewBugInformation";
+            this.viewBugInformation.Padding = new System.Windows.Forms.Padding(3);
+            this.viewBugInformation.Size = new System.Drawing.Size(777, 456);
+            this.viewBugInformation.TabIndex = 2;
+            this.viewBugInformation.Text = "View Bug Information";
+            this.viewBugInformation.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(320, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(451, 443);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Audit Logs";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(7, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(307, 443);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Bug Information";
             // 
             // menuStrip1
             // 
@@ -122,15 +175,68 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.optionsToolStripMenuItem1,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newBugToolStripMenuItem,
+            this.newAuditLogToolStripMenuItem,
+            this.newProjectToolStripMenuItem});
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.newToolStripMenuItem.Text = "New";
+            // 
+            // newBugToolStripMenuItem
+            // 
+            this.newBugToolStripMenuItem.Name = "newBugToolStripMenuItem";
+            this.newBugToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.newBugToolStripMenuItem.Text = "New Bug";
+            // 
+            // newAuditLogToolStripMenuItem
+            // 
+            this.newAuditLogToolStripMenuItem.Name = "newAuditLogToolStripMenuItem";
+            this.newAuditLogToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.newAuditLogToolStripMenuItem.Text = "New Audit Log";
+            // 
+            // newProjectToolStripMenuItem
+            // 
+            this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.newProjectToolStripMenuItem.Text = "New Project";
+            // 
+            // optionsToolStripMenuItem1
+            // 
+            this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
+            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.optionsToolStripMenuItem1.Text = "Refresh";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // optionsToolStripMenuItem
             // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeKeyLocationToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // changeKeyLocationToolStripMenuItem
+            // 
+            this.changeKeyLocationToolStripMenuItem.Name = "changeKeyLocationToolStripMenuItem";
+            this.changeKeyLocationToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.changeKeyLocationToolStripMenuItem.Text = "Change Key Location";
             // 
             // helpToolStripMenuItem
             // 
@@ -138,13 +244,14 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // issuesLog
+            // Projects
             // 
-            this.issuesLog.Location = new System.Drawing.Point(260, 67);
-            this.issuesLog.Name = "issuesLog";
-            this.issuesLog.Size = new System.Drawing.Size(262, 214);
-            this.issuesLog.TabIndex = 3;
-            this.issuesLog.Text = "";
+            this.Projects.Location = new System.Drawing.Point(4, 7);
+            this.Projects.Name = "Projects";
+            this.Projects.Size = new System.Drawing.Size(767, 446);
+            this.Projects.TabIndex = 0;
+            this.Projects.TabStop = false;
+            this.Projects.Text = "Projects";
             // 
             // MainWindow
             // 
@@ -161,6 +268,9 @@
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuBar.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.bugsBox.ResumeLayout(false);
+            this.viewBugInformation.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -177,9 +287,20 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ComboBox revisionsList;
-        private System.Windows.Forms.ComboBox branchesList;
-        private System.Windows.Forms.ComboBox projectsList;
-        private System.Windows.Forms.RichTextBox issuesLog;
+        private System.Windows.Forms.TabPage viewBugInformation;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newBugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newAuditLogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.GroupBox bugsBox;
+        private System.Windows.Forms.GroupBox controlsBox;
+        private System.Windows.Forms.GroupBox projectInfoBox;
+        private System.Windows.Forms.ToolStripMenuItem changeKeyLocationToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel bugPanel;
+        private System.Windows.Forms.GroupBox Projects;
     }
 }

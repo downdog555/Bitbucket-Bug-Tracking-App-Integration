@@ -9,14 +9,12 @@ namespace BugTrackingApplication
     /// <summary>
     /// Class representing an audit log, it contains the message of the log and the owner
     /// </summary>
-    class AuditLog
+    public class AuditLog
     {
-        private string auditLogId;
-        private string bugId;
+        private int auditLogId;
         private string message;
-        private string ownerId;
+        private string createdOn;
         private string ownerName;
-        private BugLocation bugLoc;
 
         /// <summary>
         /// Constructor
@@ -27,14 +25,12 @@ namespace BugTrackingApplication
         /// <param name="ownerId">Id string of the owner of this log</param>
         /// <param name="ownerName">Username of the owner of this log</param>
         /// <param name="bugLoc">A BugLocation object to represent he location</param>
-        public AuditLog(string auditLogId, string bugId, string message, string ownerId, string ownerName, BugLocation bugLoc)
+        public AuditLog(int auditLogId,  string message, string createdOn, string ownerName)
         {
             this.auditLogId = auditLogId;
-            this.bugId = bugId;
             this.message = message;
-            this.ownerId = ownerId;
+            this.createdOn = createdOn;
             this.ownerName = ownerName;
-            this.bugLoc = bugLoc;
         }
 
         /// <summary>
@@ -45,32 +41,15 @@ namespace BugTrackingApplication
         /// <summary>
         /// getter for ownerID
         /// </summary>
-        public string OwnerId { get => ownerId; }
+        public string CreatedOn { get => createdOn; }
 
         /// <summary>
         /// getter for owner name
         /// </summary>
         public string OwnerName { get => ownerName;  }
 
-        /// <summary>
-        /// Updates the bug location for this log
-        /// </summary>
-        /// <param name="lineNum">Line number of this bug</param>
-        /// <param name="methodBlock">Method block that the bug is a part of</param>
-        /// <param name="className">Class of the bug</param>
-        public void UpdateBugLocation(int lineNum, string methodBlock, string className)
-        {
-            bugLoc.UpdateBugLocation(lineNum, methodBlock, className);
-        }
 
-        /// <summary>
-        /// Method to update hte bug location relating to this audit log
-        /// </summary>
-        /// <param name="bg">Bug Location object</param>
-        public void UpdateBugLocation(BugLocation bg)
-        {
-            bugLoc.UpdateBugLocation(bg);
-        }
+
 
 
 

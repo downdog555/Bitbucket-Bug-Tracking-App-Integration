@@ -11,7 +11,7 @@ namespace BugTrackingApplication
     /// <summary>
     /// class representing a project
     /// </summary>
-    class Project
+    public class Project
     {
         private List<Bug> bugs = new List<Bug>();
         private string RepositoryURL;
@@ -19,9 +19,11 @@ namespace BugTrackingApplication
         private string ProjectOwner;
         private Dictionary<string, BranchInfo> branches;
 
+
         public Dictionary<string, BranchInfo> Branches { get => branches;}
         public string ProjectName1 { get => ProjectName; set => ProjectName = value; }
         public List<Bug> Bugs { get => bugs; set => bugs = value; }
+
 
         /// <summary>
         /// Constructor for the project class
@@ -37,6 +39,7 @@ namespace BugTrackingApplication
             this.ProjectName1 = ProjectName;
             this.ProjectOwner = ProjectOwner;
             this.branches = branches;
+           
 
         }
 
@@ -53,6 +56,7 @@ namespace BugTrackingApplication
             this.ProjectName1 = ProjectName;
             this.ProjectOwner = ProjectOwner;
             this.branches = branches;
+
 
         }
 
