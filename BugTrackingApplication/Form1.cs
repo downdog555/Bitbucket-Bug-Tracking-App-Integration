@@ -50,14 +50,26 @@ namespace BugTrackingApplication
             string password = passwordBox.Text;
             //we need to use basic auth on the user account to get the api keys
 
-                    //we can then setup the user
-                    user = new User(username, password);
-                    
-                    mw = new MainWindow(user);
-                    mw.Show();
-                    this.Hide();
+            //we can then setup the user
+            user = new User(username, password);
+            if (user.AccountName == null)
+            {
+                MessageBox.Show("Cannot Authenticate User. Incorrect Details entered or Lack of Internet Connection", "Error: Cannot Authenticate", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }   
+            mw = new MainWindow(user);
+            mw.Show();
+            this.Hide();
                    
             
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, e);
+            }
         }
     }
 }

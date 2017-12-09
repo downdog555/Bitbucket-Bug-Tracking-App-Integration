@@ -100,6 +100,12 @@
     <Compile Include="ProjectControl.Designer.cs">
       <DependentUpon>ProjectControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="projectControlsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="projectControlsControl.Designer.cs">
+      <DependentUpon>projectControlsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectControl.resx">
       <DependentUpon>ProjectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="projectControlsControl.resx">
+      <DependentUpon>projectControlsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

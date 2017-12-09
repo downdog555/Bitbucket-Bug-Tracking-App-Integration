@@ -20,7 +20,7 @@ namespace BugTrackingApplication
         private bool logged;
         private string username;
         private string password;
-        private string accountName;
+        private string accountName = null;
         private SharpBucketV1 v1Api;
         private SharpBucketV2 v2Api;
 
@@ -40,9 +40,15 @@ namespace BugTrackingApplication
             
             v1Api = new SharpBucketV1();
             v1Api.BasicAuthentication(username, password);
-           
-            this.accountName = v1Api.UserEndPoint().GetInfo().user.username;
-            
+            try
+            {
+                this.accountName = v1Api.UserEndPoint().GetInfo().user.username;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
             v2Api = new SharpBucketV2();
             v2Api.BasicAuthentication(username, password);
         }

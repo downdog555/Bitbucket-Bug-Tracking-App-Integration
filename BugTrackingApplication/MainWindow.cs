@@ -170,7 +170,7 @@ namespace BugTrackingApplication
         internal void LoadBugs(Project p, BranchInfo b, string revision = null)
         {
             p.ResetBugList();
-            
+            bugPanel.Controls.Clear();
             List<Issue> correctBugs = new List<Issue>();
             //limit searches to bugs
             IssueSearchParameters searchParam = new IssueSearchParameters();
@@ -179,7 +179,8 @@ namespace BugTrackingApplication
             List<Issue> issues = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().ListIssues(searchParam).issues;
             JsonSerializer serializer = new JsonSerializer();
 
-
+            projectOwner.Text = p.ProjectOwner;
+            projectTitle.Text = p.ProjectName;
             // serializer.Converters.Add(new StringEnumConverter());
 
             //if there are no issues of type bug then we have nobugs so inform the user
