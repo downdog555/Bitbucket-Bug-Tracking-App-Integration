@@ -17,7 +17,6 @@ namespace BugTrackingApplication
     public partial class ProjectControl : UserControl
     {
         private string projectOwner;
-        private string projectURL;
         private string projectName;
         private MainWindow mw;
         private Project p;
@@ -27,17 +26,16 @@ namespace BugTrackingApplication
         /// Control for the projects
         /// </summary>
         /// <param name="projectOwner"></param>
-        /// <param name="projectURL"></param>
         /// <param name="projectName"></param>
         /// <param name="branches"></param>
         /// <param name="mw"></param>
-        public ProjectControl(string projectOwner, string projectURL, string projectName, Dictionary<string, BranchInfo> branches, MainWindow mw, Project p)
+        public ProjectControl(string projectOwner, string projectName, Dictionary<string, BranchInfo> branches, MainWindow mw, Project p)
         {
             InitializeComponent();
 
             this.projectName = ProjectName.Text = projectName;
 
-            projectURLText.Text = this.projectURL = projectURL;
+
             projectOwnerText.Text = this.projectOwner = projectOwner;
             this.branches = branches;
             foreach (KeyValuePair<string, BranchInfo> branch in branches)

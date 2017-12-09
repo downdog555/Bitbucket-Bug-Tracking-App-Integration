@@ -10,7 +10,8 @@ using SharpBucket.V2.Pocos;
 using RepositoryEndPoint = SharpBucket.V2.EndPoints.RepositoriesEndPoint;
 using Comment = SharpBucket.V1.Pocos.Comment;
 using Link = SharpBucket.V1.Pocos.Link;
-using Repository = SharpBucket.V2.Pocos.Repository;
+//using Repository = SharpBucket.V2.Pocos.Repository;
+using Repository = SharpBucket.V1.Pocos.Repository;
 
 namespace BugTrackingApplication
 {
@@ -20,7 +21,6 @@ namespace BugTrackingApplication
     public partial class MainWindow : Form
     {
         private User u;
-        private DatabaseHandler db;
         private List<Project> currentProjects = new List<Project>();
         private RepositoryEndPoint reposEndPoint;
         private int positionX = 7;
@@ -31,12 +31,11 @@ namespace BugTrackingApplication
         /// </summary>
         /// <param name="u">A User Object</param>
         /// <param name="db">A Database Handler Object</param>
-        public MainWindow(User u, DatabaseHandler db)
+        public MainWindow(User u)
         {
             InitializeComponent();
 
             this.u = u;
-            this.db = db;
             
         }
 
@@ -51,22 +50,26 @@ namespace BugTrackingApplication
             reposEndPoint = u.V2Api.RepositoriesEndPoint();
             //first we need to get a list of projects
             //we need each branch
-            
+
             //gets a list of projects from the version control service
-           List<Repository> projects = reposEndPoint.ListRepositories(u.AccountName);
+            List<Repository> projects = u.V1Api.UserEndPoint().ListRepositories();
+
+            //List<Repository> projects = u.V2Api.UsersEndPoint(u.AccountName).ListRepositories();
+
+            Console.WriteLine(projects.Count);
             foreach (Repository r in projects)
             {
 
                 //we need to load the project controls
 
                 //we need to get the branches for the project
-                Dictionary<string, BranchInfo> branch = u.V1Api.RepositoriesEndPoint(u.AccountName, r.name).ListBranches();
+                Dictionary<string, BranchInfo> branch = u.V1Api.RepositoriesEndPoint(r.owner, r.name).ListBranches();
                 //we need to add the project to the list
-                Project p = new Project(r.links.self.href, r.name, r.owner, branch);
+                Project p = new Project(r.name, r.owner, branch);
                 
                 currentProjects.Add(p);
                
-                ProjectControl pc = new ProjectControl(r.owner, r.links.self.href, r.name, branch, this, p);
+                ProjectControl pc = new ProjectControl(r.owner, r.name, branch, this, p);
                 //pc.Location.X = positionX;
                 //pc.Location.Y = positionY;
 
@@ -173,13 +176,19 @@ namespace BugTrackingApplication
             IssueSearchParameters searchParam = new IssueSearchParameters();
             searchParam.kind = "bug";
             //get list of issues
-            List<Issue> issues = u.V1Api.RepositoriesEndPoint(u.AccountName, p.ProjectName1).IssuesResource().ListIssues(searchParam).issues;
+            List<Issue> issues = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().ListIssues(searchParam).issues;
             JsonSerializer serializer = new JsonSerializer();
-            
-         
+
+
             // serializer.Converters.Add(new StringEnumConverter());
-       
-      
+
+            //if there are no issues of type bug then we have nobugs so inform the user
+            if (issues == null || issues.Count == 0)
+            {
+                MessageBox.Show("No Bugs were found", "No Bugs were Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return;
+            }
             foreach (Issue i in issues)
             {
                 //we need to check if issues have a certain format
@@ -188,7 +197,7 @@ namespace BugTrackingApplication
                 temp.BugID =(int) i.local_id;
                 temp.CreatedOn = i.created_on;
                 int issueID = (int)i.local_id;
-                List<Comment> comments = u.V1Api.RepositoriesEndPoint(u.AccountName, p.ProjectName1).IssuesResource().IssueResource(issueID).ListComments();
+                List<Comment> comments = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().IssueResource(issueID).ListComments();
                 
                 Console.WriteLine(comments.Count);
                 foreach (Comment comment in comments)
@@ -216,7 +225,7 @@ namespace BugTrackingApplication
                 int bugY = 10;
                 foreach (Bug bug in p.Bugs)
                 {
-                    BugList bl = new BugList(bug.ISSUE, bug.CREATEDBY, bug.Logs.Count.ToString(), p.ProjectName1, bug.BugID, this);
+                    BugList bl = new BugList(bug.ISSUE, bug.CREATEDBY, bug.Logs.Count.ToString(), p.ProjectName, bug.BugID, this);
                     bl.Location = new System.Drawing.Point(bugX, bugY);
                     bugPanel.Controls.Add(bl);
                     bugY = bugY + 100;

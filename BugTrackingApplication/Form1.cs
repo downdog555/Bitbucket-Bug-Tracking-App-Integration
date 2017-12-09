@@ -12,7 +12,7 @@ namespace BugTrackingApplication
 {
     public partial class Form1 : Form
     {
-        private DatabaseHandler db = new DatabaseHandler("u", "sa","asd");
+       
         private User user;
         private MainWindow mw;
 
@@ -53,7 +53,7 @@ namespace BugTrackingApplication
                     //we can then setup the user
                     user = new User(username, password);
                     
-                    mw = new MainWindow(user, db);
+                    mw = new MainWindow(user);
                     mw.Show();
                     this.Hide();
                    
