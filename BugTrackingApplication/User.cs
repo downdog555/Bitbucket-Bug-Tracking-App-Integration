@@ -22,8 +22,6 @@ namespace BugTrackingApplication
         private string password;
         private string id;
         private string name;
-        private string consumerKey;
-        private string consumerSecretKey;
         private string accountName;
         private SharpBucketV1 v1Api;
         private SharpBucketV2 v2Api;
@@ -34,19 +32,20 @@ namespace BugTrackingApplication
         /// </summary>
         /// <param name="username">the username of the current user</param>
         /// <param name="password">the password of the current user</param>
-        public User(string username, string password, string id, string name)
+        public User(string username, string password)
         {
             this.username = username;
             this.password = password;
-            this.id = id;
-            this.name = name;
+
             this.logged = true;
             //we need to get the consumer key and secretkey
-            ReadDataOauth();
+            
             v1Api = new SharpBucketV1();
-            v1Api.OAuth2LeggedAuthentication(consumerKey, consumerSecretKey);
+            v1Api.BasicAuthentication(username, password);
+            this.accountName = v1Api.UserEndPoint().GetInfo().user.username;
+            
             v2Api = new SharpBucketV2();
-            v2Api.OAuth2LeggedAuthentication(consumerKey, consumerSecretKey);
+            v2Api.BasicAuthentication(username, password);
         }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace BugTrackingApplication
         {
             return false;
         }
-
+/**
         private void ReadDataOauth()
         {
             // Reads test data information from a file, you should structure it like this:
@@ -99,5 +98,6 @@ namespace BugTrackingApplication
             consumerSecretKey = lines[1].Split(':')[1];
             accountName = lines[2].Split(':')[1];
         }
+    **/
     }
 }

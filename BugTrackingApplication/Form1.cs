@@ -48,26 +48,16 @@ namespace BugTrackingApplication
             //get values 
             string username = usernameBox.Text;
             string password = passwordBox.Text;
-            //verify values
+            //we need to use basic auth on the user account to get the api keys
 
-
-            //search using db 
-            string[] param = { username };
-            List<List<string>> users = db.SubmitQuery("SELECT * FROM users WHERE username = ?", param);
-            foreach (List<string> m in users)
-            {
-                if (m.ElementAt(2).Equals(password))
-                {
                     //we can then setup the user
-                    user = new User(m.ElementAt(1), m.ElementAt(2), m.ElementAt(0), m.ElementAt(3));
+                    user = new User(username, password);
                     
                     mw = new MainWindow(user, db);
                     mw.Show();
                     this.Hide();
-                    break;
-                }
-            }
-
+                   
+            
         }
     }
 }
