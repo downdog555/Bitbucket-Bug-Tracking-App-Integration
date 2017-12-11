@@ -37,7 +37,7 @@ namespace BugTrackingApplication
 
             this.logged = true;
             //we need to get the consumer key and secretkey
-            
+            //105.2.3.0
             v1Api = new SharpBucketV1();
             v1Api.BasicAuthentication(username, password);
             try

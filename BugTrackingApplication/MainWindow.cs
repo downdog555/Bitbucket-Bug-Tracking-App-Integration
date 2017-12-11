@@ -13,6 +13,9 @@ using SharpUser = SharpBucket.V1.Pocos.User;
 using Link = SharpBucket.V1.Pocos.Link;
 //using Repository = SharpBucket.V2.Pocos.Repository;
 using Repository = SharpBucket.V1.Pocos.Repository;
+using System.Net;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace BugTrackingApplication
 {
@@ -104,6 +107,7 @@ namespace BugTrackingApplication
             this.reportedBy.Text = bug.CreatedBy;
             this.lastUpdated.Text = bug.CreatedOn;
             this.assignBugLink.Tag = bug;
+            this.assignedToText.Text = bug.Responsible;
             int x = 0;
             int y = 10;
             foreach (AuditLog a in bug.Logs)
@@ -187,10 +191,11 @@ namespace BugTrackingApplication
             }
             foreach (Issue i in issues)
             {
-                Console.WriteLine(i.responsible.display_name+"Mepw");
+                //Console.WriteLine(i.responsible.display_name+"Mepw");
                 //we need to check if issues have a certain format
                // Console.WriteLine(i.metadata.kind);
                 Bug temp = JsonConvert.DeserializeObject<Bug>(i.content);
+                temp.Responsible = i.responsible.username;
                 temp.BugID =(int) i.local_id;
                 temp.CreatedOn = i.created_on;
                 int issueID = (int)i.local_id;
@@ -248,18 +253,30 @@ namespace BugTrackingApplication
         {
             
             Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
-            
-            UserInfo currentUserInfo = u.V1Api.UserEndPoint().GetInfo();
-            issue.title = "meowwww";
-            try
-            {
-               var result =  u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(issue);
-                Console.WriteLine(result.title);
-            }
-            catch (Exception e1)
-            {
-                Console.WriteLine(e1.Message);
-            }
+            //Console.WriteLine("ObjectDump:");
+           // ObjectDumper.Write(issue);
+           // issue.title = "Updated 2";
+            //issue.content = Regex.Escape(issue.content);
+           // Console.WriteLine(issue.content);
+          //  Console.WriteLine("ObjectDump:");
+            //ObjectDumper.Write(issue);
+
+            var changedIssue = new Issue { title = "updated", content = "{\"REVISION\":\"UNKNOWN\", \"CLASSNAME\":\"UNKNOWN\", \"METHOD\":\"UNKNOWN\", \"LINENUM\":\"UNKNOWN\",\"ISSUE\":\"sadasdasdsadasdsadasdas\", \"CREATEDBY\":\"asdsadas\"}", status = "new", local_id = issue.local_id };
+             
+            var changedIssueResult =  u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
+
+          
+            //UserInfo currentUserInfo = u.V1Api.UserEndPoint().GetInfo();
+
+        //    var newIssue = new Issue
+      //      {
+     //  title = "I have this little bug",
+ // content = "that is really annoying",
+ // status = "new"
+  //    };
+
+        //    ObjectDumper.Write(newIssue);
+           // var newIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PostIssue(newIssue);
             Console.WriteLine("Issue should have been updated");
         }
     }

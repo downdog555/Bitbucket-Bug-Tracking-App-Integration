@@ -23,6 +23,7 @@ namespace BugTrackingApplication
         private string lineNum;
         private string issue;
         private string createdby;
+        private string responsible;
 
         /// <summary>
         /// Constructor for Bug Class
@@ -85,5 +86,6 @@ namespace BugTrackingApplication
         public int BugID { get => bugID; set => bugID = value; }
         public string CreatedOn { get => createdOn; set => createdOn = value; }
         public List<AuditLog> Logs { get => logs; }
+        public string Responsible { get => responsible; set => responsible = value; }
     }
 }
