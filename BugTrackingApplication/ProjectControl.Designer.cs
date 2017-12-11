@@ -34,11 +34,13 @@
             this.branchSelector = new System.Windows.Forms.Label();
             this.branchSelectorBox = new System.Windows.Forms.ComboBox();
             this.projectOwnerLabel = new System.Windows.Forms.Label();
+            this.viewMyBugsLink = new System.Windows.Forms.LinkLabel();
             this.ProjectName.SuspendLayout();
             this.SuspendLayout();
             // 
             // ProjectName
             // 
+            this.ProjectName.Controls.Add(this.viewMyBugsLink);
             this.ProjectName.Controls.Add(this.viewBugsLink);
             this.ProjectName.Controls.Add(this.projectOwnerText);
             this.ProjectName.Controls.Add(this.branchSelector);
@@ -55,7 +57,7 @@
             // viewBugsLink
             // 
             this.viewBugsLink.AutoSize = true;
-            this.viewBugsLink.Location = new System.Drawing.Point(630, 55);
+            this.viewBugsLink.Location = new System.Drawing.Point(576, 55);
             this.viewBugsLink.Name = "viewBugsLink";
             this.viewBugsLink.Size = new System.Drawing.Size(57, 13);
             this.viewBugsLink.TabIndex = 6;
@@ -98,6 +100,17 @@
             this.projectOwnerLabel.TabIndex = 0;
             this.projectOwnerLabel.Text = "Owner";
             // 
+            // viewMyBugsLink
+            // 
+            this.viewMyBugsLink.AutoSize = true;
+            this.viewMyBugsLink.Location = new System.Drawing.Point(576, 68);
+            this.viewMyBugsLink.Name = "viewMyBugsLink";
+            this.viewMyBugsLink.Size = new System.Drawing.Size(120, 13);
+            this.viewMyBugsLink.TabIndex = 7;
+            this.viewMyBugsLink.TabStop = true;
+            this.viewMyBugsLink.Text = "View My Assigned Bugs";
+            this.viewMyBugsLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.viewMyBugsLink_LinkClicked);
+            // 
             // ProjectControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -119,5 +132,6 @@
         private System.Windows.Forms.ComboBox branchSelectorBox;
         private System.Windows.Forms.Label projectOwnerLabel;
         private System.Windows.Forms.LinkLabel viewBugsLink;
+        private System.Windows.Forms.LinkLabel viewMyBugsLink;
     }
 }

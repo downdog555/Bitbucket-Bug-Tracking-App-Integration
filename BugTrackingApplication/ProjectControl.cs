@@ -67,5 +67,21 @@ namespace BugTrackingApplication
         {
 
         }
+
+        private void viewMyBugsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //we can call load bugs;
+            BranchInfo branch;
+            if (branchSelectorBox.Text.Equals(""))
+            {
+                branches.TryGetValue("Master", out branch);
+            }
+            else
+            {
+                branches.TryGetValue(branchSelectorBox.Text, out branch);
+            }
+
+            mw.LoadBugs(p, branch, null, true);
+        }
     }
 }

@@ -9,6 +9,7 @@ using SharpBucket.V2;
 using SharpBucket.V2.Pocos;
 using RepositoryEndPoint = SharpBucket.V2.EndPoints.RepositoriesEndPoint;
 using Comment = SharpBucket.V1.Pocos.Comment;
+using SharpUser = SharpBucket.V1.Pocos.User;
 using Link = SharpBucket.V1.Pocos.Link;
 //using Repository = SharpBucket.V2.Pocos.Repository;
 using Repository = SharpBucket.V1.Pocos.Repository;
@@ -25,6 +26,8 @@ namespace BugTrackingApplication
         private RepositoryEndPoint reposEndPoint;
         private int positionX = 7;
         private int positionY = 20;
+        private Project currentProject;
+        private Bug currentBug;
         
         /// <summary>
         /// Constructor for the main window class
@@ -92,6 +95,7 @@ namespace BugTrackingApplication
         /// <param name="p">the project that the bug is from</param>
         internal void ViewAuditLogs(Bug bug, Project p)
         {
+            currentBug = bug;
             //first update the bug detail list
             this.bugIssueBox.Text = bug.Issue;
             this.className.Text = bug.ClassName;
@@ -99,6 +103,7 @@ namespace BugTrackingApplication
             this.lineNumber.Text = bug.LineNum;
             this.reportedBy.Text = bug.CreatedBy;
             this.lastUpdated.Text = bug.CreatedOn;
+            this.assignBugLink.Tag = bug;
             int x = 0;
             int y = 10;
             foreach (AuditLog a in bug.Logs)
@@ -143,38 +148,6 @@ namespace BugTrackingApplication
             Application.Exit();
         }
 
-        /// <summary>
-        /// Called when the project combo-box is changed
-        /// Used to then get all the relevent branches from that project
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void projectsList_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //Project p =(Project) projectsList.SelectedItem;
-            //branchesList.Items.Clear();
-          //  foreach (KeyValuePair<string, BranchInfo> branch in p.Branches)
-           // {
-                //branchesList.Items.Add(branch.Key);
-           // }
-        }
-
-
-
-        /// <summary>
-        /// used when revision list is selected can be used to narrow down bugs to this version
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void revisionsList_SelectedValueChanged(object sender, EventArgs e)
-        {
-           // Project p = (Project)projectsList.SelectedItem;
-            BranchInfo bi;
-           // p.Branches.TryGetValue((string)branchesList.SelectedItem, out bi);
-           // string revision = revisionsList.SelectedText.Split(':')[0];
-
-           // LoadBugs(p, bi, revision);
-        }
 
         /// <summary>
         /// Used to load bugs into the project object
@@ -185,15 +158,17 @@ namespace BugTrackingApplication
         /// <param name="revision"></param>
         internal void LoadBugs(Project p, BranchInfo b, string revision = null, bool myBugs = false)
         {
+            currentProject = p;
             p.ResetBugList();
             bugPanel.Controls.Clear();
             List<Issue> correctBugs = new List<Issue>();
             //limit searches to bugs
             IssueSearchParameters searchParam = new IssueSearchParameters();
             searchParam.kind = "bug";
+            //if we just want the current users assigned bugs then add responsible to the search param
             if (myBugs)
             {
-                
+                searchParam.responsible = u.AccountName;
             }
             //get list of issues
             List<Issue> issues = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().ListIssues(searchParam).issues;
@@ -269,6 +244,23 @@ namespace BugTrackingApplication
 
         }
 
-        
+        private void assignBugLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
+            Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
+            
+            UserInfo currentUserInfo = u.V1Api.UserEndPoint().GetInfo();
+            issue.title = "meowwww";
+            try
+            {
+               var result =  u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(issue);
+                Console.WriteLine(result.title);
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1.Message);
+            }
+            Console.WriteLine("Issue should have been updated");
+        }
     }
 }

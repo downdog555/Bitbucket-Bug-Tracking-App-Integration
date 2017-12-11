@@ -69,6 +69,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Projects = new System.Windows.Forms.GroupBox();
             this.menuBar = new System.Windows.Forms.TabControl();
+            this.assignBugLink = new System.Windows.Forms.LinkLabel();
+            this.assignedLabel = new System.Windows.Forms.Label();
+            this.assignedToText = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.viewBugInformation.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -178,6 +181,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.assignedToText);
+            this.groupBox1.Controls.Add(this.assignedLabel);
+            this.groupBox1.Controls.Add(this.assignBugLink);
             this.groupBox1.Controls.Add(this.viewSourceLabel);
             this.groupBox1.Controls.Add(this.className);
             this.groupBox1.Controls.Add(this.lineNumber);
@@ -469,6 +475,35 @@
             this.menuBar.Size = new System.Drawing.Size(785, 482);
             this.menuBar.TabIndex = 0;
             // 
+            // assignBugLink
+            // 
+            this.assignBugLink.AutoSize = true;
+            this.assignBugLink.Location = new System.Drawing.Point(207, 352);
+            this.assignBugLink.Name = "assignBugLink";
+            this.assignBugLink.Size = new System.Drawing.Size(94, 13);
+            this.assignBugLink.TabIndex = 13;
+            this.assignBugLink.TabStop = true;
+            this.assignBugLink.Text = "Assign Bug To Me";
+            this.assignBugLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.assignBugLink_LinkClicked);
+            // 
+            // assignedLabel
+            // 
+            this.assignedLabel.AutoSize = true;
+            this.assignedLabel.Location = new System.Drawing.Point(10, 412);
+            this.assignedLabel.Name = "assignedLabel";
+            this.assignedLabel.Size = new System.Drawing.Size(69, 13);
+            this.assignedLabel.TabIndex = 14;
+            this.assignedLabel.Text = "Assigned To:";
+            // 
+            // assignedToText
+            // 
+            this.assignedToText.AutoSize = true;
+            this.assignedToText.Location = new System.Drawing.Point(87, 412);
+            this.assignedToText.Name = "assignedToText";
+            this.assignedToText.Size = new System.Drawing.Size(29, 13);
+            this.assignedToText.TabIndex = 15;
+            this.assignedToText.Text = "label";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -543,5 +578,8 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox Projects;
         private System.Windows.Forms.TabControl menuBar;
+        private System.Windows.Forms.Label assignedLabel;
+        private System.Windows.Forms.LinkLabel assignBugLink;
+        private System.Windows.Forms.Label assignedToText;
     }
 }
