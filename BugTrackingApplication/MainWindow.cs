@@ -86,13 +86,29 @@ namespace BugTrackingApplication
         }
 
         /// <summary>
-        /// 
+        /// Function to load the audit logs of a bug
         /// </summary>
-        /// <param name="bugId"></param>
-        /// <param name="projectName"></param>
-        internal void ViewAuditLogs(int bugId, string projectName)
+        /// <param name="b">bug to be loaded</param>
+        /// <param name="p">the project that the bug is from</param>
+        internal void ViewAuditLogs(Bug bug, Project p)
         {
-            throw new NotImplementedException();
+            //first update the bug detail list
+            this.bugIssueBox.Text = bug.Issue;
+            this.className.Text = bug.ClassName;
+            this.methodBlock.Text = bug.Method;
+            this.lineNumber.Text = bug.LineNum;
+            this.reportedBy.Text = bug.CreatedBy;
+            this.lastUpdated.Text = bug.CreatedOn;
+            int x = 0;
+            int y = 10;
+            foreach (AuditLog a in bug.Logs)
+            {
+                //foreach audit log add a control for it
+                AuditLogControl alc = new AuditLogControl(a);
+                alc.Location = new System.Drawing.Point(x, y);
+                this.auditLogPanel.Controls.Add(alc);
+                y = y + 100;
+            }
         }
 
         
@@ -167,7 +183,7 @@ namespace BugTrackingApplication
         /// <param name="p"></param>
         /// <param name="b"></param>
         /// <param name="revision"></param>
-        internal void LoadBugs(Project p, BranchInfo b, string revision = null)
+        internal void LoadBugs(Project p, BranchInfo b, string revision = null, bool myBugs = false)
         {
             p.ResetBugList();
             bugPanel.Controls.Clear();
@@ -175,6 +191,10 @@ namespace BugTrackingApplication
             //limit searches to bugs
             IssueSearchParameters searchParam = new IssueSearchParameters();
             searchParam.kind = "bug";
+            if (myBugs)
+            {
+                
+            }
             //get list of issues
             List<Issue> issues = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().ListIssues(searchParam).issues;
             JsonSerializer serializer = new JsonSerializer();
@@ -192,6 +212,7 @@ namespace BugTrackingApplication
             }
             foreach (Issue i in issues)
             {
+                Console.WriteLine(i.responsible.display_name+"Mepw");
                 //we need to check if issues have a certain format
                // Console.WriteLine(i.metadata.kind);
                 Bug temp = JsonConvert.DeserializeObject<Bug>(i.content);
@@ -211,7 +232,7 @@ namespace BugTrackingApplication
                 if (revision != null)
                 {
                     //if not null be only show certain bugs
-                    if (temp.REVISION.Equals(revision))
+                    if (temp.Revision.Equals(revision))
                     {
                         p.AddBug(temp);
                     }
@@ -226,7 +247,7 @@ namespace BugTrackingApplication
                 int bugY = 10;
                 foreach (Bug bug in p.Bugs)
                 {
-                    BugList bl = new BugList(bug.ISSUE, bug.CREATEDBY, bug.Logs.Count.ToString(), p.ProjectName, bug.BugID, this);
+                    BugList bl = new BugList(this, p , bug);
                     bl.Location = new System.Drawing.Point(bugX, bugY);
                     bugPanel.Controls.Add(bl);
                     bugY = bugY + 100;

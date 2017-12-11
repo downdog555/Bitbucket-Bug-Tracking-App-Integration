@@ -28,17 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuBar = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.Projects = new System.Windows.Forms.GroupBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.bugsBox = new System.Windows.Forms.GroupBox();
-            this.bugPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.controlsBox = new System.Windows.Forms.GroupBox();
-            this.projectInfoBox = new System.Windows.Forms.GroupBox();
-            this.viewBugInformation = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,11 +39,8 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeKeyLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectTitleLabel = new System.Windows.Forms.Label();
-            this.projectOwnerLabel = new System.Windows.Forms.Label();
-            this.projectOwner = new System.Windows.Forms.Label();
-            this.projectTitle = new System.Windows.Forms.Label();
-            this.auditLogPanel = new System.Windows.Forms.Panel();
+            this.viewBugInformation = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.bugIssue = new System.Windows.Forms.Label();
             this.bugIssueBox = new System.Windows.Forms.RichTextBox();
             this.classLabel = new System.Windows.Forms.Label();
@@ -68,150 +54,32 @@
             this.lineNumber = new System.Windows.Forms.Label();
             this.className = new System.Windows.Forms.Label();
             this.viewSourceLabel = new System.Windows.Forms.LinkLabel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.auditLogPanel = new System.Windows.Forms.Panel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.projectInfoBox = new System.Windows.Forms.GroupBox();
+            this.projectTitleLabel = new System.Windows.Forms.Label();
+            this.projectOwnerLabel = new System.Windows.Forms.Label();
+            this.projectOwner = new System.Windows.Forms.Label();
+            this.projectTitle = new System.Windows.Forms.Label();
+            this.controlsBox = new System.Windows.Forms.GroupBox();
             this.controlsPanel = new System.Windows.Forms.Panel();
-            this.menuBar.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.bugsBox.SuspendLayout();
-            this.controlsBox.SuspendLayout();
-            this.projectInfoBox.SuspendLayout();
-            this.viewBugInformation.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.bugsBox = new System.Windows.Forms.GroupBox();
+            this.bugPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Projects = new System.Windows.Forms.GroupBox();
+            this.menuBar = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
+            this.viewBugInformation.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.projectInfoBox.SuspendLayout();
+            this.controlsBox.SuspendLayout();
+            this.bugsBox.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.menuBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuBar
-            // 
-            this.menuBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.menuBar.Controls.Add(this.tabPage1);
-            this.menuBar.Controls.Add(this.tabPage2);
-            this.menuBar.Controls.Add(this.viewBugInformation);
-            this.menuBar.Location = new System.Drawing.Point(12, 27);
-            this.menuBar.Name = "menuBar";
-            this.menuBar.SelectedIndex = 0;
-            this.menuBar.Size = new System.Drawing.Size(785, 482);
-            this.menuBar.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.Projects);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(777, 456);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "View All Projects";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // Projects
-            // 
-            this.Projects.Location = new System.Drawing.Point(4, 7);
-            this.Projects.Name = "Projects";
-            this.Projects.Size = new System.Drawing.Size(767, 446);
-            this.Projects.TabIndex = 0;
-            this.Projects.TabStop = false;
-            this.Projects.Text = "Projects";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.bugsBox);
-            this.tabPage2.Controls.Add(this.controlsBox);
-            this.tabPage2.Controls.Add(this.projectInfoBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(777, 456);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "View All Bugs";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // bugsBox
-            // 
-            this.bugsBox.Controls.Add(this.bugPanel);
-            this.bugsBox.Location = new System.Drawing.Point(7, 130);
-            this.bugsBox.Name = "bugsBox";
-            this.bugsBox.Size = new System.Drawing.Size(764, 310);
-            this.bugsBox.TabIndex = 2;
-            this.bugsBox.TabStop = false;
-            this.bugsBox.Text = "Bugs:";
-            // 
-            // bugPanel
-            // 
-            this.bugPanel.AutoScroll = true;
-            this.bugPanel.Location = new System.Drawing.Point(0, 20);
-            this.bugPanel.Name = "bugPanel";
-            this.bugPanel.Size = new System.Drawing.Size(764, 284);
-            this.bugPanel.TabIndex = 0;
-            // 
-            // controlsBox
-            // 
-            this.controlsBox.Controls.Add(this.controlsPanel);
-            this.controlsBox.Location = new System.Drawing.Point(272, 7);
-            this.controlsBox.Name = "controlsBox";
-            this.controlsBox.Size = new System.Drawing.Size(499, 116);
-            this.controlsBox.TabIndex = 1;
-            this.controlsBox.TabStop = false;
-            this.controlsBox.Text = "Controls";
-            // 
-            // projectInfoBox
-            // 
-            this.projectInfoBox.Controls.Add(this.projectTitle);
-            this.projectInfoBox.Controls.Add(this.projectOwner);
-            this.projectInfoBox.Controls.Add(this.projectOwnerLabel);
-            this.projectInfoBox.Controls.Add(this.projectTitleLabel);
-            this.projectInfoBox.Location = new System.Drawing.Point(7, 7);
-            this.projectInfoBox.Name = "projectInfoBox";
-            this.projectInfoBox.Size = new System.Drawing.Size(258, 116);
-            this.projectInfoBox.TabIndex = 0;
-            this.projectInfoBox.TabStop = false;
-            this.projectInfoBox.Text = "Project Info";
-            // 
-            // viewBugInformation
-            // 
-            this.viewBugInformation.Controls.Add(this.groupBox2);
-            this.viewBugInformation.Controls.Add(this.groupBox1);
-            this.viewBugInformation.Location = new System.Drawing.Point(4, 22);
-            this.viewBugInformation.Name = "viewBugInformation";
-            this.viewBugInformation.Padding = new System.Windows.Forms.Padding(3);
-            this.viewBugInformation.Size = new System.Drawing.Size(777, 456);
-            this.viewBugInformation.TabIndex = 2;
-            this.viewBugInformation.Text = "View Bug Information";
-            this.viewBugInformation.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.auditLogPanel);
-            this.groupBox2.Location = new System.Drawing.Point(320, 7);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(451, 443);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Audit Logs";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.viewSourceLabel);
-            this.groupBox1.Controls.Add(this.className);
-            this.groupBox1.Controls.Add(this.lineNumber);
-            this.groupBox1.Controls.Add(this.lastUpdated);
-            this.groupBox1.Controls.Add(this.reportedBy);
-            this.groupBox1.Controls.Add(this.methodBlock);
-            this.groupBox1.Controls.Add(this.timeCreatedLabel);
-            this.groupBox1.Controls.Add(this.reportedByLabel);
-            this.groupBox1.Controls.Add(this.lineNumLabel);
-            this.groupBox1.Controls.Add(this.methodLabel);
-            this.groupBox1.Controls.Add(this.classLabel);
-            this.groupBox1.Controls.Add(this.bugIssueBox);
-            this.groupBox1.Controls.Add(this.bugIssue);
-            this.groupBox1.Location = new System.Drawing.Point(7, 7);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(307, 443);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bug Information";
             // 
             // menuStrip1
             // 
@@ -296,49 +164,39 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // projectTitleLabel
+            // viewBugInformation
             // 
-            this.projectTitleLabel.AutoSize = true;
-            this.projectTitleLabel.Location = new System.Drawing.Point(6, 16);
-            this.projectTitleLabel.Name = "projectTitleLabel";
-            this.projectTitleLabel.Size = new System.Drawing.Size(66, 13);
-            this.projectTitleLabel.TabIndex = 0;
-            this.projectTitleLabel.Text = "Project Title:";
+            this.viewBugInformation.Controls.Add(this.groupBox2);
+            this.viewBugInformation.Controls.Add(this.groupBox1);
+            this.viewBugInformation.Location = new System.Drawing.Point(4, 22);
+            this.viewBugInformation.Name = "viewBugInformation";
+            this.viewBugInformation.Padding = new System.Windows.Forms.Padding(3);
+            this.viewBugInformation.Size = new System.Drawing.Size(777, 456);
+            this.viewBugInformation.TabIndex = 2;
+            this.viewBugInformation.Text = "View Bug Information";
+            this.viewBugInformation.UseVisualStyleBackColor = true;
             // 
-            // projectOwnerLabel
+            // groupBox1
             // 
-            this.projectOwnerLabel.AutoSize = true;
-            this.projectOwnerLabel.Location = new System.Drawing.Point(6, 29);
-            this.projectOwnerLabel.Name = "projectOwnerLabel";
-            this.projectOwnerLabel.Size = new System.Drawing.Size(77, 13);
-            this.projectOwnerLabel.TabIndex = 1;
-            this.projectOwnerLabel.Text = "Project Owner:";
-            // 
-            // projectOwner
-            // 
-            this.projectOwner.AutoSize = true;
-            this.projectOwner.Location = new System.Drawing.Point(89, 29);
-            this.projectOwner.Name = "projectOwner";
-            this.projectOwner.Size = new System.Drawing.Size(35, 13);
-            this.projectOwner.TabIndex = 2;
-            this.projectOwner.Text = "label1";
-            // 
-            // projectTitle
-            // 
-            this.projectTitle.AutoSize = true;
-            this.projectTitle.Location = new System.Drawing.Point(89, 16);
-            this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(35, 13);
-            this.projectTitle.TabIndex = 3;
-            this.projectTitle.Text = "label2";
-            // 
-            // auditLogPanel
-            // 
-            this.auditLogPanel.AutoScroll = true;
-            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
-            this.auditLogPanel.Name = "auditLogPanel";
-            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
-            this.auditLogPanel.TabIndex = 0;
+            this.groupBox1.Controls.Add(this.viewSourceLabel);
+            this.groupBox1.Controls.Add(this.className);
+            this.groupBox1.Controls.Add(this.lineNumber);
+            this.groupBox1.Controls.Add(this.lastUpdated);
+            this.groupBox1.Controls.Add(this.reportedBy);
+            this.groupBox1.Controls.Add(this.methodBlock);
+            this.groupBox1.Controls.Add(this.timeCreatedLabel);
+            this.groupBox1.Controls.Add(this.reportedByLabel);
+            this.groupBox1.Controls.Add(this.lineNumLabel);
+            this.groupBox1.Controls.Add(this.methodLabel);
+            this.groupBox1.Controls.Add(this.classLabel);
+            this.groupBox1.Controls.Add(this.bugIssueBox);
+            this.groupBox1.Controls.Add(this.bugIssue);
+            this.groupBox1.Location = new System.Drawing.Point(7, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(307, 443);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Bug Information";
             // 
             // bugIssue
             // 
@@ -458,12 +316,158 @@
             this.viewSourceLabel.TabStop = true;
             this.viewSourceLabel.Text = "View Bug Source";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.auditLogPanel);
+            this.groupBox2.Location = new System.Drawing.Point(320, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(451, 443);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Audit Logs";
+            // 
+            // auditLogPanel
+            // 
+            this.auditLogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.auditLogPanel.AutoScroll = true;
+            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
+            this.auditLogPanel.Name = "auditLogPanel";
+            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
+            this.auditLogPanel.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.bugsBox);
+            this.tabPage2.Controls.Add(this.controlsBox);
+            this.tabPage2.Controls.Add(this.projectInfoBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(777, 456);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "View All Bugs";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // projectInfoBox
+            // 
+            this.projectInfoBox.Controls.Add(this.projectTitle);
+            this.projectInfoBox.Controls.Add(this.projectOwner);
+            this.projectInfoBox.Controls.Add(this.projectOwnerLabel);
+            this.projectInfoBox.Controls.Add(this.projectTitleLabel);
+            this.projectInfoBox.Location = new System.Drawing.Point(7, 7);
+            this.projectInfoBox.Name = "projectInfoBox";
+            this.projectInfoBox.Size = new System.Drawing.Size(258, 116);
+            this.projectInfoBox.TabIndex = 0;
+            this.projectInfoBox.TabStop = false;
+            this.projectInfoBox.Text = "Project Info";
+            // 
+            // projectTitleLabel
+            // 
+            this.projectTitleLabel.AutoSize = true;
+            this.projectTitleLabel.Location = new System.Drawing.Point(6, 16);
+            this.projectTitleLabel.Name = "projectTitleLabel";
+            this.projectTitleLabel.Size = new System.Drawing.Size(66, 13);
+            this.projectTitleLabel.TabIndex = 0;
+            this.projectTitleLabel.Text = "Project Title:";
+            // 
+            // projectOwnerLabel
+            // 
+            this.projectOwnerLabel.AutoSize = true;
+            this.projectOwnerLabel.Location = new System.Drawing.Point(6, 29);
+            this.projectOwnerLabel.Name = "projectOwnerLabel";
+            this.projectOwnerLabel.Size = new System.Drawing.Size(77, 13);
+            this.projectOwnerLabel.TabIndex = 1;
+            this.projectOwnerLabel.Text = "Project Owner:";
+            // 
+            // projectOwner
+            // 
+            this.projectOwner.AutoSize = true;
+            this.projectOwner.Location = new System.Drawing.Point(89, 29);
+            this.projectOwner.Name = "projectOwner";
+            this.projectOwner.Size = new System.Drawing.Size(35, 13);
+            this.projectOwner.TabIndex = 2;
+            this.projectOwner.Text = "label1";
+            // 
+            // projectTitle
+            // 
+            this.projectTitle.AutoSize = true;
+            this.projectTitle.Location = new System.Drawing.Point(89, 16);
+            this.projectTitle.Name = "projectTitle";
+            this.projectTitle.Size = new System.Drawing.Size(35, 13);
+            this.projectTitle.TabIndex = 3;
+            this.projectTitle.Text = "label2";
+            // 
+            // controlsBox
+            // 
+            this.controlsBox.Controls.Add(this.controlsPanel);
+            this.controlsBox.Location = new System.Drawing.Point(272, 7);
+            this.controlsBox.Name = "controlsBox";
+            this.controlsBox.Size = new System.Drawing.Size(499, 116);
+            this.controlsBox.TabIndex = 1;
+            this.controlsBox.TabStop = false;
+            this.controlsBox.Text = "Controls";
+            // 
             // controlsPanel
             // 
             this.controlsPanel.Location = new System.Drawing.Point(7, 16);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Size = new System.Drawing.Size(486, 94);
             this.controlsPanel.TabIndex = 0;
+            // 
+            // bugsBox
+            // 
+            this.bugsBox.Controls.Add(this.bugPanel);
+            this.bugsBox.Location = new System.Drawing.Point(7, 130);
+            this.bugsBox.Name = "bugsBox";
+            this.bugsBox.Size = new System.Drawing.Size(764, 310);
+            this.bugsBox.TabIndex = 2;
+            this.bugsBox.TabStop = false;
+            this.bugsBox.Text = "Bugs:";
+            // 
+            // bugPanel
+            // 
+            this.bugPanel.AutoScroll = true;
+            this.bugPanel.Location = new System.Drawing.Point(0, 20);
+            this.bugPanel.Name = "bugPanel";
+            this.bugPanel.Size = new System.Drawing.Size(764, 284);
+            this.bugPanel.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.Projects);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(777, 456);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "View All Projects";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // Projects
+            // 
+            this.Projects.Location = new System.Drawing.Point(4, 7);
+            this.Projects.Name = "Projects";
+            this.Projects.Size = new System.Drawing.Size(767, 446);
+            this.Projects.TabIndex = 0;
+            this.Projects.TabStop = false;
+            this.Projects.Text = "Projects";
+            // 
+            // menuBar
+            // 
+            this.menuBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.menuBar.Controls.Add(this.tabPage1);
+            this.menuBar.Controls.Add(this.tabPage2);
+            this.menuBar.Controls.Add(this.viewBugInformation);
+            this.menuBar.Location = new System.Drawing.Point(12, 27);
+            this.menuBar.Name = "menuBar";
+            this.menuBar.SelectedIndex = 0;
+            this.menuBar.Size = new System.Drawing.Size(785, 482);
+            this.menuBar.TabIndex = 0;
             // 
             // MainWindow
             // 
@@ -479,53 +483,40 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.Load += new System.EventHandler(this.MainWindow_Load);
-            this.menuBar.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.bugsBox.ResumeLayout(false);
-            this.controlsBox.ResumeLayout(false);
-            this.projectInfoBox.ResumeLayout(false);
-            this.projectInfoBox.PerformLayout();
-            this.viewBugInformation.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.viewBugInformation.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.projectInfoBox.ResumeLayout(false);
+            this.projectInfoBox.PerformLayout();
+            this.controlsBox.ResumeLayout(false);
+            this.bugsBox.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.menuBar.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl menuBar;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.TabPage viewBugInformation;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newBugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newAuditLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.GroupBox bugsBox;
-        private System.Windows.Forms.GroupBox controlsBox;
-        private System.Windows.Forms.GroupBox projectInfoBox;
         private System.Windows.Forms.ToolStripMenuItem changeKeyLocationToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel bugPanel;
-        private System.Windows.Forms.GroupBox Projects;
-        private System.Windows.Forms.Label projectTitle;
-        private System.Windows.Forms.Label projectOwner;
-        private System.Windows.Forms.Label projectOwnerLabel;
-        private System.Windows.Forms.Label projectTitleLabel;
+        private System.Windows.Forms.TabPage viewBugInformation;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel auditLogPanel;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.LinkLabel viewSourceLabel;
         private System.Windows.Forms.Label className;
         private System.Windows.Forms.Label lineNumber;
@@ -539,6 +530,18 @@
         private System.Windows.Forms.Label classLabel;
         private System.Windows.Forms.RichTextBox bugIssueBox;
         private System.Windows.Forms.Label bugIssue;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox bugsBox;
+        private System.Windows.Forms.FlowLayoutPanel bugPanel;
+        private System.Windows.Forms.GroupBox controlsBox;
         private System.Windows.Forms.Panel controlsPanel;
+        private System.Windows.Forms.GroupBox projectInfoBox;
+        private System.Windows.Forms.Label projectTitle;
+        private System.Windows.Forms.Label projectOwner;
+        private System.Windows.Forms.Label projectOwnerLabel;
+        private System.Windows.Forms.Label projectTitleLabel;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.GroupBox Projects;
+        private System.Windows.Forms.TabControl menuBar;
     }
 }

@@ -71,6 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditLog.cs" />
+    <Compile Include="AuditLogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AuditLogControl.Designer.cs">
+      <DependentUpon>AuditLogControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bug.cs" />
     <Compile Include="BugList.cs">
       <SubType>UserControl</SubType>
@@ -107,12 +113,10 @@
       <DependentUpon>projectControlsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="User.cs" />
+    <EmbeddedResource Include="AuditLogControl.resx">
+      <DependentUpon>AuditLogControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BugList.resx">
       <DependentUpon>BugList.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,29 +151,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="TestDataSet.xsc">
-      <DependentUpon>TestDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TestDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TestDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TestDataSet.xss">
-      <DependentUpon>TestDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Test.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Test_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Test.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

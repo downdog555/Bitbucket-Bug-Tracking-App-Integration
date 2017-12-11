@@ -18,6 +18,8 @@ namespace BugTrackingApplication
         private MainWindow mw;
         private string projectName;
         private int bugId;
+        private Project p;
+        private Bug b;
         /// <summary>
         /// Constructor.
         /// Creates bug list usercontrol
@@ -28,22 +30,22 @@ namespace BugTrackingApplication
         /// <param name="projectName">the name of the project</param>
         /// <param name="bugId">The id of the current bug</param>
         /// <param name="mw">The main window reference so we can update it</param>
-        public BugList(string issue, string reportedBy, string numAuditLogs, string projectName, int bugId ,MainWindow mw)
+        /// <param name="p">The projet this bug is a part of</param>
+        public BugList(MainWindow mw, Project p, Bug b)
         {
             InitializeComponent();
-            issueText.Text = issue;
-            reportedByText.Text = reportedBy;
-            numAuditText.Text = numAuditLogs;
-            auditLink.Tag = projectName;
             this.mw = mw;
-            this.projectName = projectName;
-            this.bugId = bugId;
+            this.p = p;
+            this.b = b;
+            issueText.Text = b.Issue;
+            reportedByText.Text = b.CreatedBy;
+            numAuditText.Text = ""+b.Logs.Count;
         }
 
         private void auditLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //when link is clicked we need to pass information to the main window
-            mw.ViewAuditLogs(bugId, projectName);
+            mw.ViewAuditLogs(b, p);
         }
     }
 }

@@ -47,11 +47,9 @@ namespace BugTrackingApplication
         /// getter for owner name
         /// </summary>
         public string OwnerName { get => ownerName;  }
-
-
-
-
-
-
+        /// <summary>
+        /// Getter for audit log id
+        /// </summary>
+        public int AuditLogId { get => auditLogId;  }
     }
 }
