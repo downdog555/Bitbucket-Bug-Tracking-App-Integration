@@ -31,6 +31,7 @@ namespace BugTrackingApplication
         private int positionY = 20;
         private Project currentProject;
         private Bug currentBug;
+        private string branchCurrent;
         
         /// <summary>
         /// Constructor for the main window class
@@ -75,7 +76,7 @@ namespace BugTrackingApplication
                 
                 currentProjects.Add(p);
                
-                ProjectControl pc = new ProjectControl(r.owner, r.name, branch, this, p);
+                ProjectControl pc = new ProjectControl(r.owner, r.name, branch, this, p, u);
                 //pc.Location.X = positionX;
                 //pc.Location.Y = positionY;
 
@@ -160,11 +161,13 @@ namespace BugTrackingApplication
         /// <param name="p"></param>
         /// <param name="b"></param>
         /// <param name="revision"></param>
-        internal void LoadBugs(Project p, BranchInfo b, string revision = null, bool myBugs = false)
+        internal void LoadBugs(Project p, string b, string revision = null, bool myBugs = false)
         {
             currentProject = p;
             p.ResetBugList();
             bugPanel.Controls.Clear();
+            branchCurrent = b;
+            
             List<Issue> correctBugs = new List<Issue>();
             //limit searches to bugs
             IssueSearchParameters searchParam = new IssueSearchParameters();
@@ -191,11 +194,27 @@ namespace BugTrackingApplication
             }
             foreach (Issue i in issues)
             {
+                //Format of bug content
+                //is issue text[REVISION:asdsadas,CLASSNAME:asdasdsa,METHODBLOCK:asdsada,LINENUM:dsasdas]
+                //
+                //
                 //Console.WriteLine(i.responsible.display_name+"Mepw");
                 //we need to check if issues have a certain format
-               // Console.WriteLine(i.metadata.kind);
-                Bug temp = JsonConvert.DeserializeObject<Bug>(i.content);
-                temp.Responsible = i.responsible.username;
+                // Console.WriteLine(i.metadata.kind);
+                string content = i.content;
+                string[] splitRemoveBracket = content.Split('[');
+                string[] bugData = splitRemoveBracket[1].Split(',');
+                string revsionData = bugData[0].Split(':')[1];
+                string classData = bugData[1].Split(':')[1];
+                string methodData = bugData[2].Split(':')[1];
+                string lineData = bugData[3].Split(':')[1];
+                lineData = lineData.Split(']')[0];
+                Bug temp = new Bug(revsionData, classData, methodData, lineData, splitRemoveBracket[0],i.reported_by.username);
+                if (temp == null)
+                {
+                    Console.WriteLine("tmp is null");
+                }
+                //temp.Responsible = i.responsible.username ?? "";
                 temp.BugID =(int) i.local_id;
                 temp.CreatedOn = i.created_on;
                 int issueID = (int)i.local_id;
@@ -252,7 +271,7 @@ namespace BugTrackingApplication
         private void assignBugLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             
-            Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
+           // Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
             //Console.WriteLine("ObjectDump:");
            // ObjectDumper.Write(issue);
            // issue.title = "Updated 2";
@@ -261,8 +280,9 @@ namespace BugTrackingApplication
           //  Console.WriteLine("ObjectDump:");
             //ObjectDumper.Write(issue);
 
-            var changedIssue = new Issue { title = "updated", content = "{\"REVISION\":\"UNKNOWN\", \"CLASSNAME\":\"UNKNOWN\", \"METHOD\":\"UNKNOWN\", \"LINENUM\":\"UNKNOWN\",\"ISSUE\":\"sadasdasdsadasdsadasdas\", \"CREATEDBY\":\"asdsadas\"}", status = "new", local_id = issue.local_id };
-             
+            var changedIssue = new Issue {  };
+            changedIssue.responsible = u.V1Api.UserEndPoint().GetInfo().user;
+            
             var changedIssueResult =  u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
 
           
@@ -278,6 +298,25 @@ namespace BugTrackingApplication
         //    ObjectDumper.Write(newIssue);
            // var newIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PostIssue(newIssue);
             Console.WriteLine("Issue should have been updated");
+        }
+
+        private void createNewBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //we need to show a bug creation form
+            //we need to create a new add bug form
+
+            AddBugs addBugform = new AddBugs(currentProject, branchCurrent, u);
+            addBugform.Show();
+        }
+
+        /// <summary>
+        /// Link to close the bug
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
         }
     }
 }

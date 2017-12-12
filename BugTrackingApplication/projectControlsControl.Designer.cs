@@ -28,24 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.updateBug = new System.Windows.Forms.LinkLabel();
             this.createBugLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
-            // 
-            // updateBug
-            // 
-            this.updateBug.AutoSize = true;
-            this.updateBug.Location = new System.Drawing.Point(80, 20);
-            this.updateBug.Name = "updateBug";
-            this.updateBug.Size = new System.Drawing.Size(64, 13);
-            this.updateBug.TabIndex = 1;
-            this.updateBug.TabStop = true;
-            this.updateBug.Text = "Update Bug";
             // 
             // createBugLabel
             // 
             this.createBugLabel.AutoSize = true;
-            this.createBugLabel.Location = new System.Drawing.Point(3, 20);
+            this.createBugLabel.Location = new System.Drawing.Point(20, 27);
             this.createBugLabel.Name = "createBugLabel";
             this.createBugLabel.Size = new System.Drawing.Size(71, 13);
             this.createBugLabel.TabIndex = 2;
@@ -57,7 +46,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.createBugLabel);
-            this.Controls.Add(this.updateBug);
             this.Name = "projectControlsControl";
             this.Size = new System.Drawing.Size(486, 94);
             this.Load += new System.EventHandler(this.projectControlsControl_Load);
@@ -67,8 +55,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.LinkLabel updateBug;
         private System.Windows.Forms.LinkLabel createBugLabel;
     }
 }

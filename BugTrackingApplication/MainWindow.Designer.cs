@@ -40,46 +40,48 @@
             this.changeKeyLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewBugInformation = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bugIssue = new System.Windows.Forms.Label();
-            this.bugIssueBox = new System.Windows.Forms.RichTextBox();
-            this.classLabel = new System.Windows.Forms.Label();
-            this.methodLabel = new System.Windows.Forms.Label();
-            this.lineNumLabel = new System.Windows.Forms.Label();
-            this.reportedByLabel = new System.Windows.Forms.Label();
-            this.timeCreatedLabel = new System.Windows.Forms.Label();
-            this.methodBlock = new System.Windows.Forms.Label();
-            this.reportedBy = new System.Windows.Forms.Label();
-            this.lastUpdated = new System.Windows.Forms.Label();
-            this.lineNumber = new System.Windows.Forms.Label();
-            this.className = new System.Windows.Forms.Label();
-            this.viewSourceLabel = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.auditLogPanel = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.assignedToText = new System.Windows.Forms.Label();
+            this.assignedLabel = new System.Windows.Forms.Label();
+            this.assignBugLink = new System.Windows.Forms.LinkLabel();
+            this.viewSourceLabel = new System.Windows.Forms.LinkLabel();
+            this.className = new System.Windows.Forms.Label();
+            this.lineNumber = new System.Windows.Forms.Label();
+            this.lastUpdated = new System.Windows.Forms.Label();
+            this.reportedBy = new System.Windows.Forms.Label();
+            this.methodBlock = new System.Windows.Forms.Label();
+            this.timeCreatedLabel = new System.Windows.Forms.Label();
+            this.reportedByLabel = new System.Windows.Forms.Label();
+            this.lineNumLabel = new System.Windows.Forms.Label();
+            this.methodLabel = new System.Windows.Forms.Label();
+            this.classLabel = new System.Windows.Forms.Label();
+            this.bugIssueBox = new System.Windows.Forms.RichTextBox();
+            this.bugIssue = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.projectInfoBox = new System.Windows.Forms.GroupBox();
-            this.projectTitleLabel = new System.Windows.Forms.Label();
-            this.projectOwnerLabel = new System.Windows.Forms.Label();
-            this.projectOwner = new System.Windows.Forms.Label();
-            this.projectTitle = new System.Windows.Forms.Label();
-            this.controlsBox = new System.Windows.Forms.GroupBox();
-            this.controlsPanel = new System.Windows.Forms.Panel();
             this.bugsBox = new System.Windows.Forms.GroupBox();
             this.bugPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.controlsBox = new System.Windows.Forms.GroupBox();
+            this.projectInfoBox = new System.Windows.Forms.GroupBox();
+            this.projectTitle = new System.Windows.Forms.Label();
+            this.projectOwner = new System.Windows.Forms.Label();
+            this.projectOwnerLabel = new System.Windows.Forms.Label();
+            this.projectTitleLabel = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Projects = new System.Windows.Forms.GroupBox();
             this.menuBar = new System.Windows.Forms.TabControl();
-            this.assignBugLink = new System.Windows.Forms.LinkLabel();
-            this.assignedLabel = new System.Windows.Forms.Label();
-            this.assignedToText = new System.Windows.Forms.Label();
+            this.createNewBug = new System.Windows.Forms.LinkLabel();
+            this.newAuditLogLink = new System.Windows.Forms.LinkLabel();
+            this.closeBug = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             this.viewBugInformation.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.projectInfoBox.SuspendLayout();
-            this.controlsBox.SuspendLayout();
             this.bugsBox.SuspendLayout();
+            this.controlsBox.SuspendLayout();
+            this.projectInfoBox.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
@@ -179,8 +181,32 @@
             this.viewBugInformation.Text = "View Bug Information";
             this.viewBugInformation.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.auditLogPanel);
+            this.groupBox2.Location = new System.Drawing.Point(320, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(451, 443);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Audit Logs";
+            // 
+            // auditLogPanel
+            // 
+            this.auditLogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.auditLogPanel.AutoScroll = true;
+            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
+            this.auditLogPanel.Name = "auditLogPanel";
+            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
+            this.auditLogPanel.TabIndex = 0;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.closeBug);
+            this.groupBox1.Controls.Add(this.newAuditLogLink);
             this.groupBox1.Controls.Add(this.assignedToText);
             this.groupBox1.Controls.Add(this.assignedLabel);
             this.groupBox1.Controls.Add(this.assignBugLink);
@@ -204,113 +230,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bug Information";
             // 
-            // bugIssue
+            // assignedToText
             // 
-            this.bugIssue.AutoSize = true;
-            this.bugIssue.Location = new System.Drawing.Point(7, 20);
-            this.bugIssue.Name = "bugIssue";
-            this.bugIssue.Size = new System.Drawing.Size(57, 13);
-            this.bugIssue.TabIndex = 0;
-            this.bugIssue.Text = "Bug Issue:";
+            this.assignedToText.AutoSize = true;
+            this.assignedToText.Location = new System.Drawing.Point(87, 412);
+            this.assignedToText.Name = "assignedToText";
+            this.assignedToText.Size = new System.Drawing.Size(29, 13);
+            this.assignedToText.TabIndex = 15;
+            this.assignedToText.Text = "label";
             // 
-            // bugIssueBox
+            // assignedLabel
             // 
-            this.bugIssueBox.Enabled = false;
-            this.bugIssueBox.Location = new System.Drawing.Point(7, 37);
-            this.bugIssueBox.Name = "bugIssueBox";
-            this.bugIssueBox.Size = new System.Drawing.Size(294, 269);
-            this.bugIssueBox.TabIndex = 1;
-            this.bugIssueBox.Text = "";
+            this.assignedLabel.AutoSize = true;
+            this.assignedLabel.Location = new System.Drawing.Point(10, 412);
+            this.assignedLabel.Name = "assignedLabel";
+            this.assignedLabel.Size = new System.Drawing.Size(69, 13);
+            this.assignedLabel.TabIndex = 14;
+            this.assignedLabel.Text = "Assigned To:";
             // 
-            // classLabel
+            // assignBugLink
             // 
-            this.classLabel.AutoSize = true;
-            this.classLabel.Location = new System.Drawing.Point(10, 313);
-            this.classLabel.Name = "classLabel";
-            this.classLabel.Size = new System.Drawing.Size(66, 13);
-            this.classLabel.TabIndex = 2;
-            this.classLabel.Text = "Class Name:";
-            // 
-            // methodLabel
-            // 
-            this.methodLabel.AutoSize = true;
-            this.methodLabel.Location = new System.Drawing.Point(10, 326);
-            this.methodLabel.Name = "methodLabel";
-            this.methodLabel.Size = new System.Drawing.Size(76, 13);
-            this.methodLabel.TabIndex = 3;
-            this.methodLabel.Text = "Method Block:";
-            // 
-            // lineNumLabel
-            // 
-            this.lineNumLabel.AutoSize = true;
-            this.lineNumLabel.Location = new System.Drawing.Point(10, 339);
-            this.lineNumLabel.Name = "lineNumLabel";
-            this.lineNumLabel.Size = new System.Drawing.Size(70, 13);
-            this.lineNumLabel.TabIndex = 4;
-            this.lineNumLabel.Text = "Line Number:";
-            // 
-            // reportedByLabel
-            // 
-            this.reportedByLabel.AutoSize = true;
-            this.reportedByLabel.Location = new System.Drawing.Point(10, 374);
-            this.reportedByLabel.Name = "reportedByLabel";
-            this.reportedByLabel.Size = new System.Drawing.Size(69, 13);
-            this.reportedByLabel.TabIndex = 5;
-            this.reportedByLabel.Text = "Reported By:";
-            // 
-            // timeCreatedLabel
-            // 
-            this.timeCreatedLabel.AutoSize = true;
-            this.timeCreatedLabel.Location = new System.Drawing.Point(10, 387);
-            this.timeCreatedLabel.Name = "timeCreatedLabel";
-            this.timeCreatedLabel.Size = new System.Drawing.Size(74, 13);
-            this.timeCreatedLabel.TabIndex = 6;
-            this.timeCreatedLabel.Text = "Last Updated:";
-            // 
-            // methodBlock
-            // 
-            this.methodBlock.AutoSize = true;
-            this.methodBlock.Location = new System.Drawing.Point(87, 326);
-            this.methodBlock.Name = "methodBlock";
-            this.methodBlock.Size = new System.Drawing.Size(35, 13);
-            this.methodBlock.TabIndex = 7;
-            this.methodBlock.Text = "label1";
-            // 
-            // reportedBy
-            // 
-            this.reportedBy.AutoSize = true;
-            this.reportedBy.Location = new System.Drawing.Point(87, 374);
-            this.reportedBy.Name = "reportedBy";
-            this.reportedBy.Size = new System.Drawing.Size(35, 13);
-            this.reportedBy.TabIndex = 8;
-            this.reportedBy.Text = "label2";
-            // 
-            // lastUpdated
-            // 
-            this.lastUpdated.AutoSize = true;
-            this.lastUpdated.Location = new System.Drawing.Point(87, 387);
-            this.lastUpdated.Name = "lastUpdated";
-            this.lastUpdated.Size = new System.Drawing.Size(35, 13);
-            this.lastUpdated.TabIndex = 9;
-            this.lastUpdated.Text = "label3";
-            // 
-            // lineNumber
-            // 
-            this.lineNumber.AutoSize = true;
-            this.lineNumber.Location = new System.Drawing.Point(87, 339);
-            this.lineNumber.Name = "lineNumber";
-            this.lineNumber.Size = new System.Drawing.Size(35, 13);
-            this.lineNumber.TabIndex = 10;
-            this.lineNumber.Text = "label4";
-            // 
-            // className
-            // 
-            this.className.AutoSize = true;
-            this.className.Location = new System.Drawing.Point(87, 313);
-            this.className.Name = "className";
-            this.className.Size = new System.Drawing.Size(35, 13);
-            this.className.TabIndex = 11;
-            this.className.Text = "label5";
+            this.assignBugLink.AutoSize = true;
+            this.assignBugLink.Location = new System.Drawing.Point(207, 412);
+            this.assignBugLink.Name = "assignBugLink";
+            this.assignBugLink.Size = new System.Drawing.Size(94, 13);
+            this.assignBugLink.TabIndex = 13;
+            this.assignBugLink.TabStop = true;
+            this.assignBugLink.Text = "Assign Bug To Me";
+            this.assignBugLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.assignBugLink_LinkClicked);
             // 
             // viewSourceLabel
             // 
@@ -322,27 +269,113 @@
             this.viewSourceLabel.TabStop = true;
             this.viewSourceLabel.Text = "View Bug Source";
             // 
-            // groupBox2
+            // className
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.auditLogPanel);
-            this.groupBox2.Location = new System.Drawing.Point(320, 7);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(451, 443);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Audit Logs";
+            this.className.AutoSize = true;
+            this.className.Location = new System.Drawing.Point(87, 313);
+            this.className.Name = "className";
+            this.className.Size = new System.Drawing.Size(35, 13);
+            this.className.TabIndex = 11;
+            this.className.Text = "label5";
             // 
-            // auditLogPanel
+            // lineNumber
             // 
-            this.auditLogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.auditLogPanel.AutoScroll = true;
-            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
-            this.auditLogPanel.Name = "auditLogPanel";
-            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
-            this.auditLogPanel.TabIndex = 0;
+            this.lineNumber.AutoSize = true;
+            this.lineNumber.Location = new System.Drawing.Point(87, 339);
+            this.lineNumber.Name = "lineNumber";
+            this.lineNumber.Size = new System.Drawing.Size(35, 13);
+            this.lineNumber.TabIndex = 10;
+            this.lineNumber.Text = "label4";
+            // 
+            // lastUpdated
+            // 
+            this.lastUpdated.AutoSize = true;
+            this.lastUpdated.Location = new System.Drawing.Point(87, 387);
+            this.lastUpdated.Name = "lastUpdated";
+            this.lastUpdated.Size = new System.Drawing.Size(35, 13);
+            this.lastUpdated.TabIndex = 9;
+            this.lastUpdated.Text = "label3";
+            // 
+            // reportedBy
+            // 
+            this.reportedBy.AutoSize = true;
+            this.reportedBy.Location = new System.Drawing.Point(87, 374);
+            this.reportedBy.Name = "reportedBy";
+            this.reportedBy.Size = new System.Drawing.Size(35, 13);
+            this.reportedBy.TabIndex = 8;
+            this.reportedBy.Text = "label2";
+            // 
+            // methodBlock
+            // 
+            this.methodBlock.AutoSize = true;
+            this.methodBlock.Location = new System.Drawing.Point(87, 326);
+            this.methodBlock.Name = "methodBlock";
+            this.methodBlock.Size = new System.Drawing.Size(35, 13);
+            this.methodBlock.TabIndex = 7;
+            this.methodBlock.Text = "label1";
+            // 
+            // timeCreatedLabel
+            // 
+            this.timeCreatedLabel.AutoSize = true;
+            this.timeCreatedLabel.Location = new System.Drawing.Point(10, 387);
+            this.timeCreatedLabel.Name = "timeCreatedLabel";
+            this.timeCreatedLabel.Size = new System.Drawing.Size(74, 13);
+            this.timeCreatedLabel.TabIndex = 6;
+            this.timeCreatedLabel.Text = "Last Updated:";
+            // 
+            // reportedByLabel
+            // 
+            this.reportedByLabel.AutoSize = true;
+            this.reportedByLabel.Location = new System.Drawing.Point(10, 374);
+            this.reportedByLabel.Name = "reportedByLabel";
+            this.reportedByLabel.Size = new System.Drawing.Size(69, 13);
+            this.reportedByLabel.TabIndex = 5;
+            this.reportedByLabel.Text = "Reported By:";
+            // 
+            // lineNumLabel
+            // 
+            this.lineNumLabel.AutoSize = true;
+            this.lineNumLabel.Location = new System.Drawing.Point(10, 339);
+            this.lineNumLabel.Name = "lineNumLabel";
+            this.lineNumLabel.Size = new System.Drawing.Size(70, 13);
+            this.lineNumLabel.TabIndex = 4;
+            this.lineNumLabel.Text = "Line Number:";
+            // 
+            // methodLabel
+            // 
+            this.methodLabel.AutoSize = true;
+            this.methodLabel.Location = new System.Drawing.Point(10, 326);
+            this.methodLabel.Name = "methodLabel";
+            this.methodLabel.Size = new System.Drawing.Size(76, 13);
+            this.methodLabel.TabIndex = 3;
+            this.methodLabel.Text = "Method Block:";
+            // 
+            // classLabel
+            // 
+            this.classLabel.AutoSize = true;
+            this.classLabel.Location = new System.Drawing.Point(10, 313);
+            this.classLabel.Name = "classLabel";
+            this.classLabel.Size = new System.Drawing.Size(66, 13);
+            this.classLabel.TabIndex = 2;
+            this.classLabel.Text = "Class Name:";
+            // 
+            // bugIssueBox
+            // 
+            this.bugIssueBox.Enabled = false;
+            this.bugIssueBox.Location = new System.Drawing.Point(7, 37);
+            this.bugIssueBox.Name = "bugIssueBox";
+            this.bugIssueBox.Size = new System.Drawing.Size(294, 269);
+            this.bugIssueBox.TabIndex = 1;
+            this.bugIssueBox.Text = "";
+            // 
+            // bugIssue
+            // 
+            this.bugIssue.AutoSize = true;
+            this.bugIssue.Location = new System.Drawing.Point(7, 20);
+            this.bugIssue.Name = "bugIssue";
+            this.bugIssue.Size = new System.Drawing.Size(57, 13);
+            this.bugIssue.TabIndex = 0;
+            this.bugIssue.Text = "Bug Issue:";
             // 
             // tabPage2
             // 
@@ -356,72 +389,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View All Bugs";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // projectInfoBox
-            // 
-            this.projectInfoBox.Controls.Add(this.projectTitle);
-            this.projectInfoBox.Controls.Add(this.projectOwner);
-            this.projectInfoBox.Controls.Add(this.projectOwnerLabel);
-            this.projectInfoBox.Controls.Add(this.projectTitleLabel);
-            this.projectInfoBox.Location = new System.Drawing.Point(7, 7);
-            this.projectInfoBox.Name = "projectInfoBox";
-            this.projectInfoBox.Size = new System.Drawing.Size(258, 116);
-            this.projectInfoBox.TabIndex = 0;
-            this.projectInfoBox.TabStop = false;
-            this.projectInfoBox.Text = "Project Info";
-            // 
-            // projectTitleLabel
-            // 
-            this.projectTitleLabel.AutoSize = true;
-            this.projectTitleLabel.Location = new System.Drawing.Point(6, 16);
-            this.projectTitleLabel.Name = "projectTitleLabel";
-            this.projectTitleLabel.Size = new System.Drawing.Size(66, 13);
-            this.projectTitleLabel.TabIndex = 0;
-            this.projectTitleLabel.Text = "Project Title:";
-            // 
-            // projectOwnerLabel
-            // 
-            this.projectOwnerLabel.AutoSize = true;
-            this.projectOwnerLabel.Location = new System.Drawing.Point(6, 29);
-            this.projectOwnerLabel.Name = "projectOwnerLabel";
-            this.projectOwnerLabel.Size = new System.Drawing.Size(77, 13);
-            this.projectOwnerLabel.TabIndex = 1;
-            this.projectOwnerLabel.Text = "Project Owner:";
-            // 
-            // projectOwner
-            // 
-            this.projectOwner.AutoSize = true;
-            this.projectOwner.Location = new System.Drawing.Point(89, 29);
-            this.projectOwner.Name = "projectOwner";
-            this.projectOwner.Size = new System.Drawing.Size(35, 13);
-            this.projectOwner.TabIndex = 2;
-            this.projectOwner.Text = "label1";
-            // 
-            // projectTitle
-            // 
-            this.projectTitle.AutoSize = true;
-            this.projectTitle.Location = new System.Drawing.Point(89, 16);
-            this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(35, 13);
-            this.projectTitle.TabIndex = 3;
-            this.projectTitle.Text = "label2";
-            // 
-            // controlsBox
-            // 
-            this.controlsBox.Controls.Add(this.controlsPanel);
-            this.controlsBox.Location = new System.Drawing.Point(272, 7);
-            this.controlsBox.Name = "controlsBox";
-            this.controlsBox.Size = new System.Drawing.Size(499, 116);
-            this.controlsBox.TabIndex = 1;
-            this.controlsBox.TabStop = false;
-            this.controlsBox.Text = "Controls";
-            // 
-            // controlsPanel
-            // 
-            this.controlsPanel.Location = new System.Drawing.Point(7, 16);
-            this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Size = new System.Drawing.Size(486, 94);
-            this.controlsPanel.TabIndex = 0;
             // 
             // bugsBox
             // 
@@ -440,6 +407,65 @@
             this.bugPanel.Name = "bugPanel";
             this.bugPanel.Size = new System.Drawing.Size(764, 284);
             this.bugPanel.TabIndex = 0;
+            // 
+            // controlsBox
+            // 
+            this.controlsBox.Controls.Add(this.createNewBug);
+            this.controlsBox.Location = new System.Drawing.Point(272, 7);
+            this.controlsBox.Name = "controlsBox";
+            this.controlsBox.Size = new System.Drawing.Size(499, 116);
+            this.controlsBox.TabIndex = 1;
+            this.controlsBox.TabStop = false;
+            this.controlsBox.Text = "Controls";
+            // 
+            // projectInfoBox
+            // 
+            this.projectInfoBox.Controls.Add(this.projectTitle);
+            this.projectInfoBox.Controls.Add(this.projectOwner);
+            this.projectInfoBox.Controls.Add(this.projectOwnerLabel);
+            this.projectInfoBox.Controls.Add(this.projectTitleLabel);
+            this.projectInfoBox.Location = new System.Drawing.Point(7, 7);
+            this.projectInfoBox.Name = "projectInfoBox";
+            this.projectInfoBox.Size = new System.Drawing.Size(258, 116);
+            this.projectInfoBox.TabIndex = 0;
+            this.projectInfoBox.TabStop = false;
+            this.projectInfoBox.Text = "Project Info";
+            // 
+            // projectTitle
+            // 
+            this.projectTitle.AutoSize = true;
+            this.projectTitle.Location = new System.Drawing.Point(89, 16);
+            this.projectTitle.Name = "projectTitle";
+            this.projectTitle.Size = new System.Drawing.Size(35, 13);
+            this.projectTitle.TabIndex = 3;
+            this.projectTitle.Text = "label2";
+            // 
+            // projectOwner
+            // 
+            this.projectOwner.AutoSize = true;
+            this.projectOwner.Location = new System.Drawing.Point(89, 29);
+            this.projectOwner.Name = "projectOwner";
+            this.projectOwner.Size = new System.Drawing.Size(35, 13);
+            this.projectOwner.TabIndex = 2;
+            this.projectOwner.Text = "label1";
+            // 
+            // projectOwnerLabel
+            // 
+            this.projectOwnerLabel.AutoSize = true;
+            this.projectOwnerLabel.Location = new System.Drawing.Point(6, 29);
+            this.projectOwnerLabel.Name = "projectOwnerLabel";
+            this.projectOwnerLabel.Size = new System.Drawing.Size(77, 13);
+            this.projectOwnerLabel.TabIndex = 1;
+            this.projectOwnerLabel.Text = "Project Owner:";
+            // 
+            // projectTitleLabel
+            // 
+            this.projectTitleLabel.AutoSize = true;
+            this.projectTitleLabel.Location = new System.Drawing.Point(6, 16);
+            this.projectTitleLabel.Name = "projectTitleLabel";
+            this.projectTitleLabel.Size = new System.Drawing.Size(66, 13);
+            this.projectTitleLabel.TabIndex = 0;
+            this.projectTitleLabel.Text = "Project Title:";
             // 
             // tabPage1
             // 
@@ -475,34 +501,37 @@
             this.menuBar.Size = new System.Drawing.Size(785, 482);
             this.menuBar.TabIndex = 0;
             // 
-            // assignBugLink
+            // createNewBug
             // 
-            this.assignBugLink.AutoSize = true;
-            this.assignBugLink.Location = new System.Drawing.Point(207, 352);
-            this.assignBugLink.Name = "assignBugLink";
-            this.assignBugLink.Size = new System.Drawing.Size(94, 13);
-            this.assignBugLink.TabIndex = 13;
-            this.assignBugLink.TabStop = true;
-            this.assignBugLink.Text = "Assign Bug To Me";
-            this.assignBugLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.assignBugLink_LinkClicked);
+            this.createNewBug.AutoSize = true;
+            this.createNewBug.Location = new System.Drawing.Point(7, 15);
+            this.createNewBug.Name = "createNewBug";
+            this.createNewBug.Size = new System.Drawing.Size(85, 13);
+            this.createNewBug.TabIndex = 0;
+            this.createNewBug.TabStop = true;
+            this.createNewBug.Text = "Create New Bug";
+            this.createNewBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.createNewBug_LinkClicked);
             // 
-            // assignedLabel
+            // newAuditLogLink
             // 
-            this.assignedLabel.AutoSize = true;
-            this.assignedLabel.Location = new System.Drawing.Point(10, 412);
-            this.assignedLabel.Name = "assignedLabel";
-            this.assignedLabel.Size = new System.Drawing.Size(69, 13);
-            this.assignedLabel.TabIndex = 14;
-            this.assignedLabel.Text = "Assigned To:";
+            this.newAuditLogLink.AutoSize = true;
+            this.newAuditLogLink.Location = new System.Drawing.Point(190, 374);
+            this.newAuditLogLink.Name = "newAuditLogLink";
+            this.newAuditLogLink.Size = new System.Drawing.Size(111, 13);
+            this.newAuditLogLink.TabIndex = 16;
+            this.newAuditLogLink.TabStop = true;
+            this.newAuditLogLink.Text = "Create New Audit Log";
             // 
-            // assignedToText
+            // closeBug
             // 
-            this.assignedToText.AutoSize = true;
-            this.assignedToText.Location = new System.Drawing.Point(87, 412);
-            this.assignedToText.Name = "assignedToText";
-            this.assignedToText.Size = new System.Drawing.Size(29, 13);
-            this.assignedToText.TabIndex = 15;
-            this.assignedToText.Text = "label";
+            this.closeBug.AutoSize = true;
+            this.closeBug.Location = new System.Drawing.Point(246, 427);
+            this.closeBug.Name = "closeBug";
+            this.closeBug.Size = new System.Drawing.Size(55, 13);
+            this.closeBug.TabIndex = 17;
+            this.closeBug.TabStop = true;
+            this.closeBug.Text = "Close Bug";
+            this.closeBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.closeBug_LinkClicked);
             // 
             // MainWindow
             // 
@@ -521,14 +550,15 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.viewBugInformation.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.bugsBox.ResumeLayout(false);
+            this.controlsBox.ResumeLayout(false);
+            this.controlsBox.PerformLayout();
             this.projectInfoBox.ResumeLayout(false);
             this.projectInfoBox.PerformLayout();
-            this.controlsBox.ResumeLayout(false);
-            this.bugsBox.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.menuBar.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -569,7 +599,6 @@
         private System.Windows.Forms.GroupBox bugsBox;
         private System.Windows.Forms.FlowLayoutPanel bugPanel;
         private System.Windows.Forms.GroupBox controlsBox;
-        private System.Windows.Forms.Panel controlsPanel;
         private System.Windows.Forms.GroupBox projectInfoBox;
         private System.Windows.Forms.Label projectTitle;
         private System.Windows.Forms.Label projectOwner;
@@ -581,5 +610,8 @@
         private System.Windows.Forms.Label assignedLabel;
         private System.Windows.Forms.LinkLabel assignBugLink;
         private System.Windows.Forms.Label assignedToText;
+        private System.Windows.Forms.LinkLabel createNewBug;
+        private System.Windows.Forms.LinkLabel newAuditLogLink;
+        private System.Windows.Forms.LinkLabel closeBug;
     }
 }

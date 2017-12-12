@@ -21,6 +21,7 @@ namespace BugTrackingApplication
         private MainWindow mw;
         private Project p;
         private Dictionary<string, BranchInfo> branches;
+        private User u;
 
         /// <summary>
         /// Control for the projects
@@ -29,13 +30,13 @@ namespace BugTrackingApplication
         /// <param name="projectName"></param>
         /// <param name="branches"></param>
         /// <param name="mw"></param>
-        public ProjectControl(string projectOwner, string projectName, Dictionary<string, BranchInfo> branches, MainWindow mw, Project p)
+        public ProjectControl(string projectOwner, string projectName, Dictionary<string, BranchInfo> branches, MainWindow mw, Project p, User u)
         {
             InitializeComponent();
 
             this.projectName = ProjectName.Text = projectName;
 
-
+            this.u = u;
             projectOwnerText.Text = this.projectOwner = projectOwner;
             this.branches = branches;
             foreach (KeyValuePair<string, BranchInfo> branch in branches)
@@ -50,16 +51,27 @@ namespace BugTrackingApplication
         private void viewBugsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //we can call load bugs;
-            BranchInfo branch;
+            string branch = "";
             if (branchSelectorBox.Text.Equals(""))
             {
-                branches.TryGetValue("Master", out branch);
+                branch = "Master";
             }
             else
             {
-                branches.TryGetValue(branchSelectorBox.Text, out branch);
-            }
+                foreach (KeyValuePair<string, BranchInfo> b in u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).ListBranches())
+                {
+                    if (b.Key.Equals(branchSelectorBox.Text))
+                    {
+                        branch = branchSelectorBox.Text;
+                    }
+                    else
+                    {
+                        branch = "Master";
+                    }
 
+                }
+            }
+            
             mw.LoadBugs(p, branch);
         }
 
@@ -71,14 +83,25 @@ namespace BugTrackingApplication
         private void viewMyBugsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //we can call load bugs;
-            BranchInfo branch;
+            string branch = "";
             if (branchSelectorBox.Text.Equals(""))
             {
-                branches.TryGetValue("Master", out branch);
+                branch = "Master";
             }
             else
             {
-                branches.TryGetValue(branchSelectorBox.Text, out branch);
+                foreach (KeyValuePair<string, BranchInfo> b in u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).ListBranches())
+                {
+                    if (b.Key.Equals(branchSelectorBox.Text))
+                    {
+                        branch = branchSelectorBox.Text;
+                    }
+                    else
+                    {
+                        branch = "Master";
+                    }
+
+                }
             }
 
             mw.LoadBugs(p, branch, null, true);
