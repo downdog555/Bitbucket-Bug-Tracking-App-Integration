@@ -521,6 +521,7 @@
             this.newAuditLogLink.TabIndex = 16;
             this.newAuditLogLink.TabStop = true;
             this.newAuditLogLink.Text = "Create New Audit Log";
+            this.newAuditLogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.newAuditLogLink_LinkClicked);
             // 
             // closeBug
             // 

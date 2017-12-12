@@ -86,23 +86,6 @@ namespace BugTrackingApplication
         {
             return false;
         }
-/**
-        private void ReadDataOauth()
-        {
-            // Reads test data information from a file, you should structure it like this:
-            // By default it reads from c:\
-            // ApiKey:yourApiKey
-            // SecretApiKey:yourSecretApiKey
-            // AccountName:yourAccountName
-            // Repository:testRepository
-            //Console.WriteLine(Directory.GetFiles(@"H:\test\").ToString());
 
-            var lines = File.ReadAllLines(@"H:\test\TestInformationOauth.txt");
-            consumerKey = lines[0].Split(':')[1];
-            Console.WriteLine(consumerKey);
-            consumerSecretKey = lines[1].Split(':')[1];
-            accountName = lines[2].Split(':')[1];
-        }
-    **/
     }
 }

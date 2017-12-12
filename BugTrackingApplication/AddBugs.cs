@@ -83,8 +83,10 @@ namespace BugTrackingApplication
             kind = "bug"
             };
 
-       
-            var newIssueResult = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().PostIssue(newIssue);
+            //var newIssueResult = 
+            u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().PostIssue(newIssue);
+
+            this.Close();
         }
     }
 }

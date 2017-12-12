@@ -37,6 +37,7 @@ namespace BugTrackingApplication
             this.mw = mw;
             this.p = p;
             this.b = b;
+            this.bugTitle.Text = b.Title;
             issueText.Text = b.Issue;
             reportedByText.Text = b.CreatedBy;
             numAuditText.Text = ""+b.Logs.Count;

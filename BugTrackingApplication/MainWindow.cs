@@ -209,12 +209,17 @@ namespace BugTrackingApplication
                 string methodData = bugData[2].Split(':')[1];
                 string lineData = bugData[3].Split(':')[1];
                 lineData = lineData.Split(']')[0];
-                Bug temp = new Bug(revsionData, classData, methodData, lineData, splitRemoveBracket[0],i.reported_by.username);
+                Bug temp = new Bug(revsionData, classData, methodData, lineData, splitRemoveBracket[0],i.reported_by.username,i.title);
                 if (temp == null)
                 {
                     Console.WriteLine("tmp is null");
                 }
-                //temp.Responsible = i.responsible.username ?? "";
+
+                if (i.responsible != null)
+                {
+                    temp.Responsible = i.responsible.username ?? "";
+                }
+                //
                 temp.BugID =(int) i.local_id;
                 temp.CreatedOn = i.created_on;
                 int issueID = (int)i.local_id;
@@ -242,22 +247,23 @@ namespace BugTrackingApplication
                 {
                     p.AddBug(temp);
                 }
-                int bugX = 2;
-                int bugY = 10;
-                foreach (Bug bug in p.Bugs)
-                {
-                    BugList bl = new BugList(this, p , bug);
-                    bl.Location = new System.Drawing.Point(bugX, bugY);
-                    bugPanel.Controls.Add(bl);
-                    bugY = bugY + 100;
-                }
-
+             
                 //we also need to get all of the comments
+            }
+            int bugX = 2;
+            int bugY = 10;
+            Console.WriteLine(p.Bugs.Count + "num of bugs");
+            foreach (Bug bug in p.Bugs)
+            {
+                BugList bl = new BugList(this, p, bug);
+                bl.Location = new System.Drawing.Point(bugX, bugY);
+                bugPanel.Controls.Add(bl);
+                bugY = bugY + 100;
             }
 
             //issuesLog.Clear();
             //issuesLog.Text = logText;
-            
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -317,6 +323,18 @@ namespace BugTrackingApplication
         private void closeBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             
+        }
+
+        /// <summary>
+        /// Method to insert a new audit log opens a small form to allow message entry then inserts to website
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void newAuditLogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AddAuditLog audit = new AddAuditLog(currentProject,currentBug,u);
+            
+            audit.Show();
         }
     }
 }

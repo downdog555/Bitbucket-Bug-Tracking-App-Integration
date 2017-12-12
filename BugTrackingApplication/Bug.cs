@@ -24,6 +24,7 @@ namespace BugTrackingApplication
         private string issue;
         private string createdby;
         private string responsible;
+        private string title;
 
         /// <summary>
         /// Constructor for Bug Class
@@ -34,7 +35,7 @@ namespace BugTrackingApplication
         /// <param name="lineNum">Line num of where the bug resides</param>
         /// <param name="issue">Comment relating to the bug</param>
         /// <param name="createdby">Who this was created By</param>
-        public Bug( string revision, string className, string method, string lineNum, string issue, string createdby)
+        public Bug( string revision, string className, string method, string lineNum, string issue, string createdby, string title)
         {
           
             this.revision = revision;
@@ -43,6 +44,7 @@ namespace BugTrackingApplication
             this.lineNum = lineNum;
             this.issue = issue;
             this.createdby = createdby;
+            this.title = title;
             
         }
 
@@ -87,5 +89,6 @@ namespace BugTrackingApplication
         public string CreatedOn { get => createdOn; set => createdOn = value; }
         public List<AuditLog> Logs { get => logs; }
         public string Responsible { get => responsible; set => responsible = value; }
+        public string Title { get => title; set => title = value; }
     }
 }
