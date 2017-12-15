@@ -39,6 +39,7 @@ namespace BugTrackingApplication
             Comment comment = new Comment { content = auditLogText.Text};
             IssueResource i = issuesResource.IssueResource(b.BugID);
             i.PostComment(comment);
+            MessageBox.Show("Audit Log has been added", "Audit log added", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
     }

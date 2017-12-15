@@ -43,6 +43,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.auditLogPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.closeBug = new System.Windows.Forms.LinkLabel();
+            this.newAuditLogLink = new System.Windows.Forms.LinkLabel();
             this.assignedToText = new System.Windows.Forms.Label();
             this.assignedLabel = new System.Windows.Forms.Label();
             this.assignBugLink = new System.Windows.Forms.LinkLabel();
@@ -63,6 +65,7 @@
             this.bugsBox = new System.Windows.Forms.GroupBox();
             this.bugPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.controlsBox = new System.Windows.Forms.GroupBox();
+            this.createNewBug = new System.Windows.Forms.LinkLabel();
             this.projectInfoBox = new System.Windows.Forms.GroupBox();
             this.projectTitle = new System.Windows.Forms.Label();
             this.projectOwner = new System.Windows.Forms.Label();
@@ -71,9 +74,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Projects = new System.Windows.Forms.GroupBox();
             this.menuBar = new System.Windows.Forms.TabControl();
-            this.createNewBug = new System.Windows.Forms.LinkLabel();
-            this.newAuditLogLink = new System.Windows.Forms.LinkLabel();
-            this.closeBug = new System.Windows.Forms.LinkLabel();
+            this.bugStatusLabel = new System.Windows.Forms.Label();
+            this.bugStatusText = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.viewBugInformation.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -205,6 +207,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bugStatusText);
+            this.groupBox1.Controls.Add(this.bugStatusLabel);
             this.groupBox1.Controls.Add(this.closeBug);
             this.groupBox1.Controls.Add(this.newAuditLogLink);
             this.groupBox1.Controls.Add(this.assignedToText);
@@ -229,6 +233,28 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bug Information";
+            // 
+            // closeBug
+            // 
+            this.closeBug.AutoSize = true;
+            this.closeBug.Location = new System.Drawing.Point(246, 427);
+            this.closeBug.Name = "closeBug";
+            this.closeBug.Size = new System.Drawing.Size(55, 13);
+            this.closeBug.TabIndex = 17;
+            this.closeBug.TabStop = true;
+            this.closeBug.Text = "Close Bug";
+            this.closeBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.closeBug_LinkClicked);
+            // 
+            // newAuditLogLink
+            // 
+            this.newAuditLogLink.AutoSize = true;
+            this.newAuditLogLink.Location = new System.Drawing.Point(190, 16);
+            this.newAuditLogLink.Name = "newAuditLogLink";
+            this.newAuditLogLink.Size = new System.Drawing.Size(111, 13);
+            this.newAuditLogLink.TabIndex = 16;
+            this.newAuditLogLink.TabStop = true;
+            this.newAuditLogLink.Text = "Create New Audit Log";
+            this.newAuditLogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.newAuditLogLink_LinkClicked);
             // 
             // assignedToText
             // 
@@ -418,6 +444,17 @@
             this.controlsBox.TabStop = false;
             this.controlsBox.Text = "Controls";
             // 
+            // createNewBug
+            // 
+            this.createNewBug.AutoSize = true;
+            this.createNewBug.Location = new System.Drawing.Point(7, 15);
+            this.createNewBug.Name = "createNewBug";
+            this.createNewBug.Size = new System.Drawing.Size(85, 13);
+            this.createNewBug.TabIndex = 0;
+            this.createNewBug.TabStop = true;
+            this.createNewBug.Text = "Create New Bug";
+            this.createNewBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.createNewBug_LinkClicked);
+            // 
             // projectInfoBox
             // 
             this.projectInfoBox.Controls.Add(this.projectTitle);
@@ -501,38 +538,23 @@
             this.menuBar.Size = new System.Drawing.Size(785, 482);
             this.menuBar.TabIndex = 0;
             // 
-            // createNewBug
+            // bugStatusLabel
             // 
-            this.createNewBug.AutoSize = true;
-            this.createNewBug.Location = new System.Drawing.Point(7, 15);
-            this.createNewBug.Name = "createNewBug";
-            this.createNewBug.Size = new System.Drawing.Size(85, 13);
-            this.createNewBug.TabIndex = 0;
-            this.createNewBug.TabStop = true;
-            this.createNewBug.Text = "Create New Bug";
-            this.createNewBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.createNewBug_LinkClicked);
+            this.bugStatusLabel.AutoSize = true;
+            this.bugStatusLabel.Location = new System.Drawing.Point(10, 425);
+            this.bugStatusLabel.Name = "bugStatusLabel";
+            this.bugStatusLabel.Size = new System.Drawing.Size(62, 13);
+            this.bugStatusLabel.TabIndex = 18;
+            this.bugStatusLabel.Text = "Bug Status:";
             // 
-            // newAuditLogLink
+            // bugStatusText
             // 
-            this.newAuditLogLink.AutoSize = true;
-            this.newAuditLogLink.Location = new System.Drawing.Point(190, 374);
-            this.newAuditLogLink.Name = "newAuditLogLink";
-            this.newAuditLogLink.Size = new System.Drawing.Size(111, 13);
-            this.newAuditLogLink.TabIndex = 16;
-            this.newAuditLogLink.TabStop = true;
-            this.newAuditLogLink.Text = "Create New Audit Log";
-            this.newAuditLogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.newAuditLogLink_LinkClicked);
-            // 
-            // closeBug
-            // 
-            this.closeBug.AutoSize = true;
-            this.closeBug.Location = new System.Drawing.Point(246, 427);
-            this.closeBug.Name = "closeBug";
-            this.closeBug.Size = new System.Drawing.Size(55, 13);
-            this.closeBug.TabIndex = 17;
-            this.closeBug.TabStop = true;
-            this.closeBug.Text = "Close Bug";
-            this.closeBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.closeBug_LinkClicked);
+            this.bugStatusText.AutoSize = true;
+            this.bugStatusText.Location = new System.Drawing.Point(87, 425);
+            this.bugStatusText.Name = "bugStatusText";
+            this.bugStatusText.Size = new System.Drawing.Size(35, 13);
+            this.bugStatusText.TabIndex = 19;
+            this.bugStatusText.Text = "meow";
             // 
             // MainWindow
             // 
@@ -614,5 +636,7 @@
         private System.Windows.Forms.LinkLabel createNewBug;
         private System.Windows.Forms.LinkLabel newAuditLogLink;
         private System.Windows.Forms.LinkLabel closeBug;
+        private System.Windows.Forms.Label bugStatusText;
+        private System.Windows.Forms.Label bugStatusLabel;
     }
 }

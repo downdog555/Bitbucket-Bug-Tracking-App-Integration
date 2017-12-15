@@ -109,6 +109,15 @@ namespace BugTrackingApplication
             this.lastUpdated.Text = bug.CreatedOn;
             this.assignBugLink.Tag = bug;
             this.assignedToText.Text = bug.Responsible;
+            this.bugStatusText.Text = bug.Status;
+            if (bug.Status.Equals("closed"))
+            {
+               closeBug.Text = "Open Bug";
+            }
+            else
+            {
+                closeBug.Text = "Close Bug";
+            }
             int x = 0;
             int y = 10;
             foreach (AuditLog a in bug.Logs)
@@ -179,7 +188,8 @@ namespace BugTrackingApplication
             }
             //get list of issues
             List<Issue> issues = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().ListIssues(searchParam).issues;
-            JsonSerializer serializer = new JsonSerializer();
+           
+                //JsonSerializer serializer = new JsonSerializer();
 
             projectOwner.Text = p.ProjectOwner;
             projectTitle.Text = p.ProjectName;
@@ -209,7 +219,7 @@ namespace BugTrackingApplication
                 string methodData = bugData[2].Split(':')[1];
                 string lineData = bugData[3].Split(':')[1];
                 lineData = lineData.Split(']')[0];
-                Bug temp = new Bug(revsionData, classData, methodData, lineData, splitRemoveBracket[0],i.reported_by.username,i.title);
+                Bug temp = new Bug(revsionData, classData, methodData, lineData, splitRemoveBracket[0],i.reported_by.username,i.title,i.status);
                 if (temp == null)
                 {
                     Console.WriteLine("tmp is null");
@@ -274,36 +284,49 @@ namespace BugTrackingApplication
 
         }
 
+        /// <summary>
+        /// Used to assign the bug to the current user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void assignBugLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //create new issue and the put it to update the issue
+            Issue newIssue = new Issue {responsible = u.V1Api.UserEndPoint().GetInfo().user, local_id = currentBug.BugID };
+
+            newIssue.responsible.username = u.V1Api.UserEndPoint().GetInfo().user.username;
             
-           // Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
+            Console.WriteLine(newIssue.responsible.username);
+            Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(newIssue);
+            Console.WriteLine("Bug may have been assigned?");
+
+            // Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
             //Console.WriteLine("ObjectDump:");
-           // ObjectDumper.Write(issue);
-           // issue.title = "Updated 2";
+            // ObjectDumper.Write(issue);
+            // issue.title = "Updated 2";
             //issue.content = Regex.Escape(issue.content);
-           // Console.WriteLine(issue.content);
-          //  Console.WriteLine("ObjectDump:");
+            // Console.WriteLine(issue.content);
+            //  Console.WriteLine("ObjectDump:");
             //ObjectDumper.Write(issue);
 
-            var changedIssue = new Issue {  };
-            changedIssue.responsible = u.V1Api.UserEndPoint().GetInfo().user;
-            
-            var changedIssueResult =  u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
+            //var changedIssue = new Issue {  };
+            // changedIssue.responsible = u.V1Api.UserEndPoint().GetInfo().user;
 
-          
+            // var changedIssueResult =  u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
+
+
             //UserInfo currentUserInfo = u.V1Api.UserEndPoint().GetInfo();
 
-        //    var newIssue = new Issue
-      //      {
-     //  title = "I have this little bug",
- // content = "that is really annoying",
- // status = "new"
-  //    };
+            //    var newIssue = new Issue
+            //      {
+            //  title = "I have this little bug",
+            // content = "that is really annoying",
+            // status = "new"
+            //    };
 
-        //    ObjectDumper.Write(newIssue);
-           // var newIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PostIssue(newIssue);
-            Console.WriteLine("Issue should have been updated");
+            //    ObjectDumper.Write(newIssue);
+            // var newIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PostIssue(newIssue);
+            //Console.WriteLine("Issue should have been updated");
         }
 
         private void createNewBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -322,7 +345,18 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void closeBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            if (closeBug.Text.Equals("Open Bug"))
+            {
+                //we need the current bug id
+                Issue changedIssue = new Issue {  status = "new", local_id = currentBug.BugID };
+                Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
+            }
+            else
+            {
+                //we need the current bug id
+                Issue changedIssue = new Issue { status = "closed", local_id = currentBug.BugID };
+                Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
+            }
         }
 
         /// <summary>
