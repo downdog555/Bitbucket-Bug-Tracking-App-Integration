@@ -54,10 +54,23 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void MainWindow_Load(object sender, EventArgs e)
         {
-           
+
+
+
+            LoadProjects();
+
+
+        }
+
+        
+        /// <summary>
+        /// Method used to load the projects 
+        /// </summary>
+        private void LoadProjects()
+        {
+            Projects.Controls.Clear();
             reposEndPoint = u.V2Api.RepositoriesEndPoint();
-            //first we need to get a list of projects
-            //we need each branch
+           
 
             //gets a list of projects from the version control service
             List<Repository> projects = u.V1Api.UserEndPoint().ListRepositories();
@@ -74,9 +87,12 @@ namespace BugTrackingApplication
                 Dictionary<string, BranchInfo> branch = u.V1Api.RepositoriesEndPoint(r.owner, r.name).ListBranches();
                 //we need to add the project to the list
                 Project p = new Project(r.name, r.owner, branch);
-                
+                if (currentProject != null && p.ProjectName.Equals(currentProject.ProjectName))
+                {
+                    currentProject = p;
+                }
                 currentProjects.Add(p);
-               
+
                 ProjectControl pc = new ProjectControl(r.owner, r.name, branch, this, p, u);
                 //pc.Location.X = positionX;
                 //pc.Location.Y = positionY;
@@ -87,19 +103,19 @@ namespace BugTrackingApplication
             }
 
             Console.WriteLine(currentProjects.Count);
-           
-            
-
-
         }
 
         /// <summary>
         /// Function to load the audit logs of a bug
         /// </summary>
-        /// <param name="b">bug to be loaded</param>
-        /// <param name="p">the project that the bug is from</param>
-        internal void ViewAuditLogs(Bug bug, Project p)
+        /// <param name="bug">bug to be loaded</param>
+        /// <param name="project">the project that the bug is from</param>
+        internal void ViewAuditLogs(Bug bug, Project project)
         {
+            
+            //we need to load the logs first
+            bug = LoadBugsAuditLogs(bug, project);
+
             currentBug = bug;
             //first update the bug detail list
             this.bugIssueBox.Text = bug.Issue;
@@ -121,6 +137,9 @@ namespace BugTrackingApplication
             }
             int x = 0;
             int y = 10;
+
+            //clear audit log panel
+            auditLogPanel.Controls.Clear();
             foreach (AuditLog a in bug.Logs)
             {
                 //foreach audit log add a control for it
@@ -168,15 +187,15 @@ namespace BugTrackingApplication
         /// Used to load bugs into the project object
         /// Gets issues from repository. Checks if there is a revision set, checks if issue has related then adds to project bugs
         /// </summary>
-        /// <param name="p"></param>
-        /// <param name="b"></param>
-        /// <param name="revision"></param>
-        internal void LoadBugs(Project p, string b, string revision = null, bool myBugs = false)
+        /// <param name="p">the project to load the bugs for</param>
+        /// <param name="branch">teh branch to load the bugs from</param>
+        /// <param name="revision">the revision that the bug is for</param>
+        internal void LoadBugs(Project p, string branch, string revision = null, bool myBugs = false)
         {
             currentProject = p;
             p.ResetBugList();
             bugPanel.Controls.Clear();
-            branchCurrent = b;
+            branchCurrent = branch;
             auditLogPanel.Controls.Clear();
             
             List<Issue> correctBugs = new List<Issue>();
@@ -234,18 +253,7 @@ namespace BugTrackingApplication
                 //
                 temp.BugID =(int) i.local_id;
                 temp.CreatedOn = i.created_on;
-                int issueID = (int)i.local_id;
-                List<Comment> comments = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().IssueResource(issueID).ListComments();
-                
-                Console.WriteLine(comments.Count);
-                foreach (Comment comment in comments)
-                {
-                    AuditLog log = new AuditLog((int)comment.comment_id, comment.content, comment.utc_created_on, comment.author_info.display_name, comment.utc_updated_on);
-                    temp.AddAuditLog(log);
-                    Console.WriteLine(log.Message);
-                    
-                }
-                temp.FlipList();
+                temp = LoadBugsAuditLogs(temp, p);
                 if (revision != null)
                 {
                     //if not null be only show certain bugs
@@ -265,7 +273,9 @@ namespace BugTrackingApplication
             }
             int bugX = 2;
             int bugY = 10;
-           // Console.WriteLine(p.Bugs.Count + "num of bugs");
+            // Console.WriteLine(p.Bugs.Count + "num of bugs");
+            //we clear the bug panel just before adding the new ones
+            bugPanel.Controls.Clear();
             foreach (Bug bug in p.Bugs)
             {
                 BugList bl = new BugList(this, p, bug);
@@ -279,6 +289,30 @@ namespace BugTrackingApplication
 
         }
 
+        /// <summary>
+        /// Method Used to Load the audit logs for a specific bug
+        /// </summary>
+        /// <param name="bug">the bug of which the logs are going to be loaded</param>
+        /// <param name="project">The project of which is going to be loaded</param>
+        /// <returns></returns>
+        private Bug LoadBugsAuditLogs(Bug bug, Project project)
+        {
+            int issueID = bug.BugID;
+            bug.Logs.Clear();
+            List<Comment> comments = u.V1Api.RepositoriesEndPoint(project.ProjectOwner, project.ProjectName).IssuesResource().IssueResource(issueID).ListComments();
+
+            Console.WriteLine(comments.Count);
+            foreach (Comment comment in comments)
+            {
+                AuditLog log = new AuditLog((int)comment.comment_id, comment.content, comment.utc_created_on, comment.author_info.display_name, comment.utc_updated_on);
+                bug.AddAuditLog(log);
+                Console.WriteLine(log.Message);
+
+            }
+            bug.FlipList();
+
+            return bug;
+        }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -294,15 +328,10 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void assignBugLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //create new issue and the put it to update the issue
-           // Issue newIssue = new Issue {responsible = u.V1Api.UserEndPoint().GetInfo().user, local_id = currentBug.BugID };
-
-           // newIssue.responsible.username = u.V1Api.UserEndPoint().GetInfo().user.username;
             
-           // Console.WriteLine(newIssue.responsible.username);
-            //Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(newIssue);
-            
+            //create the request with the rest of the URL(the client contains the base url)
             RestRequest request = new RestRequest("1.0/repositories/{accountname}/{repo_slug}/issues/{issueID}", Method.PUT);
+            //these replace what are in brackets
             request.AddUrlSegment("accountname", currentProject.ProjectOwner);
             request.AddUrlSegment("repo_slug", currentProject.ProjectName);
             request.AddUrlSegment("issueID", currentBug.BugID.ToString());
@@ -313,33 +342,7 @@ namespace BugTrackingApplication
             IRestResponse response = u.Client.Execute(request);
             var content = response.Content;
             Console.WriteLine("Bug may have been assigned?");
-            // Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
-            //Console.WriteLine("ObjectDump:");
-            // ObjectDumper.Write(issue);
-            // issue.title = "Updated 2";
-            //issue.content = Regex.Escape(issue.content);
-            // Console.WriteLine(issue.content);
-            //  Console.WriteLine("ObjectDump:");
-            //ObjectDumper.Write(issue);
-
-            //var changedIssue = new Issue {  };
-            // changedIssue.responsible = u.V1Api.UserEndPoint().GetInfo().user;
-
-            // var changedIssueResult =  u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
-
-
-            //UserInfo currentUserInfo = u.V1Api.UserEndPoint().GetInfo();
-
-            //    var newIssue = new Issue
-            //      {
-            //  title = "I have this little bug",
-            // content = "that is really annoying",
-            // status = "new"
-            //    };
-
-            //    ObjectDumper.Write(newIssue);
-            // var newIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PostIssue(newIssue);
-            //Console.WriteLine("Issue should have been updated");
+         
 
         }
 
@@ -348,8 +351,10 @@ namespace BugTrackingApplication
             //we need to show a bug creation form
             //we need to create a new add bug form
 
-            AddBugs addBugform = new AddBugs(currentProject, branchCurrent, u);
+            AddBugs addBugform = new AddBugs(currentProject, branchCurrent, u, this);
             addBugform.Show();
+            //we then need to refresh bugs
+            
         }
 
         /// <summary>
@@ -362,7 +367,7 @@ namespace BugTrackingApplication
             if (closeBug.Text.Equals("Open Bug"))
             {
                 //we need the current bug id
-                Issue changedIssue = new Issue {  status = "new", local_id = currentBug.BugID };
+                Issue changedIssue = new Issue { status = "new", local_id = currentBug.BugID };
                 Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
             }
             else
@@ -371,6 +376,21 @@ namespace BugTrackingApplication
                 Issue changedIssue = new Issue { status = "closed", local_id = currentBug.BugID };
                 Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(changedIssue);
             }
+
+            //we then need to update the bug
+            LoadBugs(currentProject, branchCurrent);
+            //we need to set the current bug
+            foreach (Bug b in currentProject.Bugs)
+            {
+                if (b.BugID == currentBug.BugID)
+                {
+                    currentBug = b;
+                }
+            }
+            //we need to clear audit logs panel
+            auditLogPanel.Controls.Clear();
+            //we then need to call view audit logs again
+            ViewAuditLogs(currentBug, currentProject);
         }
 
         /// <summary>
@@ -380,7 +400,7 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void newAuditLogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AddAuditLog audit = new AddAuditLog(currentProject,currentBug,u);
+            AddAuditLog audit = new AddAuditLog(currentProject,currentBug,u, this);
             
             audit.Show();
         }
@@ -388,8 +408,33 @@ namespace BugTrackingApplication
         private void editBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //we need to open the update bug form
-            UpdateBug ub = new UpdateBug(currentProject, currentBug, u);
+            UpdateBug ub = new UpdateBug(currentProject, currentBug, u, this);
             ub.Show();
+
+
+       
+        }
+
+        /// <summary>
+        /// Used to reload all the bugs relating to a specific project and then reassign the current bug
+        /// </summary>
+        public void ReloadBugs()
+        {
+            //we then need to update the bug
+            LoadBugs(currentProject, branchCurrent);
+            //we need to set the current bug
+            foreach (Bug b in currentProject.Bugs)
+            {
+                if (b.BugID == currentBug.BugID)
+                {
+                    currentBug = b;
+                }
+            }
+            //we need to clear audit logs panel
+            //auditLogPanel.Controls.Clear();
+            //we then need to call view audit logs again
+            ViewAuditLogs(currentBug, currentProject);
+            this.Close();
         }
     }
 }

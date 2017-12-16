@@ -17,12 +17,14 @@ namespace BugTrackingApplication
         private Project p;
         private Bug b;
         private User u;
-        public AddAuditLog(Project p, Bug b, User u)
+        private MainWindow mw;
+        public AddAuditLog(Project p, Bug b, User u, MainWindow mw)
         {
             InitializeComponent();
             this.p = p;
             this.b = b;
             this.u = u;
+            this.mw = mw;
         }
 
         private void auditLogAdd_Click(object sender, EventArgs e)
@@ -40,6 +42,7 @@ namespace BugTrackingApplication
             IssueResource i = issuesResource.IssueResource(b.BugID);
             i.PostComment(comment);
             MessageBox.Show("Audit Log has been added", "Audit log added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            mw.ViewAuditLogs(b, p);
             this.Close();
         }
     }

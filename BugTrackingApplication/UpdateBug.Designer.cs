@@ -130,7 +130,7 @@
             this.addBugButton.Name = "addBugButton";
             this.addBugButton.Size = new System.Drawing.Size(75, 23);
             this.addBugButton.TabIndex = 10;
-            this.addBugButton.Text = "Add Bug";
+            this.addBugButton.Text = "Update Bug";
             this.addBugButton.UseVisualStyleBackColor = true;
             this.addBugButton.Click += new System.EventHandler(this.addBugButton_Click);
             // 

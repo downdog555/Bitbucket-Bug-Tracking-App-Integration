@@ -15,14 +15,16 @@ namespace BugTrackingApplication
     public partial class AddBugs : Form
     {
         private Project p;
-        private string b;
+        private string branch;
         private User u;
-        public AddBugs(Project currentProject, string b, User u)
+        private MainWindow mw;
+        public AddBugs(Project currentProject, string branch, User u, MainWindow mw)
         {
             InitializeComponent();
             this.p = currentProject;
-            this.b = b;
+            this.branch = branch;
             this.u = u;
+            this.mw = mw;
 
             List<Commit> commits = u.V2Api.RepositoriesEndPoint().RepositoryResource(p.ProjectOwner, p.ProjectName).ListCommits();
             foreach (Commit c in commits)
@@ -85,7 +87,7 @@ namespace BugTrackingApplication
 
             //var newIssueResult = 
             u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().PostIssue(newIssue);
-
+            mw.LoadBugs(p,branch);
             this.Close();
         }
     }

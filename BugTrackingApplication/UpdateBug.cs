@@ -17,13 +17,14 @@ namespace BugTrackingApplication
         private Project p;
         private Bug b;
         private User u;
-        public UpdateBug(Project currentProject, Bug b, User u)
+        private MainWindow mw;
+        public UpdateBug(Project currentProject, Bug b, User u, MainWindow mw)
         {
             InitializeComponent();
             this.p = currentProject;
             this.b = b;
             this.u = u;
-
+            this.mw = mw;
             List<Commit> commits = u.V2Api.RepositoriesEndPoint().RepositoryResource(p.ProjectOwner, p.ProjectName).ListCommits();
             foreach (Commit c in commits)
             {
@@ -89,8 +90,7 @@ namespace BugTrackingApplication
 
             //var newIssueResult = 
             u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().PutIssue(newIssue);
-
-            this.Close();
+            mw.ReloadBugs();
         }
     }
 }
