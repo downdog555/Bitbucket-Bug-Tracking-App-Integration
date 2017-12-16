@@ -16,6 +16,7 @@ using Repository = SharpBucket.V1.Pocos.Repository;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using RestSharp;
 
 namespace BugTrackingApplication
 {
@@ -53,7 +54,7 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            tabPage2.Hide();
+           
             reposEndPoint = u.V2Api.RepositoriesEndPoint();
             //first we need to get a list of projects
             //we need each branch
@@ -294,14 +295,24 @@ namespace BugTrackingApplication
         private void assignBugLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //create new issue and the put it to update the issue
-            Issue newIssue = new Issue {responsible = u.V1Api.UserEndPoint().GetInfo().user, local_id = currentBug.BugID };
+           // Issue newIssue = new Issue {responsible = u.V1Api.UserEndPoint().GetInfo().user, local_id = currentBug.BugID };
 
-            newIssue.responsible.username = u.V1Api.UserEndPoint().GetInfo().user.username;
+           // newIssue.responsible.username = u.V1Api.UserEndPoint().GetInfo().user.username;
             
-            Console.WriteLine(newIssue.responsible.username);
-            Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(newIssue);
-            Console.WriteLine("Bug may have been assigned?");
+           // Console.WriteLine(newIssue.responsible.username);
+            //Issue changedIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PutIssue(newIssue);
+            
+            RestRequest request = new RestRequest("1.0/repositories/{accountname}/{repo_slug}/issues/{issueID}", Method.PUT);
+            request.AddUrlSegment("accountname", currentProject.ProjectOwner);
+            request.AddUrlSegment("repo_slug", currentProject.ProjectName);
+            request.AddUrlSegment("issueID", currentBug.BugID.ToString());
 
+            request.AddParameter("responsible", u.AccountName);
+            Console.WriteLine(u.AccountName);
+
+            IRestResponse response = u.Client.Execute(request);
+            var content = response.Content;
+            Console.WriteLine("Bug may have been assigned?");
             // Issue issue = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().GetIssue(currentBug.BugID);
             //Console.WriteLine("ObjectDump:");
             // ObjectDumper.Write(issue);
@@ -329,6 +340,7 @@ namespace BugTrackingApplication
             //    ObjectDumper.Write(newIssue);
             // var newIssueResult = u.V1Api.RepositoriesEndPoint(currentProject.ProjectOwner, currentProject.ProjectName).IssuesResource().PostIssue(newIssue);
             //Console.WriteLine("Issue should have been updated");
+
         }
 
         private void createNewBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

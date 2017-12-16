@@ -8,6 +8,8 @@ using SharpBucket.V1;
 using SharpBucket.V1.Pocos;
 using SharpBucket.V2;
 using SharpBucket.V2.Pocos;
+using RestSharp.Authenticators;
+using RestSharp;
 
 
 namespace BugTrackingApplication
@@ -15,7 +17,7 @@ namespace BugTrackingApplication
     /// <summary>
     /// Class representing a user
     /// </summary>
-   public class User
+    public class User
     {
         private bool logged;
         private string username;
@@ -23,6 +25,7 @@ namespace BugTrackingApplication
         private string accountName = null;
         private SharpBucketV1 v1Api;
         private SharpBucketV2 v2Api;
+        private RestClient client;
 
 
         /// <summary>
@@ -51,6 +54,9 @@ namespace BugTrackingApplication
             }
             v2Api = new SharpBucketV2();
             v2Api.BasicAuthentication(username, password);
+
+            client = new RestClient("https://api.bitbucket.org/");
+            client.Authenticator = new HttpBasicAuthenticator(username, password);
         }
 
         /// <summary>
@@ -67,6 +73,11 @@ namespace BugTrackingApplication
         /// Gets the v2 api for bitbucket
         /// </summary>
         public SharpBucketV2 V2Api { get { return v2Api; } }
+
+        /// <summary>
+        /// getter for the authenticator to make custom restsharp requests
+        /// </summary>
+        public RestClient Client { get { return client; } } 
 
         /// <summary>
         /// Login function
