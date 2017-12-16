@@ -77,6 +77,12 @@
     <Compile Include="AddAuditLog.Designer.cs">
       <DependentUpon>AddAuditLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateBug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateBug.Designer.cs">
+      <DependentUpon>UpdateBug.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddBugs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,7 +104,6 @@
       <DependentUpon>BugList.cs</DependentUpon>
     </Compile>
     <Compile Include="BugLocation.cs" />
-    <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +135,9 @@
     <Compile Include="User.cs" />
     <EmbeddedResource Include="AddAuditLog.resx">
       <DependentUpon>AddAuditLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateBug.resx">
+      <DependentUpon>UpdateBug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddBugs.resx">
       <DependentUpon>AddBugs.cs</DependentUpon>

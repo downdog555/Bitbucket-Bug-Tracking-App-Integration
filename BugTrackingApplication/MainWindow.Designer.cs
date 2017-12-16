@@ -41,8 +41,9 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewBugInformation = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.auditLogPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bugStatusText = new System.Windows.Forms.Label();
+            this.bugStatusLabel = new System.Windows.Forms.Label();
             this.closeBug = new System.Windows.Forms.LinkLabel();
             this.newAuditLogLink = new System.Windows.Forms.LinkLabel();
             this.assignedToText = new System.Windows.Forms.Label();
@@ -74,8 +75,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Projects = new System.Windows.Forms.GroupBox();
             this.menuBar = new System.Windows.Forms.TabControl();
-            this.bugStatusLabel = new System.Windows.Forms.Label();
-            this.bugStatusText = new System.Windows.Forms.Label();
+            this.auditLogPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.editBug = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             this.viewBugInformation.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -185,7 +186,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.auditLogPanel);
             this.groupBox2.Location = new System.Drawing.Point(320, 7);
@@ -195,18 +197,9 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Audit Logs";
             // 
-            // auditLogPanel
-            // 
-            this.auditLogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.auditLogPanel.AutoScroll = true;
-            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
-            this.auditLogPanel.Name = "auditLogPanel";
-            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
-            this.auditLogPanel.TabIndex = 0;
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.editBug);
             this.groupBox1.Controls.Add(this.bugStatusText);
             this.groupBox1.Controls.Add(this.bugStatusLabel);
             this.groupBox1.Controls.Add(this.closeBug);
@@ -233,6 +226,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bug Information";
+            // 
+            // bugStatusText
+            // 
+            this.bugStatusText.AutoSize = true;
+            this.bugStatusText.Location = new System.Drawing.Point(87, 425);
+            this.bugStatusText.Name = "bugStatusText";
+            this.bugStatusText.Size = new System.Drawing.Size(35, 13);
+            this.bugStatusText.TabIndex = 19;
+            this.bugStatusText.Text = "meow";
+            // 
+            // bugStatusLabel
+            // 
+            this.bugStatusLabel.AutoSize = true;
+            this.bugStatusLabel.Location = new System.Drawing.Point(10, 425);
+            this.bugStatusLabel.Name = "bugStatusLabel";
+            this.bugStatusLabel.Size = new System.Drawing.Size(62, 13);
+            this.bugStatusLabel.TabIndex = 18;
+            this.bugStatusLabel.Text = "Bug Status:";
             // 
             // closeBug
             // 
@@ -418,6 +429,9 @@
             // 
             // bugsBox
             // 
+            this.bugsBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bugsBox.Controls.Add(this.bugPanel);
             this.bugsBox.Location = new System.Drawing.Point(7, 130);
             this.bugsBox.Name = "bugsBox";
@@ -428,6 +442,9 @@
             // 
             // bugPanel
             // 
+            this.bugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bugPanel.AutoScroll = true;
             this.bugPanel.Location = new System.Drawing.Point(0, 20);
             this.bugPanel.Name = "bugPanel";
@@ -457,6 +474,9 @@
             // 
             // projectInfoBox
             // 
+            this.projectInfoBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.projectInfoBox.Controls.Add(this.projectTitle);
             this.projectInfoBox.Controls.Add(this.projectOwner);
             this.projectInfoBox.Controls.Add(this.projectOwnerLabel);
@@ -517,6 +537,9 @@
             // 
             // Projects
             // 
+            this.Projects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Projects.Location = new System.Drawing.Point(4, 7);
             this.Projects.Name = "Projects";
             this.Projects.Size = new System.Drawing.Size(767, 446);
@@ -538,23 +561,27 @@
             this.menuBar.Size = new System.Drawing.Size(785, 482);
             this.menuBar.TabIndex = 0;
             // 
-            // bugStatusLabel
+            // auditLogPanel
             // 
-            this.bugStatusLabel.AutoSize = true;
-            this.bugStatusLabel.Location = new System.Drawing.Point(10, 425);
-            this.bugStatusLabel.Name = "bugStatusLabel";
-            this.bugStatusLabel.Size = new System.Drawing.Size(62, 13);
-            this.bugStatusLabel.TabIndex = 18;
-            this.bugStatusLabel.Text = "Bug Status:";
+            this.auditLogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.auditLogPanel.AutoScroll = true;
+            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
+            this.auditLogPanel.Name = "auditLogPanel";
+            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
+            this.auditLogPanel.TabIndex = 0;
             // 
-            // bugStatusText
+            // editBug
             // 
-            this.bugStatusText.AutoSize = true;
-            this.bugStatusText.Location = new System.Drawing.Point(87, 425);
-            this.bugStatusText.Name = "bugStatusText";
-            this.bugStatusText.Size = new System.Drawing.Size(35, 13);
-            this.bugStatusText.TabIndex = 19;
-            this.bugStatusText.Text = "meow";
+            this.editBug.AutoSize = true;
+            this.editBug.Location = new System.Drawing.Point(199, 326);
+            this.editBug.Name = "editBug";
+            this.editBug.Size = new System.Drawing.Size(102, 13);
+            this.editBug.TabIndex = 20;
+            this.editBug.TabStop = true;
+            this.editBug.Text = "Edit Bug Information";
+            this.editBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.editBug_LinkClicked);
             // 
             // MainWindow
             // 
@@ -603,7 +630,6 @@
         private System.Windows.Forms.ToolStripMenuItem changeKeyLocationToolStripMenuItem;
         private System.Windows.Forms.TabPage viewBugInformation;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel auditLogPanel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.LinkLabel viewSourceLabel;
         private System.Windows.Forms.Label className;
@@ -638,5 +664,7 @@
         private System.Windows.Forms.LinkLabel closeBug;
         private System.Windows.Forms.Label bugStatusText;
         private System.Windows.Forms.Label bugStatusLabel;
+        private System.Windows.Forms.FlowLayoutPanel auditLogPanel;
+        private System.Windows.Forms.LinkLabel editBug;
     }
 }

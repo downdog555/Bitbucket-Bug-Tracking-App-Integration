@@ -15,6 +15,7 @@ namespace BugTrackingApplication
         private string message;
         private string createdOn;
         private string ownerName;
+        private string updatedOn;
 
         /// <summary>
         /// Constructor
@@ -25,31 +26,48 @@ namespace BugTrackingApplication
         /// <param name="ownerId">Id string of the owner of this log</param>
         /// <param name="ownerName">Username of the owner of this log</param>
         /// <param name="bugLoc">A BugLocation object to represent he location</param>
-        public AuditLog(int auditLogId,  string message, string createdOn, string ownerName)
+        public AuditLog(int auditLogId,  string message, string createdOn, string ownerName, string updatedOn)
         {
             this.auditLogId = auditLogId;
             this.message = message;
             this.createdOn = createdOn;
             this.ownerName = ownerName;
+            this.updatedOn = updatedOn;
         }
 
         /// <summary>
         /// getter and setter for message
         /// </summary>
-        public string Message { get => message; set => message = value; }
+        public string Message { get {return message; } set { message = value; } }
 
         /// <summary>
         /// getter for ownerID
         /// </summary>
-        public string CreatedOn { get => createdOn; }
+        public string CreatedOn { get { return createdOn; } }
 
         /// <summary>
         /// getter for owner name
         /// </summary>
-        public string OwnerName { get => ownerName;  }
+        public string OwnerName { get { return ownerName; } }
         /// <summary>
         /// Getter for audit log id
         /// </summary>
-        public int AuditLogId { get => auditLogId;  }
+        public int AuditLogId { get { return auditLogId; } }
+
+        /// <summary>
+        /// getter and setter for the update date
+        /// </summary>
+        public string UpdatedOn
+        {
+            get
+            {
+                return updatedOn;
+            }
+
+            set
+            {
+                updatedOn = value;
+            }
+        }
     }
 }

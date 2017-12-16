@@ -81,17 +81,17 @@ namespace BugTrackingApplication
             logs.Reverse();
         }
         //Getters and setters
-        public string Revision { get => revision; set => revision = value; }
-        public string ClassName { get => className; set => className = value; }
-        public string Method { get => method; set => method = value; }
-        public string LineNum { get => lineNum; set => lineNum = value; }
-        public string Issue { get => issue; set => issue = value; }
-        public string CreatedBy { get => createdby; set => createdby = value; }
-        public int BugID { get => bugID; set => bugID = value; }
-        public string CreatedOn { get => createdOn; set => createdOn = value; }
-        public List<AuditLog> Logs { get => logs; }
-        public string Responsible { get => responsible; set => responsible = value; }
-        public string Title { get => title; set => title = value; }
-        public string Status { get => status; set => status = value; }
+        public string Revision { get { return revision; } set { revision = value; } }
+        public string ClassName { get { return className; } set { className = value; } }
+        public string Method { get { return method; } set { method = value; } }
+        public string LineNum { get { return lineNum; } set { lineNum = value; } }
+        public string Issue { get { return issue; } set { issue = value; } }
+        public string CreatedBy { get { return createdby; } set { createdby = value; } }
+        public int BugID { get { return bugID; } set { bugID = value; } }
+        public string CreatedOn { get { return createdOn; } set { createdOn = value; } }
+        public List<AuditLog> Logs { get { return logs; } }
+        public string Responsible { get { return responsible; } set { responsible = value; } }
+        public string Title { get { return title; } set { title = value; } }
+        public string Status { get { return status; } set { status = value; } }
     }
 }

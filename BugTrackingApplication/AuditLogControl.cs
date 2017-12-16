@@ -19,6 +19,7 @@ namespace BugTrackingApplication
             messageText.Text = l.Message;
             createdByText.Text = l.OwnerName;
             createdOnText.Text = l.CreatedOn;
+            updatedOn.Text = l.UpdatedOn;
         }
     }
 }

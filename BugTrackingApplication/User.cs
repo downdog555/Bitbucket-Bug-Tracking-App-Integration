@@ -56,17 +56,17 @@ namespace BugTrackingApplication
         /// <summary>
         /// Gets the account name for the repositories
         /// </summary>
-        public string AccountName { get => accountName; }
+        public string AccountName { get { return accountName; } }
 
         /// <summary>
         /// gets the api object for the Version 1 api
         /// </summary>
-        public SharpBucketV1 V1Api { get => v1Api; }
+        public SharpBucketV1 V1Api { get { return v1Api; } }
 
         /// <summary>
         /// Gets the v2 api for bitbucket
         /// </summary>
-        public SharpBucketV2 V2Api { get => v2Api; }
+        public SharpBucketV2 V2Api { get { return v2Api; } }
 
         /// <summary>
         /// Login function

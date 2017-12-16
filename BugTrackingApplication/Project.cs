@@ -20,10 +20,10 @@ namespace BugTrackingApplication
         private Dictionary<string, BranchInfo> branches;
 
 
-        public Dictionary<string, BranchInfo> Branches { get => branches;}
-        public string ProjectName { get => projectName; set => projectName = value; }
-        public List<Bug> Bugs { get => bugs; set => bugs = value; }
-        public string ProjectOwner { get => projectOwner; }
+        public Dictionary<string, BranchInfo> Branches { get {return branches; } }
+        public string ProjectName { get {return projectName; } set { projectName = value; } }
+        public List<Bug> Bugs { get { return bugs; } set { bugs = value; } }
+        public string ProjectOwner { get { return projectOwner; } }
 
         public Project( string projectName, string projectOwner, Dictionary<string, BranchInfo> branches)
         {

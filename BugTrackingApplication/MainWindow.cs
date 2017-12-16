@@ -176,6 +176,7 @@ namespace BugTrackingApplication
             p.ResetBugList();
             bugPanel.Controls.Clear();
             branchCurrent = b;
+            auditLogPanel.Controls.Clear();
             
             List<Issue> correctBugs = new List<Issue>();
             //limit searches to bugs
@@ -189,7 +190,7 @@ namespace BugTrackingApplication
             //get list of issues
             List<Issue> issues = u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().ListIssues(searchParam).issues;
            
-                //JsonSerializer serializer = new JsonSerializer();
+            
 
             projectOwner.Text = p.ProjectOwner;
             projectTitle.Text = p.ProjectName;
@@ -238,11 +239,12 @@ namespace BugTrackingApplication
                 Console.WriteLine(comments.Count);
                 foreach (Comment comment in comments)
                 {
-                    AuditLog log = new AuditLog((int)comment.comment_id, comment.content, comment.utc_created_on, comment.author_info.display_name);
+                    AuditLog log = new AuditLog((int)comment.comment_id, comment.content, comment.utc_created_on, comment.author_info.display_name, comment.utc_updated_on);
                     temp.AddAuditLog(log);
                     Console.WriteLine(log.Message);
-                    temp.FlipList();
+                    
                 }
+                temp.FlipList();
                 if (revision != null)
                 {
                     //if not null be only show certain bugs
@@ -262,7 +264,7 @@ namespace BugTrackingApplication
             }
             int bugX = 2;
             int bugY = 10;
-            Console.WriteLine(p.Bugs.Count + "num of bugs");
+           // Console.WriteLine(p.Bugs.Count + "num of bugs");
             foreach (Bug bug in p.Bugs)
             {
                 BugList bl = new BugList(this, p, bug);
@@ -369,6 +371,13 @@ namespace BugTrackingApplication
             AddAuditLog audit = new AddAuditLog(currentProject,currentBug,u);
             
             audit.Show();
+        }
+
+        private void editBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //we need to open the update bug form
+            UpdateBug ub = new UpdateBug(currentProject, currentBug, u);
+            ub.Show();
         }
     }
 }

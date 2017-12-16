@@ -18,17 +18,17 @@ namespace BugTrackingApplication
         /// <summary>
         /// getters and setters
         /// </summary>
-        public int LineNum { get => lineNum; set => lineNum = value; }
+        public int LineNum { get { return lineNum; } set { lineNum = value; } }
 
         /// <summary>
         /// getters and setters
         /// </summary>
-        public string MethodBlock { get => methodBlock; set => methodBlock = value; }
+        public string MethodBlock { get { return methodBlock; } set { methodBlock = value; } }
 
         /// <summary>
         /// getters and setters
         /// </summary>
-        public string ClassName { get => className; set => className = value; }
+        public string ClassName { get { return className; } set { className = value; } }
 
         /// <summary>
         /// gets an array with the bugs location
