@@ -152,35 +152,7 @@ namespace BugTrackingApplication
 
         
 
-        /// <summary>
-        /// Called when main form window is closing.
-        /// Event is cancelled if they do not want to close the window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult dr = MessageBox.Show("Are you sure you want to exit?", "Are You Sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            if (dr == DialogResult.Yes)
-            {
-                
-            }
-            else
-            {
-                e.Cancel = true;
-            }
-        }
 
-        /// <summary>
-        /// Called when main window has closed and resources free(no point of return)
-        /// Have to still call application.exit as the application is still running with the entry point of the login form just hidden
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
 
 
         /// <summary>
@@ -435,6 +407,37 @@ namespace BugTrackingApplication
             //we then need to call view audit logs again
             ViewAuditLogs(currentBug, currentProject);
             this.Close();
+        }
+
+
+                /// <summary>
+        /// Called when main form window is closing.
+        /// Event is cancelled if they do not want to close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to exit?", "Are You Sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (dr == DialogResult.Yes)
+            {
+                
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// Called when main window has closed and resources free(no point of return)
+        /// Have to still call application.exit as the application is still running with the entry point of the login form just hidden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

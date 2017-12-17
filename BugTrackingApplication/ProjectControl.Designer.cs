@@ -29,30 +29,43 @@
         private void InitializeComponent()
         {
             this.ProjectName = new System.Windows.Forms.GroupBox();
+            this.viewMyBugsLink = new System.Windows.Forms.LinkLabel();
             this.viewBugsLink = new System.Windows.Forms.LinkLabel();
             this.projectOwnerText = new System.Windows.Forms.Label();
             this.branchSelector = new System.Windows.Forms.Label();
             this.branchSelectorBox = new System.Windows.Forms.ComboBox();
             this.projectOwnerLabel = new System.Windows.Forms.Label();
-            this.viewMyBugsLink = new System.Windows.Forms.LinkLabel();
             this.ProjectName.SuspendLayout();
             this.SuspendLayout();
             // 
             // ProjectName
             // 
+            this.ProjectName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ProjectName.Controls.Add(this.viewMyBugsLink);
             this.ProjectName.Controls.Add(this.viewBugsLink);
             this.ProjectName.Controls.Add(this.projectOwnerText);
             this.ProjectName.Controls.Add(this.branchSelector);
             this.ProjectName.Controls.Add(this.branchSelectorBox);
             this.ProjectName.Controls.Add(this.projectOwnerLabel);
-            this.ProjectName.Location = new System.Drawing.Point(4, 4);
+            this.ProjectName.Location = new System.Drawing.Point(4, 7);
             this.ProjectName.Name = "ProjectName";
-            this.ProjectName.Size = new System.Drawing.Size(693, 93);
+            this.ProjectName.Size = new System.Drawing.Size(696, 93);
             this.ProjectName.TabIndex = 0;
             this.ProjectName.TabStop = false;
             this.ProjectName.Text = "ProjectName";
             this.ProjectName.Enter += new System.EventHandler(this.ProjectName_Enter);
+            // 
+            // viewMyBugsLink
+            // 
+            this.viewMyBugsLink.AutoSize = true;
+            this.viewMyBugsLink.Location = new System.Drawing.Point(576, 68);
+            this.viewMyBugsLink.Name = "viewMyBugsLink";
+            this.viewMyBugsLink.Size = new System.Drawing.Size(120, 13);
+            this.viewMyBugsLink.TabIndex = 7;
+            this.viewMyBugsLink.TabStop = true;
+            this.viewMyBugsLink.Text = "View My Assigned Bugs";
+            this.viewMyBugsLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.viewMyBugsLink_LinkClicked);
             // 
             // viewBugsLink
             // 
@@ -99,17 +112,6 @@
             this.projectOwnerLabel.Size = new System.Drawing.Size(38, 13);
             this.projectOwnerLabel.TabIndex = 0;
             this.projectOwnerLabel.Text = "Owner";
-            // 
-            // viewMyBugsLink
-            // 
-            this.viewMyBugsLink.AutoSize = true;
-            this.viewMyBugsLink.Location = new System.Drawing.Point(576, 68);
-            this.viewMyBugsLink.Name = "viewMyBugsLink";
-            this.viewMyBugsLink.Size = new System.Drawing.Size(120, 13);
-            this.viewMyBugsLink.TabIndex = 7;
-            this.viewMyBugsLink.TabStop = true;
-            this.viewMyBugsLink.Text = "View My Assigned Bugs";
-            this.viewMyBugsLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.viewMyBugsLink_LinkClicked);
             // 
             // ProjectControl
             // 

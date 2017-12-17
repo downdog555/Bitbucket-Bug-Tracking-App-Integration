@@ -41,7 +41,9 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewBugInformation = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.auditLogPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.editBug = new System.Windows.Forms.LinkLabel();
             this.bugStatusText = new System.Windows.Forms.Label();
             this.bugStatusLabel = new System.Windows.Forms.Label();
             this.closeBug = new System.Windows.Forms.LinkLabel();
@@ -75,8 +77,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Projects = new System.Windows.Forms.GroupBox();
             this.menuBar = new System.Windows.Forms.TabControl();
-            this.auditLogPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.editBug = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             this.viewBugInformation.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -197,6 +197,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Audit Logs";
             // 
+            // auditLogPanel
+            // 
+            this.auditLogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.auditLogPanel.AutoScroll = true;
+            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
+            this.auditLogPanel.Name = "auditLogPanel";
+            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
+            this.auditLogPanel.TabIndex = 0;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.editBug);
@@ -226,6 +237,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bug Information";
+            // 
+            // editBug
+            // 
+            this.editBug.AutoSize = true;
+            this.editBug.Location = new System.Drawing.Point(199, 326);
+            this.editBug.Name = "editBug";
+            this.editBug.Size = new System.Drawing.Size(102, 13);
+            this.editBug.TabIndex = 20;
+            this.editBug.TabStop = true;
+            this.editBug.Text = "Edit Bug Information";
+            this.editBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.editBug_LinkClicked);
             // 
             // bugStatusText
             // 
@@ -560,28 +582,6 @@
             this.menuBar.SelectedIndex = 0;
             this.menuBar.Size = new System.Drawing.Size(785, 482);
             this.menuBar.TabIndex = 0;
-            // 
-            // auditLogPanel
-            // 
-            this.auditLogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.auditLogPanel.AutoScroll = true;
-            this.auditLogPanel.Location = new System.Drawing.Point(7, 20);
-            this.auditLogPanel.Name = "auditLogPanel";
-            this.auditLogPanel.Size = new System.Drawing.Size(438, 417);
-            this.auditLogPanel.TabIndex = 0;
-            // 
-            // editBug
-            // 
-            this.editBug.AutoSize = true;
-            this.editBug.Location = new System.Drawing.Point(199, 326);
-            this.editBug.Name = "editBug";
-            this.editBug.Size = new System.Drawing.Size(102, 13);
-            this.editBug.TabIndex = 20;
-            this.editBug.TabStop = true;
-            this.editBug.Text = "Edit Bug Information";
-            this.editBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.editBug_LinkClicked);
             // 
             // MainWindow
             // 

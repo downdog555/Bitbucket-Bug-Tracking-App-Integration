@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace BugTrackingApplication
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
        
         private User user;
         private MainWindow mw;
 
 
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }

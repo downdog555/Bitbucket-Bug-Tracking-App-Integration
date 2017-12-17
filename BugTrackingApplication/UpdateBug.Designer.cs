@@ -170,6 +170,7 @@
             this.Controls.Add(this.bugIssueLabel);
             this.Controls.Add(this.titleLabel);
             this.Name = "UpdateBug";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Update Bug";
             this.Load += new System.EventHandler(this.addBug_Load);
             this.ResumeLayout(false);

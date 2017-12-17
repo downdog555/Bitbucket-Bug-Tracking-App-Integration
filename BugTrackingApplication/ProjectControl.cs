@@ -33,7 +33,7 @@ namespace BugTrackingApplication
         public ProjectControl(string projectOwner, string projectName, Dictionary<string, BranchInfo> branches, MainWindow mw, Project p, User u)
         {
             InitializeComponent();
-
+            //this.Dock = DockStyle.Fill;
             this.projectName = ProjectName.Text = projectName;
 
             this.u = u;

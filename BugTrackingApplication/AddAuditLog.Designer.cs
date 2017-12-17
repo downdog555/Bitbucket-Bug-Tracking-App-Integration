@@ -69,6 +69,7 @@
             this.Controls.Add(this.auditLogAdd);
             this.Controls.Add(this.auditLabel);
             this.Name = "AddAuditLog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddAuditLog";
             this.ResumeLayout(false);
             this.PerformLayout();
