@@ -439,5 +439,11 @@ namespace BugTrackingApplication
         {
             Application.Exit();
         }
+
+        private void viewSourceLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ViewBugSource viewSource = new ViewBugSource(currentProject, currentBug, u);
+            viewSource.Show();
+        }
     }
 }

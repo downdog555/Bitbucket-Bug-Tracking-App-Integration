@@ -327,6 +327,7 @@
             this.viewSourceLabel.TabIndex = 12;
             this.viewSourceLabel.TabStop = true;
             this.viewSourceLabel.Text = "View Bug Source";
+            this.viewSourceLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.viewSourceLabel_LinkClicked);
             // 
             // className
             // 
