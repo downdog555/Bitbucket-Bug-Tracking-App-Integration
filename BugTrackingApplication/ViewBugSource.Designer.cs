@@ -28,33 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.srcViewer = new System.Windows.Forms.WebBrowser();
+            this.TextPanel = new System.Windows.Forms.Panel();
+            this.FileName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // srcViewer
+            // TextPanel
             // 
-            this.srcViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srcViewer.Location = new System.Drawing.Point(0, 0);
-            this.srcViewer.MinimumSize = new System.Drawing.Size(20, 20);
-            this.srcViewer.Name = "srcViewer";
-            this.srcViewer.Size = new System.Drawing.Size(716, 633);
-            this.srcViewer.TabIndex = 0;
+            this.TextPanel.Location = new System.Drawing.Point(4, 43);
+            this.TextPanel.Name = "TextPanel";
+            this.TextPanel.Size = new System.Drawing.Size(711, 578);
+            this.TextPanel.TabIndex = 0;
+            // 
+            // FileName
+            // 
+            this.FileName.AutoSize = true;
+            this.FileName.Location = new System.Drawing.Point(13, 13);
+            this.FileName.Name = "FileName";
+            this.FileName.Size = new System.Drawing.Size(35, 13);
+            this.FileName.TabIndex = 1;
+            this.FileName.Text = "label1";
             // 
             // ViewBugSource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(716, 633);
-            this.Controls.Add(this.srcViewer);
+            this.Controls.Add(this.FileName);
+            this.Controls.Add(this.TextPanel);
             this.Name = "ViewBugSource";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ViewBugSource";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ViewBugSource_FormClosing);
+            this.Load += new System.EventHandler(this.ViewBugSource_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.WebBrowser srcViewer;
+        private System.Windows.Forms.Panel TextPanel;
+        private System.Windows.Forms.Label FileName;
     }
 }

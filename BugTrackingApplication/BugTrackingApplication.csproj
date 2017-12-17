@@ -58,6 +58,9 @@
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="SharpBucket, Version=0.6.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpBucket.0.6.5\lib\net40\SharpBucket.dll</HintPath>
     </Reference>
@@ -81,6 +84,8 @@
     <Compile Include="AddAuditLog.Designer.cs">
       <DependentUpon>AddAuditLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="HotKeyManager.cs" />
+    <Compile Include="SearchManager.cs" />
     <Compile Include="UpdateBug.cs">
       <SubType>Form</SubType>
     </Compile>

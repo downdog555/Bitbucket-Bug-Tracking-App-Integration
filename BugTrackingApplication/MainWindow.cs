@@ -33,7 +33,10 @@ namespace BugTrackingApplication
         private Project currentProject;
         private Bug currentBug;
         private string branchCurrent;
-        
+        private bool validSource;
+
+        public bool ValidSource { get { return validSource; } set { validSource = value; } }
+
         /// <summary>
         /// Constructor for the main window class
         /// </summary>
@@ -58,7 +61,7 @@ namespace BugTrackingApplication
 
 
             LoadProjects();
-
+            validSource = false;
 
         }
 
@@ -395,8 +398,14 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void viewSourceLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ViewBugSource viewSource = new ViewBugSource(currentProject, currentBug, u);
+            ViewBugSource viewSource = new ViewBugSource(currentProject, currentBug, u, this);
+            if (validSource)
+            {
+                viewSource.Show();
+            }
+
             viewSource.Show();
+            
         }
 
         /// <summary>
