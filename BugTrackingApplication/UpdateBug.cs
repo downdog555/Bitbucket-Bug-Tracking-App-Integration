@@ -90,6 +90,7 @@ namespace BugTrackingApplication
 
             //var newIssueResult = 
             u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().PutIssue(newIssue);
+            this.Close();
             mw.ReloadBugs();
         }
     }

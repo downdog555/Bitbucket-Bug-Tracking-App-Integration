@@ -199,11 +199,7 @@ namespace BugTrackingApplication
             {
                 //Format of bug content
                 //is issue text[REVISION:asdsadas,CLASSNAME:asdasdsa,METHODBLOCK:asdsada,LINENUM:dsasdas]
-                //
-                //
-                //Console.WriteLine(i.responsible.display_name+"Mepw");
-                //we need to check if issues have a certain format
-                // Console.WriteLine(i.metadata.kind);
+
                 string content = i.content;
                 string[] splitRemoveBracket = content.Split('[');
                 string[] bugData = splitRemoveBracket[1].Split(',');
@@ -377,6 +373,11 @@ namespace BugTrackingApplication
             audit.Show();
         }
 
+        /// <summary>
+        /// Function that opens the edit bug form when the link is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //we need to open the update bug form
@@ -385,6 +386,17 @@ namespace BugTrackingApplication
 
 
        
+        }
+
+        /// <summary>
+        /// Function that runs when the view source is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void viewSourceLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ViewBugSource viewSource = new ViewBugSource(currentProject, currentBug, u);
+            viewSource.Show();
         }
 
         /// <summary>
@@ -406,11 +418,11 @@ namespace BugTrackingApplication
             //auditLogPanel.Controls.Clear();
             //we then need to call view audit logs again
             ViewAuditLogs(currentBug, currentProject);
-            this.Close();
+            
         }
 
 
-                /// <summary>
+        /// <summary>
         /// Called when main form window is closing.
         /// Event is cancelled if they do not want to close the window
         /// </summary>
@@ -440,10 +452,6 @@ namespace BugTrackingApplication
             Application.Exit();
         }
 
-        private void viewSourceLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ViewBugSource viewSource = new ViewBugSource(currentProject, currentBug, u);
-            viewSource.Show();
-        }
+        
     }
 }
