@@ -404,7 +404,7 @@ namespace BugTrackingApplication
                 viewSource.Show();
             }
 
-            viewSource.Show();
+            
             
         }
 

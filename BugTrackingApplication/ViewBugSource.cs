@@ -30,7 +30,9 @@ namespace BugTrackingApplication
         private User user;
         private MainWindow mainWindow;
         private string src;
-        private string colourisedSource;
+        private string tempPath;
+        private string fileName;
+        
 
         /// <summary>
         /// Constructor which gets revision it is not provided and then gets the source of the given location.
@@ -71,6 +73,7 @@ namespace BugTrackingApplication
 
 
             IRestResponse r = user.Client.Execute(request);
+            //if we get 404 that means there isnt the file so its the wrong location.
             if (r.StatusCode.Equals(HttpStatusCode.NotFound))
             {
                 mainWindow.ValidSource = false;
@@ -82,15 +85,64 @@ namespace BugTrackingApplication
                 mainWindow.ValidSource = true;
                 src = r.Content;
                 //we then need to create a file
-                File.WriteAllText(@"H:\Form1.cs", src);
+                //if we have file path we need  to create file in temp folder
+                tempPath = Path.GetTempPath();
+                Console.WriteLine(tempPath);
+                string dir = bug.ClassName.Split('/')[0];
+                string tempDirectory = tempPath+dir;
+                tempPath = tempPath + bug.ClassName;
+                fileName = bug.ClassName.Split('/')[1];
+
+                if (!Directory.Exists(tempDirectory))
+                {
+                    Directory.CreateDirectory(tempDirectory);
+                }
+                File.WriteAllText(tempPath, src);
                 
             }
+            
+        }
+
+        private void commitFileToRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //we need to make a commit with the file
+            //we have file path of file
+            RestRequest request = new RestRequest("/2.0/repositories/{username}/{repo_slug}/src/", Method.POST);
+
+            request.AddUrlSegment("username", project.ProjectOwner);
+            request.AddUrlSegment("repo_slug", project.ProjectName);
+           
+
+            request.AddFile(fileName,tempPath);
+            IRestResponse response =  user.Client.Execute(request);
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine("Done");
             
         }
 
         private void ViewBugSource_FormClosing(object sender, FormClosingEventArgs e)
         {
             Dispose();
+        }
+
+        /// <summary>
+        /// Function called when the save file locally button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveFileLocallyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string dir = bug.ClassName.Split('/')[0];
+            string tempDirectory = tempPath + dir;
+
+
+            if (!Directory.Exists(tempDirectory))
+            {
+                Directory.CreateDirectory(tempDirectory);
+            }
+                File.WriteAllText(tempPath, TextArea.Text);
+            MessageBox.Show("File has been saved locally", "File Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
@@ -124,11 +176,10 @@ namespace BugTrackingApplication
             // CODE FOLDING MARGIN
             InitCodeFolding();
 
-            // DRAG DROP
-            //InitDragDropFile();
+           
 
             // DEFAULT FILE
-            LoadDataFromFile(@"H:\Form1.cs");
+            LoadDataFromFile(tempPath);
 
             // INIT HOTKEYS
             InitHotkeys();
@@ -147,10 +198,6 @@ namespace BugTrackingApplication
             
 
             // register the hotkeys with the form
-            //HotKeyManager.AddHotKey(this, OpenSearch, Keys.F, true);
-            HotKeyManager.AddHotKey(this, OpenFindDialog, Keys.F, true, false, true);
-            HotKeyManager.AddHotKey(this, OpenReplaceDialog, Keys.R, true);
-            HotKeyManager.AddHotKey(this, OpenReplaceDialog, Keys.H, true);
             HotKeyManager.AddHotKey(this, Uppercase, Keys.U, true);
             HotKeyManager.AddHotKey(this, Lowercase, Keys.L, true);
             HotKeyManager.AddHotKey(this, ZoomIn, Keys.Oemplus, true);
@@ -344,6 +391,8 @@ namespace BugTrackingApplication
             if (File.Exists(path))
             {
                 FileName.Text = Path.GetFileName(path);
+                methodBlock.Text = bug.Method;
+                lineNumber.Text = bug.LineNum;
                 TextArea.Text = File.ReadAllText(path);
             }
         }
@@ -428,19 +477,7 @@ namespace BugTrackingApplication
         #endregion
 
       
-        #region Find & Replace Dialog
 
-        private void OpenFindDialog()
-        {
-
-        }
-        private void OpenReplaceDialog()
-        {
-
-
-        }
-
-        #endregion
 
         #region Utils
 
@@ -461,11 +498,13 @@ namespace BugTrackingApplication
             }
         }
 
+
+
+
+
         #endregion
 
-
-
-
+        
     }
 }
 
