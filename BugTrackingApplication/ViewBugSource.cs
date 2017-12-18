@@ -105,11 +105,37 @@ namespace BugTrackingApplication
 
         private void commitFileToRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //we need to make a commit with the file
-            //we have file path of file
+            SaveFile();
+            //then open message form
+            CommitMessage cm = new CommitMessage(this);
+            cm.Show();
+                       
 
-            //save file first
+           
 
+        }
+
+        public void CommitFile(string message)
+        {
+            RestRequest request = new RestRequest("/2.0/repositories/{username}/{repo_slug}/src/", Method.POST);
+
+            request.AddUrlSegment("username", project.ProjectOwner);
+            request.AddUrlSegment("repo_slug", project.ProjectName);
+
+            string uploadPath = bug.ClassName.Split('/')[0] + "\\" + fileName;
+            Console.WriteLine(uploadPath);
+            request.AddFile(bug.ClassName, tempPath);
+            request.AddParameter("message", message);
+            IRestResponse response = user.Client.Execute(request);
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine("Done");
+
+            MessageBox.Show("File has been Uploaded to Version Control", "Version Control", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void SaveFile()
+        {
             string dir = bug.ClassName.Split('/')[0];
             string tempDirectory = tempPath + dir;
 
@@ -119,26 +145,6 @@ namespace BugTrackingApplication
                 Directory.CreateDirectory(tempDirectory);
             }
             File.WriteAllText(tempPath, TextArea.Text);
-            
-
-
-            //
-
-            RestRequest request = new RestRequest("/2.0/repositories/{username}/{repo_slug}/src/", Method.POST);
-
-            request.AddUrlSegment("username", project.ProjectOwner);
-            request.AddUrlSegment("repo_slug", project.ProjectName);
-
-            string uploadPath = bug.ClassName.Split('/')[0] + fileName;
-            request.AddFile(uploadPath,tempPath);
-            request.AddParameter("message","bug may have been fixed with this commit");
-            IRestResponse response =  user.Client.Execute(request);
-
-            Console.WriteLine(response.StatusCode);
-            Console.WriteLine("Done");
-
-            MessageBox.Show("File has been Uploaded to Version Control", "Version Control", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
         }
 
         private void ViewBugSource_FormClosing(object sender, FormClosingEventArgs e)

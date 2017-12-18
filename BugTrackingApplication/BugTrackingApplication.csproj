@@ -84,6 +84,12 @@
     <Compile Include="AddAuditLog.Designer.cs">
       <DependentUpon>AddAuditLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommitMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommitMessage.Designer.cs">
+      <DependentUpon>CommitMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="HotKeyManager.cs" />
     <Compile Include="SearchManager.cs" />
     <Compile Include="UpdateBug.cs">
@@ -150,6 +156,9 @@
     </Compile>
     <EmbeddedResource Include="AddAuditLog.resx">
       <DependentUpon>AddAuditLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommitMessage.resx">
+      <DependentUpon>CommitMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateBug.resx">
       <DependentUpon>UpdateBug.cs</DependentUpon>
