@@ -48,7 +48,6 @@
             this.Controls.Add(this.createBugLabel);
             this.Name = "projectControlsControl";
             this.Size = new System.Drawing.Size(486, 94);
-            this.Load += new System.EventHandler(this.projectControlsControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -15,10 +15,25 @@ namespace BugTrackingApplication
     /// </summary>
     public partial class BugList : UserControl
     {
+        /// <summary>
+        /// Reference to the main window
+        /// </summary>
         private MainWindow mw;
+        /// <summary>
+        /// The project name
+        /// </summary>
         private string projectName;
+        /// <summary>
+        /// The Id of the bug
+        /// </summary>
         private int bugId;
+        /// <summary>
+        /// the project that the control is representitive of
+        /// </summary>
         private Project p;
+        /// <summary>
+        /// the bug that the control is representive of
+        /// </summary>
         private Bug b;
         /// <summary>
         /// Constructor.
@@ -43,6 +58,11 @@ namespace BugTrackingApplication
             numAuditText.Text = ""+b.Logs.Count;
         }
 
+        /// <summary>
+        /// Function is called when link is clicked on this control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void auditLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //when link is clicked we need to pass information to the main window

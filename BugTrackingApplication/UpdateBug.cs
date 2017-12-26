@@ -12,15 +12,39 @@ using SharpBucket.V2.Pocos;
 
 namespace BugTrackingApplication
 {
+    /// <summary>
+    /// Class that represents the Update Bug Form
+    /// </summary>
     public partial class UpdateBug : Form
     {
+        /// <summary>
+        /// Project that the bug belongs to
+        /// </summary>
         private Project p;
+        /// <summary>
+        /// The bug to be edited
+        /// </summary>
         private Bug b;
+        /// <summary>
+        /// the authorised user
+        /// </summary>
         private User u;
+        /// <summary>
+        /// THe current main window
+        /// </summary>
         private MainWindow mw;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="currentProject">Current project</param>
+        /// <param name="b">Bug to  be edited</param>
+        /// <param name="u">current authroised user</param>
+        /// <param name="mw">the current mainwindow</param>
         public UpdateBug(Project currentProject, Bug b, User u, MainWindow mw)
         {
             InitializeComponent();
+            //sets values
             this.p = currentProject;
             this.b = b;
             this.u = u;
@@ -32,8 +56,14 @@ namespace BugTrackingApplication
             }
         }
 
+        /// <summary>
+        /// Called when form loads
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addBug_Load(object sender, EventArgs e)
         {
+            //sets values
             issueBox.Text = b.Issue;
             classData.Text = b.ClassName;
             methodBlockData.Text = b.Method;
@@ -41,6 +71,11 @@ namespace BugTrackingApplication
             titleBox.Text = b.Title;
         }
 
+        /// <summary>
+        /// Function called hwne add/update bug is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addBugButton_Click(object sender, EventArgs e)
         { //is issue text[REVISION:asdsadas,CLASSNAME:asdasdsa,METHODBLOCK:asdsada,LINENUM:dsasdas]
             //we need to create a new issue 
@@ -80,6 +115,7 @@ namespace BugTrackingApplication
             {
                 linenum = lineNumberBox.Text ;
             }
+            //we still create a new issue and just have the data in it that we want to update, with the bug id
             var newIssue = new Issue
             {
                 title = titleBox.Text,
@@ -88,9 +124,10 @@ namespace BugTrackingApplication
                 local_id = b.BugID
             };
 
-            //var newIssueResult = 
+            
             u.V1Api.RepositoriesEndPoint(p.ProjectOwner, p.ProjectName).IssuesResource().PutIssue(newIssue);
             this.Close();
+            //reload bugs after editing one
             mw.ReloadBugs();
         }
     }

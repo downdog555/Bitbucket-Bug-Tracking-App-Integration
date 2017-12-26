@@ -14,13 +14,25 @@ using SharpBucket.V2.Pocos;
 
 namespace BugTrackingApplication
 {
+    /// <summary>
+    /// Class representing a custom control for displaying the projects
+    /// </summary>
     public partial class ProjectControl : UserControl
     {
         private string projectOwner;
         private string projectName;
+        /// <summary>
+        /// Reference to the MainWindow Object
+        /// </summary>
         private MainWindow mw;
+        /// <summary>
+        /// Project that this control represents
+        /// </summary>
         private Project p;
         private Dictionary<string, BranchInfo> branches;
+        /// <summary>
+        /// User that is current authorised
+        /// </summary>
         private User u;
 
         /// <summary>
@@ -34,11 +46,14 @@ namespace BugTrackingApplication
         {
             InitializeComponent();
             //this.Dock = DockStyle.Fill;
+
+            //displays data onto control
             this.projectName = ProjectName.Text = projectName;
 
             this.u = u;
             projectOwnerText.Text = this.projectOwner = projectOwner;
             this.branches = branches;
+            //displays all the availabl branches for this project
             foreach (KeyValuePair<string, BranchInfo> branch in branches)
             {
                 branchSelectorBox.Items.Add(branch.Key);
@@ -48,10 +63,16 @@ namespace BugTrackingApplication
             this.p = p;
         }
 
+        /// <summary>
+        /// Function called when the view bugs link is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewBugsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //we can call load bugs;
             string branch = "";
+            //if we have blank value for branch just select master
             if (branchSelectorBox.Text.Equals(""))
             {
                 branch = "Master";
@@ -75,11 +96,12 @@ namespace BugTrackingApplication
             mw.LoadBugs(p, branch);
         }
 
-        private void ProjectName_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+        
+        /// <summary>
+        /// Function called whne the view my bugs link is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewMyBugsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //we can call load bugs;
@@ -103,7 +125,7 @@ namespace BugTrackingApplication
 
                 }
             }
-
+            //sets bool at end if true only loads the authrised users bugs
             mw.LoadBugs(p, branch, null, true);
         }
     }

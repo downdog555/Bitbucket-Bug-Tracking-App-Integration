@@ -3,19 +3,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 //sharpbucke libs
-using SharpBucket.V1;
 using SharpBucket.V1.Pocos;
-using SharpBucket.V2;
-using SharpBucket.V2.Pocos;
 using RepositoryEndPoint = SharpBucket.V2.EndPoints.RepositoriesEndPoint;
 using Comment = SharpBucket.V1.Pocos.Comment;
-using SharpUser = SharpBucket.V1.Pocos.User;
-using Link = SharpBucket.V1.Pocos.Link;
 //using Repository = SharpBucket.V2.Pocos.Repository;
 using Repository = SharpBucket.V1.Pocos.Repository;
-using System.Net;
-using System.IO;
-using System.Text.RegularExpressions;
 using RestSharp;
 
 namespace BugTrackingApplication
@@ -25,10 +17,19 @@ namespace BugTrackingApplication
     /// </summary>
     public partial class MainWindow : Form
     {
+        /// <summary>
+        /// the user that has been autheticated
+        /// </summary>
         private User u;
         private List<Project> currentProjects = new List<Project>();
         private RepositoryEndPoint reposEndPoint;
+        /// <summary>
+        /// position x for the project controls to be added
+        /// </summary>
         private int positionX = 7;
+        /// <summary>
+        /// postion y for the project controls to be added
+        /// </summary>
         private int positionY = 20;
         private Project currentProject;
         private Bug currentBug;
@@ -202,16 +203,24 @@ namespace BugTrackingApplication
             {
                 //Format of bug content
                 //is issue text[REVISION:asdsadas,CLASSNAME:asdasdsa,METHODBLOCK:asdsada,LINENUM:dsasdas]
-
+                //We need to strip out the formatting from the data in the bug content string
                 string content = i.content;
+                
+                //removes left brace gives the bug issue in position 0 and rest of data in position 1
                 string[] splitRemoveBracket = content.Split('[');
+                string issue = splitRemoveBracket[0];
+                //we then split on comma to give revision class name etc into separete array locations
                 string[] bugData = splitRemoveBracket[1].Split(',');
+                //we then split each bugdata postion on: and take position 1 which gives us the correct data
                 string revsionData = bugData[0].Split(':')[1];
                 string classData = bugData[1].Split(':')[1];
                 string methodData = bugData[2].Split(':')[1];
                 string lineData = bugData[3].Split(':')[1];
+                //for the last value we need to remove the ending brace so split and take the position 0
                 lineData = lineData.Split(']')[0];
-                Bug temp = new Bug(revsionData, classData, methodData, lineData, splitRemoveBracket[0],i.reported_by.username,i.title,i.status);
+
+
+                Bug temp = new Bug(revsionData, classData, methodData, lineData, issue,i.reported_by.username,i.title,i.status);
                 if (temp == null)
                 {
                     Console.WriteLine("tmp is null");
@@ -219,12 +228,14 @@ namespace BugTrackingApplication
 
                 if (i.responsible != null)
                 {
+                    //if username is null sets the value to a blank string
                     temp.Responsible = i.responsible.username ?? "";
                 }
-                //
+                //set the values of the temp bug
                 temp.BugID =(int) i.local_id;
                 temp.CreatedOn = i.created_on;
                 temp = LoadBugsAuditLogs(temp, p);
+                //checks if we are looking for bugs relating to a specific version
                 if (revision != null)
                 {
                     //if not null be only show certain bugs
@@ -255,8 +266,7 @@ namespace BugTrackingApplication
                 bugY = bugY + 100;
             }
 
-            //issuesLog.Clear();
-            //issuesLog.Text = logText;
+           
 
         }
 
@@ -299,7 +309,9 @@ namespace BugTrackingApplication
         /// <param name="e"></param>
         private void assignBugLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            //we have to use the RestSharp lib here as the SharpBucket does not handel this properly
+
+
             //create the request with the rest of the URL(the client contains the base url)
             RestRequest request = new RestRequest("1.0/repositories/{accountname}/{repo_slug}/issues/{issueID}", Method.PUT);
             //these replace what are in brackets
@@ -317,6 +329,11 @@ namespace BugTrackingApplication
 
         }
 
+        /// <summary>
+        /// Function called when the create new bug link is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createNewBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //we need to show a bug creation form
@@ -324,7 +341,7 @@ namespace BugTrackingApplication
 
             AddBugs addBugform = new AddBugs(currentProject, branchCurrent, u, this);
             addBugform.Show();
-            //we then need to refresh bugs
+            
             
         }
 

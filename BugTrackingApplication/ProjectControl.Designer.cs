@@ -54,7 +54,6 @@
             this.ProjectName.TabIndex = 0;
             this.ProjectName.TabStop = false;
             this.ProjectName.Text = "ProjectName";
-            this.ProjectName.Enter += new System.EventHandler(this.ProjectName_Enter);
             // 
             // viewMyBugsLink
             // 

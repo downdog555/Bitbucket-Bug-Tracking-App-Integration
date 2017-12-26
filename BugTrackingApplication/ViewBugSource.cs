@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ColorCode;
-using SharpBucket.V1;
-using SharpBucket.V1.Pocos;
-using SharpBucket.V2;
 using SharpBucket.V2.Pocos;
 using RestSharp;
 using System.Net;
@@ -22,6 +15,9 @@ using System.IO;
 
 namespace BugTrackingApplication
 {
+    /// <summary>
+    /// class representing tthe view source form, allows editing of source
+    /// </summary>
     public partial class ViewBugSource : Form
     {
         private Project project;
@@ -32,7 +28,8 @@ namespace BugTrackingApplication
         private string src;
         private string tempPath;
         private string fileName;
-        
+        private Scintilla TextArea;
+
 
         /// <summary>
         /// Constructor which gets revision it is not provided and then gets the source of the given location.
@@ -115,6 +112,10 @@ namespace BugTrackingApplication
 
         }
 
+        /// <summary>
+        /// Function used to commit a file
+        /// </summary>
+        /// <param name="message">The commit message</param>
         public void CommitFile(string message)
         {
             RestRequest request = new RestRequest("/2.0/repositories/{username}/{repo_slug}/src/", Method.POST);
@@ -147,6 +148,11 @@ namespace BugTrackingApplication
             File.WriteAllText(tempPath, TextArea.Text);
         }
 
+        /// <summary>
+        /// called on closing of form to try and free up memeory
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewBugSource_FormClosing(object sender, FormClosingEventArgs e)
         {
             Dispose();
@@ -172,8 +178,14 @@ namespace BugTrackingApplication
         }
 
 
-        ScintillaNET.Scintilla TextArea;
+        
 
+        /// <summary>
+        /// Function called when form loads
+        /// Used By the Scintilla wrapper
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewBugSource_Load(object sender, EventArgs e)
         {
 

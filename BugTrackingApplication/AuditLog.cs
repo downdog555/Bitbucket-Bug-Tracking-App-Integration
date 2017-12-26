@@ -11,10 +11,25 @@ namespace BugTrackingApplication
     /// </summary>
     public class AuditLog
     {
+        /// <summary>
+        /// the ID of the audit log
+        /// </summary>
         private int auditLogId;
+        /// <summary>
+        /// The message that is in the audit log
+        /// </summary>
         private string message;
+        /// <summary>
+        /// When the audit log was created
+        /// </summary>
         private string createdOn;
+        /// <summary>
+        /// Whom created the audit log
+        /// </summary>
         private string ownerName;
+        /// <summary>
+        /// When the audit log was last updated
+        /// </summary>
         private string updatedOn;
 
         /// <summary>

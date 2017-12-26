@@ -11,8 +11,17 @@ namespace BugTrackingApplication
     /// </summary>
     class BugLocation
     {
+        /// <summary>
+        /// the line number where the bug starts
+        /// </summary>
         private int lineNum;
+        /// <summary>
+        /// the method block where the bug is
+        /// </summary>
         private string methodBlock;
+        /// <summary>
+        /// the class name which the bug resides in
+        /// </summary>
         private string className;
 
         /// <summary>

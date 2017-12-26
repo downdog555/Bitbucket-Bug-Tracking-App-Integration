@@ -19,12 +19,18 @@ namespace BugTrackingApplication
         private string projectOwner;
         private Dictionary<string, BranchInfo> branches;
 
-
+        //getters and setters
         public Dictionary<string, BranchInfo> Branches { get {return branches; } }
         public string ProjectName { get {return projectName; } set { projectName = value; } }
         public List<Bug> Bugs { get { return bugs; } set { bugs = value; } }
         public string ProjectOwner { get { return projectOwner; } }
 
+        /// <summary>
+        /// Constructor for projects class
+        /// </summary>
+        /// <param name="projectName">Name of the project</param>
+        /// <param name="projectOwner">The name of the owner of the project</param>
+        /// <param name="branches">A dictionary of branch names and branch info objects</param>
         public Project( string projectName, string projectOwner, Dictionary<string, BranchInfo> branches)
         {
             this.Bugs = bugs;
@@ -89,6 +95,9 @@ namespace BugTrackingApplication
             Bugs.Add(b);
         }
 
+        /// <summary>
+        /// clears the list of bugs
+        /// </summary>
         public void ResetBugList()
         {
             Bugs = new List<Bug>();

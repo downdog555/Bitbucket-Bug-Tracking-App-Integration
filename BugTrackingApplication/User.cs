@@ -19,7 +19,7 @@ namespace BugTrackingApplication
     /// </summary>
     public class User
     {
-        private bool logged;
+        
         private string username;
         private string password;
         private string accountName = null;
@@ -38,9 +38,8 @@ namespace BugTrackingApplication
             this.username = username;
             this.password = password;
 
-            this.logged = true;
-            //we need to get the consumer key and secretkey
-            //105.2.3.0
+            
+            //Sharp bucket has two versions of API so we authenticate with both as well as our own RESTSHARP client
             v1Api = new SharpBucketV1();
             v1Api.BasicAuthentication(username, password);
             try
@@ -79,24 +78,7 @@ namespace BugTrackingApplication
         /// </summary>
         public RestClient Client { get { return client; } } 
 
-        /// <summary>
-        /// Login function
-        /// </summary>
-        /// <returns>boolean based on success or not</returns>
-        public bool Login()
-        {
-
-            return false;
-        }
-
-        /// <summary>
-        /// logout function, destroys the user
-        /// </summary>
-        /// <returns>boolean based on success</returns>
-        public bool Logout()
-        {
-            return false;
-        }
+        
 
     }
 }

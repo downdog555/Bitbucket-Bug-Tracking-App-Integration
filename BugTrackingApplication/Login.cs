@@ -10,22 +10,30 @@ using System.Windows.Forms;
 
 namespace BugTrackingApplication
 {
+    /// <summary>
+    /// Class that represents first form to be opened in program and the login form
+    /// </summary>
     public partial class Login : Form
     {
-       
+       /// <summary>
+       /// The user that is going to be loggedin/authorised
+       /// </summary>
         private User user;
+
+        /// <summary>
+        /// THe main window object to be shown when authorisation is complete
+        /// </summary>
         private MainWindow mw;
 
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Login()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
 
         /// <summary>
@@ -48,22 +56,33 @@ namespace BugTrackingApplication
             //get values 
             string username = usernameBox.Text;
             string password = passwordBox.Text;
-            //we need to use basic auth on the user account to get the api keys
+            
 
-            //we can then setup the user
+            //we can then call the user constructor
             user = new User(username, password);
+            //if the account name is not set it means the user was not authorised/the data could not be recieved
             if (user.AccountName == null)
             {
                 MessageBox.Show("Cannot Authenticate User. Incorrect Details entered or Lack of Internet Connection", "Error: Cannot Authenticate", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }   
+            //create the mainwindow passing the current user to it
             mw = new MainWindow(user);
+            //show mainwindow
             mw.Show();
+
             this.Hide();
                    
             
         }
 
+       
+
+        /// <summary>
+        /// Function called when key is pressed. Used to add a shortcut when logging in(allows enter to activate the login button click)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

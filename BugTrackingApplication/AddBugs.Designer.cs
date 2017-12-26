@@ -151,7 +151,7 @@
             this.revsionBox.Size = new System.Drawing.Size(121, 21);
             this.revsionBox.TabIndex = 12;
             // 
-            // addBug
+            // AddBugs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -169,9 +169,8 @@
             this.Controls.Add(this.classNameLabel);
             this.Controls.Add(this.bugIssueLabel);
             this.Controls.Add(this.titleLabel);
-            this.Name = "addBug";
+            this.Name = "AddBugs";
             this.Text = "addBug";
-            this.Load += new System.EventHandler(this.addBug_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
