@@ -78,6 +78,23 @@ namespace BugTrackingApplication
         }
 
         /// <summary>
+        /// Constructor for the project class
+        /// </summary>
+        /// <param name="RepositoryURL">URL of the repository for code</param>
+        /// <param name="ProjectName">Name of project</param>
+        /// <param name="ProjectOwner">Owner of project</param>
+        public Project(string RepositoryURL, string projectName, string projectOwner)
+        {
+
+            this.RepositoryURL = RepositoryURL;
+            this.projectName = projectName;
+            this.projectOwner = projectOwner;
+            
+
+
+        }
+
+        /// <summary>
         /// Override of to string
         /// </summary>
         /// <returns>the name of this project</returns>

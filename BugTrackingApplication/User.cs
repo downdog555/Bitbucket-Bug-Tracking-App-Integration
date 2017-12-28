@@ -26,6 +26,7 @@ namespace BugTrackingApplication
         private SharpBucketV1 v1Api;
         private SharpBucketV2 v2Api;
         private RestClient client;
+        private bool logged;
 
 
         /// <summary>
@@ -35,6 +36,8 @@ namespace BugTrackingApplication
         /// <param name="password">the password of the current user</param>
         public User(string username, string password)
         {
+            
+            logged = false;
             this.username = username;
             this.password = password;
 
@@ -45,6 +48,7 @@ namespace BugTrackingApplication
             try
             {
                 this.accountName = v1Api.UserEndPoint().GetInfo().user.username;
+                logged = true;
             }
             catch (Exception e)
             {
@@ -76,9 +80,11 @@ namespace BugTrackingApplication
         /// <summary>
         /// getter for the authenticator to make custom restsharp requests
         /// </summary>
-        public RestClient Client { get { return client; } } 
+        public RestClient Client { get { return client; } }
 
-        
-
+        /// <summary>
+        /// Getter for whether the user is loggedin
+        /// </summary>
+        public bool Logged { get { return logged; } }
     }
 }

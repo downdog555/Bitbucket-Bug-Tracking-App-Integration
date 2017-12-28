@@ -9,7 +9,6 @@ using RestSharp;
 using System.Net;
 using ScintillaNET;
 using Style = ScintillaNET.Style;
-using ScintillaNET.Utils;
 using System.IO;
 
 
@@ -219,8 +218,7 @@ namespace BugTrackingApplication
             // DEFAULT FILE
             LoadDataFromFile(tempPath);
 
-            // INIT HOTKEYS
-            InitHotkeys();
+         
 
         }
 
@@ -231,26 +229,6 @@ namespace BugTrackingApplication
 
         }
 
-        private void InitHotkeys()
-        {
-            
-
-            // register the hotkeys with the form
-            HotKeyManager.AddHotKey(this, Uppercase, Keys.U, true);
-            HotKeyManager.AddHotKey(this, Lowercase, Keys.L, true);
-            HotKeyManager.AddHotKey(this, ZoomIn, Keys.Oemplus, true);
-            HotKeyManager.AddHotKey(this, ZoomOut, Keys.OemMinus, true);
-            HotKeyManager.AddHotKey(this, ZoomDefault, Keys.D0, true);
-           // HotKeyManager.AddHotKey(this, CloseSearch, Keys.Escape);
-
-            // remove conflicting hotkeys from scintilla
-            TextArea.ClearCmdKey(Keys.Control | Keys.F);
-            TextArea.ClearCmdKey(Keys.Control | Keys.R);
-            TextArea.ClearCmdKey(Keys.Control | Keys.H);
-            TextArea.ClearCmdKey(Keys.Control | Keys.L);
-            TextArea.ClearCmdKey(Keys.Control | Keys.U);
-
-        }
 
         private void InitSyntaxColoring()
         {
@@ -486,10 +464,10 @@ namespace BugTrackingApplication
 
         private void GenerateKeystrokes(string keys)
         {
-            HotKeyManager.Enable = false;
+            
             TextArea.Focus();
             SendKeys.Send(keys);
-            HotKeyManager.Enable = true;
+            
         }
 
         #endregion
