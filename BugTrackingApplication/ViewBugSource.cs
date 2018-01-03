@@ -215,7 +215,7 @@ namespace BugTrackingApplication
 
            
 
-            // DEFAULT FILE
+            
             LoadDataFromFile(tempPath);
 
          
@@ -409,6 +409,7 @@ namespace BugTrackingApplication
                 FileName.Text = Path.GetFileName(path);
                 methodBlock.Text = bug.Method;
                 lineNumber.Text = bug.LineNum;
+                lineNumEnd.Text = bug.LineNumEnd;
                 TextArea.Text = File.ReadAllText(path);
             }
         }

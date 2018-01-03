@@ -131,6 +131,7 @@ namespace BugTrackingApplication
             this.assignBugLink.Tag = bug;
             this.assignedToText.Text = bug.Responsible;
             this.bugStatusText.Text = bug.Status;
+            this.lineNumEnd.Text = bug.LineNumEnd;
             if (bug.Status.Equals("closed"))
             {
                closeBug.Text = "Open Bug";
@@ -216,11 +217,12 @@ namespace BugTrackingApplication
                 string classData = bugData[1].Split(':')[1];
                 string methodData = bugData[2].Split(':')[1];
                 string lineData = bugData[3].Split(':')[1];
+                string lineDataEnd = bugData[4].Split(':')[1];
                 //for the last value we need to remove the ending brace so split and take the position 0
-                lineData = lineData.Split(']')[0];
+                lineDataEnd = lineDataEnd.Split(']')[0];
 
 
-                Bug temp = new Bug(revsionData, classData, methodData, lineData, issue,i.reported_by.username,i.title,i.status);
+                Bug temp = new Bug(revsionData, classData, methodData, lineData, issue,i.reported_by.username,i.title,i.status, lineDataEnd);
                 if (temp == null)
                 {
                     Console.WriteLine("tmp is null");
@@ -294,6 +296,12 @@ namespace BugTrackingApplication
 
             return bug;
         }
+
+        /// <summary>
+        /// Exit button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             

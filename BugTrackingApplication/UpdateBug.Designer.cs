@@ -41,6 +41,8 @@
             this.addBugButton = new System.Windows.Forms.Button();
             this.revsionLabel = new System.Windows.Forms.Label();
             this.revsionBox = new System.Windows.Forms.ComboBox();
+            this.lineNumEndLabl = new System.Windows.Forms.Label();
+            this.lineNumEndBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -90,37 +92,37 @@
             // 
             // titleBox
             // 
-            this.titleBox.Location = new System.Drawing.Point(108, 9);
+            this.titleBox.Location = new System.Drawing.Point(123, 9);
             this.titleBox.Name = "titleBox";
             this.titleBox.Size = new System.Drawing.Size(121, 20);
             this.titleBox.TabIndex = 5;
             // 
             // classData
             // 
-            this.classData.Location = new System.Drawing.Point(108, 138);
+            this.classData.Location = new System.Drawing.Point(123, 138);
             this.classData.Name = "classData";
             this.classData.Size = new System.Drawing.Size(121, 20);
             this.classData.TabIndex = 6;
             // 
             // methodBlockData
             // 
-            this.methodBlockData.Location = new System.Drawing.Point(108, 164);
+            this.methodBlockData.Location = new System.Drawing.Point(123, 164);
             this.methodBlockData.Name = "methodBlockData";
             this.methodBlockData.Size = new System.Drawing.Size(121, 20);
             this.methodBlockData.TabIndex = 7;
             // 
             // lineNumberBox
             // 
-            this.lineNumberBox.Location = new System.Drawing.Point(108, 190);
+            this.lineNumberBox.Location = new System.Drawing.Point(123, 187);
             this.lineNumberBox.Name = "lineNumberBox";
             this.lineNumberBox.Size = new System.Drawing.Size(121, 20);
             this.lineNumberBox.TabIndex = 8;
             // 
             // issueBox
             // 
-            this.issueBox.Location = new System.Drawing.Point(108, 61);
+            this.issueBox.Location = new System.Drawing.Point(123, 58);
             this.issueBox.Name = "issueBox";
-            this.issueBox.Size = new System.Drawing.Size(256, 71);
+            this.issueBox.Size = new System.Drawing.Size(241, 71);
             this.issueBox.TabIndex = 9;
             this.issueBox.Text = "";
             // 
@@ -146,16 +148,34 @@
             // revsionBox
             // 
             this.revsionBox.FormattingEnabled = true;
-            this.revsionBox.Location = new System.Drawing.Point(108, 34);
+            this.revsionBox.Location = new System.Drawing.Point(123, 34);
             this.revsionBox.Name = "revsionBox";
             this.revsionBox.Size = new System.Drawing.Size(121, 21);
             this.revsionBox.TabIndex = 12;
+            // 
+            // lineNumEndLabl
+            // 
+            this.lineNumEndLabl.AutoSize = true;
+            this.lineNumEndLabl.Location = new System.Drawing.Point(25, 213);
+            this.lineNumEndLabl.Name = "lineNumEndLabl";
+            this.lineNumEndLabl.Size = new System.Drawing.Size(92, 13);
+            this.lineNumEndLabl.TabIndex = 13;
+            this.lineNumEndLabl.Text = "Line Number End:";
+            // 
+            // lineNumEndBox
+            // 
+            this.lineNumEndBox.Location = new System.Drawing.Point(123, 213);
+            this.lineNumEndBox.Name = "lineNumEndBox";
+            this.lineNumEndBox.Size = new System.Drawing.Size(121, 20);
+            this.lineNumEndBox.TabIndex = 14;
             // 
             // UpdateBug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(376, 324);
+            this.Controls.Add(this.lineNumEndBox);
+            this.Controls.Add(this.lineNumEndLabl);
             this.Controls.Add(this.revsionBox);
             this.Controls.Add(this.revsionLabel);
             this.Controls.Add(this.addBugButton);
@@ -193,5 +213,7 @@
         private System.Windows.Forms.Button addBugButton;
         private System.Windows.Forms.Label revsionLabel;
         private System.Windows.Forms.ComboBox revsionBox;
+        private System.Windows.Forms.Label lineNumEndLabl;
+        private System.Windows.Forms.TextBox lineNumEndBox;
     }
 }

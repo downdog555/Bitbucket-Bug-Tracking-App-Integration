@@ -69,6 +69,7 @@ namespace BugTrackingApplication
             methodBlockData.Text = b.Method;
             lineNumberBox.Text = b.LineNum;
             titleBox.Text = b.Title;
+            lineNumEndBox.Text = b.LineNumEnd;
         }
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace BugTrackingApplication
         private void addBugButton_Click(object sender, EventArgs e)
         { //is issue text[REVISION:asdsadas,CLASSNAME:asdasdsa,METHODBLOCK:asdsada,LINENUM:dsasdas]
             //we need to create a new issue 
-            string revision, classname, methodblock, linenum;
+            string revision, classname, methodblock, linenum, linenumEnd;
             if (revsionBox.SelectedText.Equals(""))
             {
                 revision = "UNKNOWN";
@@ -115,11 +116,20 @@ namespace BugTrackingApplication
             {
                 linenum = lineNumberBox.Text ;
             }
+
+            if (lineNumEndBox.Text.Equals("") || lineNumEndBox.Text.Equals(" "))
+            {
+                linenumEnd = "UNKNOWN";
+            }
+            else
+            {
+                linenumEnd = lineNumEndBox.Text;
+            }
             //we still create a new issue and just have the data in it that we want to update, with the bug id
             var newIssue = new Issue
             {
                 title = titleBox.Text,
-                content = issueBox.Text + "[REVISION:" + revision + ",CLASSNAME:" + classname + ",METHODBLOCK:" + methodblock + ",LINENUM:" + linenum + "]",
+                content = issueBox.Text + "[REVISION:" + revision + ",CLASSNAME:" + classname + ",METHODBLOCK:" + methodblock + ",LINENUM:" + linenum + ",LINENUMEND:"+linenumEnd+"]",
                 kind = "bug",
                 local_id = b.BugID
             };

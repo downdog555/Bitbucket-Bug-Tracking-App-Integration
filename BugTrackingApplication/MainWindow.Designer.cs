@@ -77,6 +77,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Projects = new System.Windows.Forms.GroupBox();
             this.menuBar = new System.Windows.Forms.TabControl();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lineNumEnd = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.viewBugInformation.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -210,6 +212,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lineNumEnd);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.editBug);
             this.groupBox1.Controls.Add(this.bugStatusText);
             this.groupBox1.Controls.Add(this.bugStatusLabel);
@@ -584,6 +588,24 @@
             this.menuBar.Size = new System.Drawing.Size(785, 482);
             this.menuBar.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 352);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Line Num End:";
+            // 
+            // lineNumEnd
+            // 
+            this.lineNumEnd.AutoSize = true;
+            this.lineNumEnd.Location = new System.Drawing.Point(87, 352);
+            this.lineNumEnd.Name = "lineNumEnd";
+            this.lineNumEnd.Size = new System.Drawing.Size(64, 13);
+            this.lineNumEnd.TabIndex = 22;
+            this.lineNumEnd.Text = "lineNumEnd";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -667,5 +689,7 @@
         private System.Windows.Forms.Label bugStatusLabel;
         private System.Windows.Forms.FlowLayoutPanel auditLogPanel;
         private System.Windows.Forms.LinkLabel editBug;
+        private System.Windows.Forms.Label lineNumEnd;
+        private System.Windows.Forms.Label label1;
     }
 }

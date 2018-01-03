@@ -70,7 +70,7 @@ namespace BugTrackingApplication
             //we need to create a new issue 
 
             //we create local strings before hand so we can set them to a defualt value if there is not a value entered.
-            string revision, classname, methodblock, linenum;
+            string revision, classname, methodblock, linenum, linenumEnd;
             if (revsionBox.SelectedText.Equals(""))
             {
                 revision = "UNKNOWN";
@@ -107,13 +107,22 @@ namespace BugTrackingApplication
                 linenum = lineNumberBox.Text ;
             }
 
+            if (lineNumEndBox.Text.Equals("") || lineNumEndBox.Text.Equals(" "))
+            {
+                linenumEnd = "UNKNOWN";
+            }
+            else
+            {
+                linenumEnd = lineNumEndBox.Text;
+            }
+
             //we then use the sharpbucket class for a issue(bug)
             var newIssue = new Issue
             {
             title = titleBox.Text,
-            //Creates the specified layout for the issue content
-            content = issueBox.Text+"[REVISION:"+revision+",CLASSNAME:"+classname+",METHODBLOCK:"+methodblock+",LINENUM:"+linenum+"]",
-            status = "new",
+                //Creates the specified layout for the issue content
+                content = issueBox.Text + "[REVISION:" + revision + ",CLASSNAME:" + classname + ",METHODBLOCK:" + methodblock + ",LINENUM:" + linenum + ",LINENUMEND:" + linenumEnd + "]",
+                status = "new",
             //we can have different kinds of issues however we only require bugs
             kind = "bug"
             };

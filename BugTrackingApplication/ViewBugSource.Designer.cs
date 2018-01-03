@@ -40,6 +40,8 @@
             this.classNameLabel = new System.Windows.Forms.Label();
             this.methodLabel = new System.Windows.Forms.Label();
             this.lineNumLabel = new System.Windows.Forms.Label();
+            this.lineNumEndLabel = new System.Windows.Forms.Label();
+            this.lineNumEnd = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,7 +113,7 @@
             // lineNumber
             // 
             this.lineNumber.AutoSize = true;
-            this.lineNumber.Location = new System.Drawing.Point(565, 27);
+            this.lineNumber.Location = new System.Drawing.Point(458, 27);
             this.lineNumber.Name = "lineNumber";
             this.lineNumber.Size = new System.Drawing.Size(35, 13);
             this.lineNumber.TabIndex = 4;
@@ -138,17 +140,37 @@
             // lineNumLabel
             // 
             this.lineNumLabel.AutoSize = true;
-            this.lineNumLabel.Location = new System.Drawing.Point(489, 27);
+            this.lineNumLabel.Location = new System.Drawing.Point(382, 27);
             this.lineNumLabel.Name = "lineNumLabel";
             this.lineNumLabel.Size = new System.Drawing.Size(70, 13);
             this.lineNumLabel.TabIndex = 6;
             this.lineNumLabel.Text = "Line Number:";
+            // 
+            // lineNumEndLabel
+            // 
+            this.lineNumEndLabel.AutoSize = true;
+            this.lineNumEndLabel.Location = new System.Drawing.Point(521, 27);
+            this.lineNumEndLabel.Name = "lineNumEndLabel";
+            this.lineNumEndLabel.Size = new System.Drawing.Size(92, 13);
+            this.lineNumEndLabel.TabIndex = 8;
+            this.lineNumEndLabel.Text = "Line Number End:";
+            // 
+            // lineNumEnd
+            // 
+            this.lineNumEnd.AutoSize = true;
+            this.lineNumEnd.Location = new System.Drawing.Point(619, 27);
+            this.lineNumEnd.Name = "lineNumEnd";
+            this.lineNumEnd.Size = new System.Drawing.Size(35, 13);
+            this.lineNumEnd.TabIndex = 7;
+            this.lineNumEnd.Text = "label1";
             // 
             // ViewBugSource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(716, 633);
+            this.Controls.Add(this.lineNumEndLabel);
+            this.Controls.Add(this.lineNumEnd);
             this.Controls.Add(this.lineNumLabel);
             this.Controls.Add(this.methodBlock);
             this.Controls.Add(this.methodLabel);
@@ -184,5 +206,7 @@
         private System.Windows.Forms.Label classNameLabel;
         private System.Windows.Forms.Label methodLabel;
         private System.Windows.Forms.Label lineNumLabel;
+        private System.Windows.Forms.Label lineNumEndLabel;
+        private System.Windows.Forms.Label lineNumEnd;
     }
 }

@@ -41,6 +41,10 @@ namespace BugTrackingApplication
         /// </summary>
         private string lineNum;
         /// <summary>
+        /// The line number where the bug ends
+        /// </summary>
+        private string lineNumEnd;
+        /// <summary>
         /// The actual issue of the bug such as how to reproduce it
         /// </summary>
         private string issue;
@@ -70,7 +74,7 @@ namespace BugTrackingApplication
         /// <param name="lineNum">Line num of where the bug resides</param>
         /// <param name="issue">Comment relating to the bug</param>
         /// <param name="createdby">Who this was created By</param>
-        public Bug( string revision, string className, string method, string lineNum, string issue, string createdby, string title, string status)
+        public Bug( string revision, string className, string method, string lineNum, string issue, string createdby, string title, string status, string lineNumEnd)
         {
           
             this.revision = revision;
@@ -81,6 +85,7 @@ namespace BugTrackingApplication
             this.createdby = createdby;
             this.title = title;
             this.status = status;
+            this.lineNumEnd = lineNumEnd;
             
         }
 
@@ -149,5 +154,9 @@ namespace BugTrackingApplication
         /// Getter and setter for Status of the bug
         /// </summary>
         public string Status { get { return status; } set { status = value; } }
+        /// <summary>
+        /// Getter and setter for line number end
+        /// </summary>
+        public string LineNumEnd { get => lineNumEnd; set => lineNumEnd = value; }
     }
 }
