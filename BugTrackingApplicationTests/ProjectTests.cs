@@ -8,9 +8,15 @@ using System.Threading.Tasks;
 
 namespace BugTrackingApplication.Tests
 {
+    /// <summary>
+    /// Test class for the project class
+    /// </summary>
     [TestClass()]
     public class ProjectTests
     {
+        /// <summary>
+        /// tests if the project construcotr works correctly
+        /// </summary>
         [TestMethod()]
         public void ProjectConstructorTest()
         {
@@ -18,6 +24,9 @@ namespace BugTrackingApplication.Tests
             Assert.IsNotNull(project);
         }
 
+        /// <summary>
+        /// Checks if the reset bug list method works properly
+        /// </summary>
         [TestMethod()]
         public void ResetBugListTest()
         {
@@ -27,6 +36,9 @@ namespace BugTrackingApplication.Tests
             Assert.IsTrue(project.Bugs.Count == 0);
         }
 
+        /// <summary>
+        /// checksi if a bug can be added to a project
+        /// </summary>
         [TestMethod()]
         public void AddBugTest()
         {
@@ -36,6 +48,9 @@ namespace BugTrackingApplication.Tests
             Assert.IsTrue(project.Bugs.Count == 1);
         }
 
+        /// <summary>
+        /// checks if the override of to string works correctly
+        /// </summary>
         [TestMethod()]
         public void ProjectToStringTest()
         {

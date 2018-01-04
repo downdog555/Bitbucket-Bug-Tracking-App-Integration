@@ -8,9 +8,15 @@ using System.Threading.Tasks;
 
 namespace BugTrackingApplication.Tests
 {
+    /// <summary>
+    /// Test class for the bug class
+    /// </summary>
     [TestClass()]
     public class BugTests
     {
+        /// <summary>
+        /// Checks if bug constructor works properly
+        /// </summary>
         [TestMethod()]
         public void BugConstructorTest()
         {
@@ -27,6 +33,9 @@ namespace BugTrackingApplication.Tests
 
         }
 
+        /// <summary>
+        /// Checks if add audit log method works
+        /// </summary>
         [TestMethod()]
         public void AddAuditLogTest()
         {
@@ -36,6 +45,9 @@ namespace BugTrackingApplication.Tests
             Assert.IsTrue(bug.Logs.Count == 1);
         }
 
+        /// <summary>
+        /// Checks if the list of audit logs is flipped 
+        /// </summary>
         [TestMethod()]
         public void FlipListTest()
         {

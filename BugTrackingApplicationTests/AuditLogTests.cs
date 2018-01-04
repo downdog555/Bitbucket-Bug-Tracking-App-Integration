@@ -8,9 +8,15 @@ using System.Threading.Tasks;
 
 namespace BugTrackingApplication.Tests
 {
+    /// <summary>
+    /// Test class for the audit log class
+    /// </summary>
     [TestClass()]
     public class AuditLogTests
     {
+        /// <summary>
+        /// Test seeing if the audit log constructor assigns value properly
+        /// </summary>
         [TestMethod()]
         public void AuditLogConstructorTest()
         {

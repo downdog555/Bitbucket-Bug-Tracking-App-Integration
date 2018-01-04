@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 
 namespace BugTrackingApplication.Tests
 {
+    /// <summary>
+    /// Test calss for the User class
+    /// </summary>
     [TestClass()]
     public class UserTests
     {
+
+        /// <summary>
+        /// Checks if the user logs in propperly
+        /// </summary>
         [TestMethod()]
         public void UserTestCorrectDetails()
         {
@@ -21,6 +28,9 @@ namespace BugTrackingApplication.Tests
             
         }
 
+        /// <summary>
+        /// checks with false details
+        /// </summary>
         [TestMethod()]
         public void UserTestFalseDetailsBoolCheck()
         {
@@ -28,6 +38,9 @@ namespace BugTrackingApplication.Tests
             Assert.IsFalse(user.Logged);
         }
 
+        /// <summary>
+        /// this checks again with false details however by trying to access the sharpbucket api with wont be authorised if details are false
+        /// </summary>
         [TestMethod()]
         public void UserTestFalseDetailsPropertyCheck()
         {
