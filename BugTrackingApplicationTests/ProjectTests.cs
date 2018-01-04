@@ -22,7 +22,7 @@ namespace BugTrackingApplication.Tests
         public void ResetBugListTest()
         {
             Project project = new Project("test", "test", "test");
-            project.AddBug(new Bug("test", "test", "test", "test", "test", "test", "test", "test"));
+            project.AddBug(new Bug("test", "test", "test", "test", "test", "test", "test", "test", "test"));
             project.ResetBugList();
             Assert.IsTrue(project.Bugs.Count == 0);
         }
@@ -31,7 +31,7 @@ namespace BugTrackingApplication.Tests
         public void AddBugTest()
         {
             Project project = new Project("test", "test", "test");
-            project.AddBug(new Bug("test", "test", "test", "test", "test", "test", "test", "test"));
+            project.AddBug(new Bug("test", "test", "test", "test", "test", "test", "test", "test", "test"));
 
             Assert.IsTrue(project.Bugs.Count == 1);
         }

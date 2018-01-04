@@ -157,6 +157,6 @@ namespace BugTrackingApplication
         /// <summary>
         /// Getter and setter for line number end
         /// </summary>
-        public string LineNumEnd { get => lineNumEnd; set => lineNumEnd = value; }
+        public string LineNumEnd { get { return lineNumEnd; } set { lineNumEnd = value; } }
     }
 }
